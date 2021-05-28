@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EBookLibrary.Presentation.Extensions;
 
 namespace EBookLibrary.Presentation
 {
@@ -36,21 +37,7 @@ namespace EBookLibrary.Presentation
             services.AddDbContextPool<AppDbContext>
                 (options => options.UseSqlite
                 (Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<User, IdentityRole>()
-             .AddEntityFrameworkStores<AppDbContext>()
-             .AddDefaultTokenProviders();
-
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequiredUniqueChars = 1;
-
-            });
-
+            services.AddIdentityConfigurations();
             services.AddServices(Configuration);
             services.AddConfigurations(Configuration);
         }
