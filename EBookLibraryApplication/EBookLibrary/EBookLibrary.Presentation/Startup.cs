@@ -1,3 +1,5 @@
+using EBookLibrary.DataAccess;
+using EBookLibrary.Models;
 
 using EBookLibrary.Models.Settings;
 using EBookLibrary.Presentation.DIServices;
@@ -6,6 +8,8 @@ using EBookLibrary.Server.Core.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,6 +34,23 @@ namespace EBookLibrary.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //configuring the dbcontext and connection string
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, IdentityRole>()
+             .AddEntityFrameworkStores<AppDbContext>()
+             .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 1;
+
+            });
             services.AddServices(Configuration);
             services.AddConfigurations(Configuration);
         }
