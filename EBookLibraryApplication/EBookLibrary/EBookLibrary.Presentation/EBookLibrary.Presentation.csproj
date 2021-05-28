@@ -15,10 +15,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\MVControllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EBookLibrary.Commons\EBookLibrary.Commons.csproj" />
+    <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
+    <ProjectReference Include="..\EBookLibrary.Server.Core\EBookLibrary.Server.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
