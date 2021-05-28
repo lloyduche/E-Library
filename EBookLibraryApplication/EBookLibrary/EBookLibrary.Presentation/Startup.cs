@@ -1,3 +1,8 @@
+
+using EBookLibrary.Models.Settings;
+using EBookLibrary.Presentation.DIServices;
+using EBookLibrary.Server.Core.Abstractions;
+using EBookLibrary.Server.Core.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +30,8 @@ namespace EBookLibrary.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddServices(Configuration);
+            services.AddConfigurations(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
