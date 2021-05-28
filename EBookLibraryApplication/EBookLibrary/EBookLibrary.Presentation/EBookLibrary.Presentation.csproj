@@ -16,4 +16,8 @@
     <Folder Include="Controllers\MVControllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
+  </ItemGroup>
+
 </Project>
