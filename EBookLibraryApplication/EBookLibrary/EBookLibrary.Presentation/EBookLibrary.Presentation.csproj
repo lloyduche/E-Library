@@ -10,6 +10,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.10" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="NLog" Version="4.7.8" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EBookLibrary.Commons\EBookLibrary.Commons.csproj" />
+    <ProjectReference Include="..\EBookLibrary.DTOs\EBookLibrary.DTOs.csproj" />
+    <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>
