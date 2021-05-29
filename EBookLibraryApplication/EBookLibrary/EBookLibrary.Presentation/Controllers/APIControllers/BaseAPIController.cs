@@ -9,6 +9,6 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
     [ApiController]
     public class BaseAPIController : ControllerBase
     {
-  
+        
     }
 }

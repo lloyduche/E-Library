@@ -23,6 +23,8 @@ namespace EBookLibrary.Presentation.DIServices
             services.AddTransient<IMailService, MailService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         public static void AddConfigurations(this IServiceCollection services, IConfiguration configuration)

@@ -60,6 +60,9 @@ namespace EBookLibrary.Presentation.APIExceptionMiddleWare
             case NotFoundException notFoundException:
                 httpStatusCode = HttpStatusCode.NotFound;
                 break;
+            case UnauthorizedAccessException unauthorizedAccess:
+                httpStatusCode = HttpStatusCode.Unauthorized;
+                break;
             default:
                 httpStatusCode = HttpStatusCode.InternalServerError;
                 break;
