@@ -1,4 +1,3 @@
-
 using EBookLibrary.Server.Core;
 using EBookLibrary.DataAccess;
 using EBookLibrary.DataAccess.DataSeed;
@@ -23,7 +22,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 using NLog.Extensions.Logging;
-
 using System;
 using Microsoft.AspNetCore.Identity;
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EBookLibrary.Models.Settings
+﻿namespace EBookLibrary.Models.Settings
 {
     public class CloudinaryConfig
     {
