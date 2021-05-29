@@ -5,11 +5,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System;
-using System.Collections.Generic;
 using System.IO;
-//using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Server.Core.Implementations
@@ -24,7 +20,9 @@ namespace EBookLibrary.Server.Core.Implementations
         }
         public async Task SendEmailAsync(MailRequest mailRequest)
         {
-            string FilePath = Directory.GetCurrentDirectory() + "\\Templates\\WelcomeTemplate.html";
+
+            
+            string FilePath = Directory.GetCurrentDirectory() + "\\Email\\Mail.html";
             StreamReader str = new StreamReader(FilePath);
             string MailText = str.ReadToEnd();
             str.Close();
@@ -46,6 +44,10 @@ namespace EBookLibrary.Server.Core.Implementations
             smtp.Authenticate(_mailConfig.Mail, _mailConfig.Password);
             await smtp.SendAsync(email);
             smtp.Disconnect(true);
+            
+
+           
+            
         }  
     }
 }
