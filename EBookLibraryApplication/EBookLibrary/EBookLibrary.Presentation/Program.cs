@@ -2,10 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using NLog.Extensions.Logging;
 
 namespace EBookLibrary.Presentation
 {
@@ -13,6 +10,7 @@ namespace EBookLibrary.Presentation
     {
         public static void Main(string[] args)
         {
+
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -20,7 +18,12 @@ namespace EBookLibrary.Presentation
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureLogging((hostingContext, logging) => {
+                        logging.AddConfiguration(hostingContext.Configuration.GetSection("logging"));
+                        logging.AddConsole(); // important for development
+                        logging.AddDebug(); // important for hosting environment
+                        logging.AddNLog(); // important to log to file
+                    }).UseStartup<Startup>();
                 });
     }
 }

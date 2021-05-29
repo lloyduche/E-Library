@@ -1,0 +1,239 @@
+[
+  {
+    "name": "Fiction",
+    "Type": 0
+  },
+  {
+    "name": "Non-fiction",
+    "Type" :  0
+  },
+  {
+    "name": "Sci-fi",
+    "Type": 1,
+    "Books": [
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 9,
+        "Title": "Patton",
+        "Author": "Cote Ball",
+        "Publisher": "GLOBOIL",
+        "ISBN": "daa50dbc-4871-4724-b130-759bfc9107a1",
+        "pages": 157,
+        "Description": "Ipsum id occaecat duis ullamco. In nulla in nostrud id laborum quis deserunt qui nisi qui eu mollit eiusmod ullamco. Velit deserunt veniam nisi amet aute fugiat reprehenderit non et. Officia minim esse consequat consequat minim exercitation ex fugiat occaecat dolor. Reprehenderit enim eiusmod Lorem aliqua duis nisi sint ex duis ea nisi incididunt ut. Dolore sint et id laborum eiusmod amet aliqua velit qui cillum veniam ad nulla ea.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 10,
+        "Title": "Vasquez",
+        "Author": "Battle Gamble",
+        "Publisher": "TERRAGO",
+        "ISBN": "003cf721-2d49-4426-b2a5-a1aa264d3038",
+        "pages": 586,
+        "Description": "Aliquip culpa ex fugiat do non. Ex ut excepteur Lorem labore ut proident laborum id aute reprehenderit consequat non fugiat. Est enim cupidatat eu aliqua aliquip quis ad culpa pariatur adipisicing et laboris ea eu. Esse ipsum cupidatat enim culpa ad adipisicing Lorem nisi consequat est officia esse aliqua est. Sunt enim nulla et aliquip irure veniam incididunt veniam adipisicing ullamco. Id esse mollit non est qui id exercitation exercitation consequat.\r\n"
+      }
+
+    ]
+  },
+  {
+    "name": "Horror",
+    "Type": 1,
+    "Books": [
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 17,
+        "Title": "Sharp",
+        "Author": "Josefina Mason",
+        "Publisher": "GYNK",
+        "ISBN": "36395310-9ff5-4db5-8cff-83024de94aa5",
+        "pages": 737,
+        "Description": "Sunt fugiat elit officia amet proident. Ea mollit veniam veniam et non aliqua irure do anim qui ullamco cillum eu reprehenderit. Sint officia et proident eiusmod nulla culpa. Non aliquip esse incididunt adipisicing qui laborum deserunt reprehenderit Lorem ad laborum id dolore. Veniam officia nisi ea velit ex ullamco ad cupidatat tempor do.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 16,
+        "Title": "Gloria",
+        "Author": "Wagner Mack",
+        "Publisher": "EARTHPURE",
+        "ISBN": "eafd0892-9a00-47a3-9d08-06ef71db1ba5",
+        "pages": 124,
+        "Description": "Culpa pariatur quis Lorem mollit id adipisicing velit exercitation cupidatat nisi nulla dolore voluptate eu. Laboris elit deserunt Lorem fugiat non ad aliquip nostrud ullamco aliquip. Nulla proident officia magna cupidatat ad ad. Anim dolore consectetur cupidatat id officia irure deserunt reprehenderit laboris mollit eiusmod sunt. Cupidatat fugiat incididunt occaecat cupidatat laborum mollit ad. Nulla veniam fugiat magna proident tempor qui culpa ea aute sit cupidatat non occaecat minim. Fugiat consectetur amet est minim exercitation ullamco do pariatur minim do.\r\n"
+      }
+    ]
+  },
+  {
+    "name": "Mystery",
+    "Type": 1,
+    "Books": [
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 5,
+        "Title": "Dean",
+        "Author": "Lorna Barron",
+        "Publisher": "ISOTRONIC",
+        "ISBN": "0b6e8ac5-fd87-4e26-b723-c81f5821bf16",
+        "pages": 224,
+        "Description": "Ut aliqua occaecat culpa et. Cillum nisi id cillum consectetur reprehenderit ea tempor labore ullamco. Aliqua consectetur non aliqua deserunt in id ex occaecat cupidatat consectetur exercitation officia. Tempor cupidatat sit non cillum mollit minim exercitation occaecat do tempor. Elit excepteur duis excepteur et occaecat et dolor cupidatat ex Lorem aute deserunt.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 4,
+        "Title": "Ava",
+        "Author": "Hope Bridges",
+        "Publisher": "MOBILDATA",
+        "ISBN": "02ffdde9-dfe5-4d46-8b26-cf6780f6287a",
+        "pages": 685,
+        "Description": "Velit quis sint ullamco voluptate in aliquip. Anim ipsum incididunt nisi consectetur est est. Mollit consequat duis nulla aliqua nostrud nulla fugiat incididunt aliqua in ad aliqua anim. Ipsum laborum irure deserunt culpa eu. Consectetur reprehenderit do incididunt esse sint proident deserunt id non sit adipisicing et ipsum. Enim nulla amet ullamco cupidatat. Non ea ullamco adipisicing dolore magna incididunt sunt ea ea veniam consequat duis.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 2,
+        "Title": "Parsons",
+        "Author": "Tamera Sims",
+        "Publisher": "ENDICIL",
+        "ISBN": "beb36ebb-ec34-4b51-ac36-5ead7f1ba2ef",
+        "pages": 560,
+        "Description": "Duis consectetur nulla velit qui sit deserunt deserunt anim Lorem quis aute esse et. Pariatur commodo ad excepteur elit nostrud laborum in ipsum esse commodo. Dolor cillum ipsum dolore consectetur anim id nisi magna magna elit. Do consequat occaecat sit duis aute elit dolore cupidatat. Amet commodo occaecat est cillum eiusmod aliqua deserunt irure duis aute enim sunt.\r\n"
+      }
+    ]
+  },
+  {
+    "name": "Drama",
+    "Type": 2,
+    "Books": [
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 11,
+        "Title": "Dunlap",
+        "Author": "Hancock Banks",
+        "Publisher": "DIGIQUE",
+        "ISBN": "2bab3ffe-4aeb-4779-bf85-75e5de091bbf",
+        "pages": 237,
+        "Description": "Nulla in sunt sunt id aliqua nulla culpa aliquip proident et officia incididunt enim elit. Sint reprehenderit ad mollit aliqua pariatur amet velit. Aliqua Lorem pariatur mollit non.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 20,
+        "Title": "Blackburn",
+        "Author": "Williams Christian",
+        "Publisher": "LUMBREX",
+        "ISBN": "ca5634a5-c7e0-4edf-b23f-ef406c652929",
+        "pages": 428,
+        "Description": "Qui non sint quis eiusmod aute amet. Fugiat velit velit occaecat ut deserunt nulla mollit anim adipisicing et et amet Lorem officia. Duis velit aliqua fugiat in id sint voluptate amet fugiat laboris minim mollit. Nostrud sint Lorem pariatur aute amet sit ipsum do laboris excepteur elit.\r\n"
+      }
+    ]
+  },
+  {
+    "name": "Art",
+    "Type": 2,
+    "Books": [
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 14,
+        "Title": "Edith",
+        "Author": "Knapp Vega",
+        "Publisher": "OMATOM",
+        "ISBN": "3a875fa2-075a-4589-9a48-e6e59a44d64b",
+        "pages": 927,
+        "Description": "Tempor cillum officia do fugiat voluptate ea veniam duis duis incididunt consequat. Ut laboris consectetur enim do ea nulla id. Et aliqua nulla Lorem reprehenderit. Dolor culpa nostrud incididunt velit pariatur.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 2,
+        "Title": "Carolyn",
+        "Author": "Vega Clayton",
+        "Publisher": "OTHERWAY",
+        "ISBN": "a3cad29a-5e0c-43d7-8e08-9c9951c3924c",
+        "pages": 349,
+        "Description": "Eu adipisicing quis in est mollit in ex deserunt velit sit et occaecat enim eiusmod. Excepteur sint Lorem elit non cillum eu culpa exercitation. In reprehenderit culpa adipisicing est consectetur.\r\n"
+      }
+    ]
+  },
+  {
+    "name": "Biography",
+    "Type": 2,
+    "Books": [
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 19,
+        "Title": "Pacheco",
+        "Author": "Ladonna Davis",
+        "Publisher": "HAWKSTER",
+        "ISBN": "18700f4f-3fe9-4a15-907c-7b8819fd323c",
+        "pages": 783,
+        "Description": "Qui culpa dolore nulla nostrud incididunt ex consectetur commodo aliquip labore. Veniam proident ea aliqua officia laborum amet. Fugiat tempor anim cupidatat amet dolor voluptate Lorem.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 19,
+        "Title": "Susana",
+        "Author": "Prince Thornton",
+        "Publisher": "VIAGRAND",
+        "ISBN": "1017bf91-e1c2-48d9-8e4e-4ca37dc63019",
+        "pages": 626,
+        "Description": "Ad incididunt quis sint consequat exercitation do elit ex nostrud. Minim veniam esse exercitation aliqua eiusmod esse ex occaecat elit. Pariatur consectetur exercitation tempor nulla ea quis pariatur sunt Lorem. Cupidatat anim nostrud Lorem esse amet velit qui ea dolor anim et. Excepteur sit elit esse cillum id enim commodo consectetur. Fugiat ipsum Lorem labore consectetur ipsum enim veniam ea dolore.\r\n"
+      }
+    ]
+  },
+  {
+    "name": "Sports",
+    "Type": 1,
+    "Books": [
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 15,
+        "Title": "Hillary",
+        "Author": "Carver Gentry",
+        "Publisher": "REMOLD",
+        "ISBN": "672d3778-eab7-4b60-bfd9-6f967e82ee40",
+        "pages": 91,
+        "Description": "Do nostrud Lorem dolore deserunt qui cillum amet. Sunt quis ex qui aliquip sint aute ullamco voluptate amet reprehenderit eu tempor. Et nostrud ex ut et fugiat ex do. Occaecat ut aliquip fugiat commodo.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 11,
+        "Title": "Santana",
+        "Author": "Livingston Graves",
+        "Publisher": "VIRVA",
+        "ISBN": "27f00824-d25a-4fe3-82c6-88ab99588564",
+        "pages": 269,
+        "Description": "Eiusmod esse labore in sint sit anim tempor dolor cupidatat quis fugiat magna adipisicing pariatur. Do qui labore aute ex. Laborum mollit id nostrud tempor. Veniam irure esse tempor esse aliquip aute mollit. Anim nostrud reprehenderit proident quis pariatur sint id. Id pariatur id id consectetur ipsum laborum. Magna dolore excepteur mollit aliqua.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 3,
+        "Title": "Short",
+        "Author": "Vargas Holder",
+        "Publisher": "ZENTRY",
+        "ISBN": "aac982c6-4389-423e-bddd-50339d7d4f2c",
+        "pages": 480,
+        "Description": "Magna velit proident irure sit dolore ea laboris do irure. Voluptate sunt dolor id minim incididunt irure. Pariatur qui velit cillum reprehenderit enim consequat excepteur qui. Sunt culpa quis pariatur nisi. Esse velit anim aliqua dolor voluptate sint ullamco dolor magna. Labore eu nostrud ut reprehenderit occaecat ullamco pariatur pariatur et non Lorem exercitation qui.\r\n"
+      }
+    ]
+  },
+  {
+    "name": "Travel",
+    "Type": 2,
+    "Books": [
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 19,
+        "Title": "Abby",
+        "Author": "Hanson Roth",
+        "Publisher": "NAMEBOX",
+        "ISBN": "82e265eb-eac0-466c-962d-10a2bd425215",
+        "pages": 220,
+        "Description": "Consequat sint minim exercitation eiusmod pariatur aliqua eiusmod aliqua. Duis et esse sunt veniam duis adipisicing cupidatat adipisicing. Cillum irure reprehenderit dolore mollit minim veniam. Nisi velit deserunt sunt eu labore adipisicing irure consequat sunt sit. Non tempor cillum laborum reprehenderit ipsum elit et laborum amet in. Dolor et dolor eiusmod ad tempor. Nostrud nostrud ex veniam quis aliquip aliqua.\r\n"
+      },
+      {
+        "AvatarUrl": "http://placehold.it/32x32",
+        "CopiesAvailable": 11,
+        "Title": "Muriel",
+        "Author": "Lee Harmon",
+        "Publisher": "PHARMEX",
+        "ISBN": "31991485-d131-4b11-afba-79be09d43b14",
+        "pages": 897,
+        "Description": "Dolore ad laboris ea officia voluptate sint ipsum officia sunt dolore commodo. Ullamco id ad eiusmod quis veniam do laboris laboris. Nulla minim do qui eu labore in laborum sit ullamco eiusmod incididunt deserunt ex. Sunt aliqua exercitation dolor minim cillum irure excepteur aliqua nisi consequat commodo aliqua aute minim.\r\n"
+      }
+    ]
+  }
+]
