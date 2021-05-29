@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Server.Core.Abstractions
 {
-    public interface IAppHttpClient<T> where T : class
+    public interface IAppHttpClient
     {
-        Task<IEnumerable<T>> Get(string Uri);
-        Task<T> Create(string Uri, T model);
+        Task<TResponse> Get<TResponse>(string Uri);
+        Task<TResponse> Create<TResponse, TRequest>(string Uri, TRequest model);
         Task<bool> Update(string Uri, HttpContent model);
-        Task<T> UploadPhoto(string Uri, T model);
+        Task<TResponse> UploadPhoto<TResponse, TRequest>(string Uri, IFormFile file);
     }
 }
