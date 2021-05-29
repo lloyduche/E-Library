@@ -1,3 +1,5 @@
+
+using EBookLibrary.Server.Core;
 using EBookLibrary.DataAccess;
 using EBookLibrary.DataAccess.DataSeed;
 using EBookLibrary.Models;
@@ -40,39 +42,21 @@ namespace EBookLibrary.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IJWTService, JWTService>();
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.Configure<JWTData>(Configuration.GetSection(JWTData.Data));
-            //Configure and add JWT Authentication
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Configuration.GetSection("JWTKey:JWTSecurityKey").Value)), //JWT security key not set
-                    ValidateIssuer = true,
-                    ValidIssuer = Configuration.GetSection("JWTKey:Issuer").Value,
-                    ValidateAudience = true,
-                    ValidAudience = Configuration.GetSection("JWT:Issuer").Value
-                };
-            });
-
-            //configuring the dbcontext and connection string
+            services.AddHttpClient();
+            services.AddAuthenticationConfiguration(Configuration);
             services.AddDbContextPool<AppDbContext>
                 (options => options.UseSqlite
                 (Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentityConfigurations();
             services.AddServices(Configuration);
             services.AddConfigurations(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         [Obsolete]
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory,
+            AppDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -91,9 +75,9 @@ namespace EBookLibrary.Presentation
 
             app.UseRouting();
 
-            app.UseAuthentication();
             Seeder.Seed(context, roleManager, userManager).Wait();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
