@@ -1,0 +1,28 @@
+[
+  {
+    "AvatarUrl": "http://placehold.it/32x32",
+    "FirstName": "Claudia",
+    "LastName": "Norris",
+    "gender": "female",
+    "Email": "claudianorris@zentry.com",
+    "UserName": "claudianorris@zentry.com"
+  },
+  {
+    "AvatarUrl": "http://placehold.it/32x32",
+    "FirstName": "Summer",
+    "LastName": "Higgins",
+    "gender": "female",
+    "Email": "summerhiggins@zentry.com",
+    "UserName": "summerhiggins@zentry.com"
+
+  },
+  {
+    "AvatarUrl": "http://placehold.it/32x32",
+    "FirstName": "Maryann",
+    "LastName": "Lamb",
+    "gender": "female",
+    "Email": "maryannlamb@zentry.com",
+    "UserName": "maryannlamb@zentry.com"
+
+  }
+]

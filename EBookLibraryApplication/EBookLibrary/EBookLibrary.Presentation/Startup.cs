@@ -1,4 +1,5 @@
 using EBookLibrary.DataAccess;
+using EBookLibrary.DataAccess.DataSeed;
 using EBookLibrary.Models;
 using EBookLibrary.Presentation.DIServices;
 using Microsoft.AspNetCore.Builder;
@@ -49,7 +50,8 @@ namespace EBookLibrary.Presentation
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            AppDbContext context,UserManager<User> userManager,RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -65,6 +67,8 @@ namespace EBookLibrary.Presentation
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            Seeder.Seed(context, roleManager, userManager).Wait();
 
             app.UseAuthorization();
 

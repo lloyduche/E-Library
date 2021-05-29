@@ -11,7 +11,8 @@ namespace EBookLibrary.DataAccess.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.HasMany(category => category.Book)
+            builder
+                .HasMany(category => category.Books)
               .WithOne(book => book.Category )
               .OnDelete(DeleteBehavior.Cascade);
         }

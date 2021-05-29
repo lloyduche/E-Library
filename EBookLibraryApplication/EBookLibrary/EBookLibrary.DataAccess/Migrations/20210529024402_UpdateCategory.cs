@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EBookLibrary.DataAccess.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class UpdateCategory : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,34 +53,11 @@ namespace EBookLibrary.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Books",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    PublicId = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    Publisher = table.Column<string>(nullable: false),
-                    Isbn = table.Column<string>(nullable: false),
-                    AvatarUrl = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(maxLength: 150, nullable: false),
-                    Pages = table.Column<int>(nullable: false),
-                    Author = table.Column<string>(nullable: false),
-                    CopiesAvailable = table.Column<string>(nullable: false),
-                    DatePublished = table.Column<DateTime>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Books", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    Type = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -224,6 +201,36 @@ namespace EBookLibrary.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    PublicId = table.Column<string>(nullable: true),
+                    CategoryId = table.Column<string>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
+                    Publisher = table.Column<string>(nullable: false),
+                    Isbn = table.Column<string>(nullable: false),
+                    AvatarUrl = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(maxLength: 150, nullable: false),
+                    Pages = table.Column<int>(nullable: false),
+                    Author = table.Column<string>(nullable: false),
+                    CopiesAvailable = table.Column<string>(nullable: false),
+                    DatePublished = table.Column<DateTime>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Books_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -260,6 +267,11 @@ namespace EBookLibrary.DataAccess.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_CategoryId",
+                table: "Books",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -283,9 +295,6 @@ namespace EBookLibrary.DataAccess.Migrations
                 name: "Books");
 
             migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "Ratings");
 
             migrationBuilder.DropTable(
@@ -296,6 +305,9 @@ namespace EBookLibrary.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }
