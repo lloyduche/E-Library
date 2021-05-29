@@ -1,4 +1,6 @@
 using EBookLibrary.DataAccess;
+using EBookLibrary.DataAccess.DataSeed;
+using EBookLibrary.Models;
 using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DataAccess.Implementations;
 using EBookLibrary.Models.Settings;
@@ -89,6 +91,8 @@ namespace EBookLibrary.Presentation
             app.UseRouting();
 
             app.UseAuthentication();
+            Seeder.Seed(context, roleManager, userManager).Wait();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
