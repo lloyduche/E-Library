@@ -31,6 +31,12 @@ namespace EBookLibrary.DTOs.UserDTOs
         [Required]
         public string Gender { get; set; }
 
+        public string UserName { 
+            get
+            {
+                return Email;
+            }
+        }
         public DateTime DateCreated { get; set; } = DateTime.Now;
     }
 }
