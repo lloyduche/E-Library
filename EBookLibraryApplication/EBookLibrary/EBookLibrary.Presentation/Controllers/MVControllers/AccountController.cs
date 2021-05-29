@@ -10,13 +10,15 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.MVControllers
 {
-    public class AuthenticationController : Controller
+    public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AuthenticationController(UserManager<User> userManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         // GET: AuthenticationController
         public ActionResult Index()
@@ -24,7 +26,8 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             return View();
         }
 
-        // GET: AuthenticationController/Details/5
+        // Register user
+        [HttpPost]
         public async Task<ActionResult> Register(RegisterationViewModel model)
         {
             var user = _userManager.FindByEmailAsync(model.Email);
@@ -38,14 +41,20 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                     Gender = model.Gender,
                     //AvatarUrl = model.AvatarFile
                 };
+
                 var res = await _userManager.CreateAsync(newUser, model.Password);
+                await _userManager.AddToRoleAsync(newUser, "Regular");
+
                 if (res.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(newUser, "Regular");
-                    return Ok("Registered successfully.");
+                    await _signInManager.SignInAsync(newUser, isPersistent: false);
+                    ViewBag.Message = "Account created successfully";
+
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            return BadRequest("User already exist");
+            return Ok("User already exist");
+
         }
     }
 }
