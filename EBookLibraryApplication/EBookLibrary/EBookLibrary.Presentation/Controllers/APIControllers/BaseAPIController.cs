@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
 
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class BaseAPIController : ControllerBase
+    public abstract class BaseAPIController : ControllerBase
     {
-  
+        
     }
 }

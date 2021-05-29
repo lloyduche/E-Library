@@ -1,4 +1,6 @@
-﻿using EBookLibrary.Client.Core.Implementations;
+﻿using AutoMapper;
+using EBookLibrary.Commons.Profiles;
+using EBookLibrary.Client.Core.Implementations;
 using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DataAccess.Implementations;
 using EBookLibrary.Models;
@@ -9,10 +11,6 @@ using EBookLibrary.ViewModels.UserVMs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.DIServices
 {
@@ -25,16 +23,37 @@ namespace EBookLibrary.Presentation.DIServices
             services.AddTransient<IMailService, MailService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddCustomConfiguredAutoMapper();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
             services.AddScoped<IAppHttpClient, AppHttpClient>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
 
         public static void AddConfigurations(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<ApplicationBaseAddress>(configuration.GetSection("BaseAddress"));
+            services.Configure<ApplicationBaseAddress>(configuration.GetSection("ApplicationBaseAddress"));
             services.Configure<CloudinaryConfig>(configuration.GetSection("CloudinaryConfig"));
-            services.Configure<MailConfig>(configuration.GetSection("MailConfig"));
-            services.Configure<JWTData>(configuration.GetSection(JWTData.Data));
+            services.Configure<MailConfig>(configuration.GetSection("SmtpConfig"));
+            services.Configure<JWTData>(configuration.GetSection("JWTConfigurations"));
+           
+        }
+    }
+
+    public static class CustomAutoMapper
+    {
+        public static void AddCustomConfiguredAutoMapper(this IServiceCollection services)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new UsersProfile());
+            });
+
+            var mapper = config.CreateMapper();
+
+            services.AddSingleton(mapper);
         }
     }
 }

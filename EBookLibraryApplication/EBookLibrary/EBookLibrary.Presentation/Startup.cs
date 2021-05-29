@@ -1,4 +1,3 @@
-
 using EBookLibrary.Server.Core;
 using EBookLibrary.DataAccess;
 using EBookLibrary.DataAccess.DataSeed;
@@ -23,7 +22,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 using NLog.Extensions.Logging;
-
 using System;
 using Microsoft.AspNetCore.Identity;
 
@@ -50,7 +48,6 @@ namespace EBookLibrary.Presentation
             services.AddIdentityConfigurations();
             services.AddServices(Configuration);
             services.AddConfigurations(Configuration);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
