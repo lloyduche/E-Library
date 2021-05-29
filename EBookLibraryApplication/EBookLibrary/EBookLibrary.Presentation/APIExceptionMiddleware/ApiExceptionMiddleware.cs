@@ -44,11 +44,13 @@ namespace EBookLibrary.Presentation.APIExceptionMiddleWare
         }
 
     private async Task ConvertException(Exception exception, HttpContext context)
-    {
+    
+        {
         HttpStatusCode httpStatusCode = HttpStatusCode.BadRequest;
         context.Response.ContentType = "application/json";
 
-        switch (exception)
+        
+            switch (exception)
         {
             case BadRequestException accessViolationException:
                 httpStatusCode = HttpStatusCode.BadRequest;

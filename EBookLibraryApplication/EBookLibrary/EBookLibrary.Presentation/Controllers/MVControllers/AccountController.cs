@@ -1,5 +1,5 @@
 ﻿using EBookLibrary.Models;
-using EBookLibrary.Presentation.ViewModels;
+using EBookLibrary.ViewModels.UserVMs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,16 +12,13 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IAuthenticationService _auth;
+        public AccountController(IAuthenticationService authenticationService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _auth = authenticationService;
         }
         // GET: AuthenticationController
-        public ActionResult Index()
+        public ActionResult Registration()
         {
             return View();
         }
@@ -30,31 +27,12 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpPost]
         public async Task<ActionResult> Register(RegisterationViewModel model)
         {
-            var user = _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
+           var response = await _auth.Register(model);
+            if (!response.Successful)
             {
-                var newUser = new User
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = model.Email,
-                    Gender = model.Gender,
-                    //AvatarUrl = model.AvatarFile
-                };
-
-                var res = await _userManager.CreateAsync(newUser, model.Password);
-                await _userManager.AddToRoleAsync(newUser, "Regular");
-
-                if (res.Succeeded)
-                {
-                    await _signInManager.SignInAsync(newUser, isPersistent: false);
-                    ViewBag.Message = "Account created successfully";
-
-                    return RedirectToAction("Index", "Home");
-                }
+                return RedirectToAction("successReg");
             }
-            return Ok("User already exist");
-
+           return BadRequest();
         }
     }
 }

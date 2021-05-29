@@ -1,9 +1,11 @@
-﻿using EBookLibrary.DataAccess.Abstractions;
+﻿using EBookLibrary.Client.Core.Implementations;
+using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DataAccess.Implementations;
 using EBookLibrary.Models;
 using EBookLibrary.Models.Settings;
 using EBookLibrary.Server.Core.Abstractions;
 using EBookLibrary.Server.Core.Implementations;
+using EBookLibrary.ViewModels.UserVMs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -23,6 +25,8 @@ namespace EBookLibrary.Presentation.DIServices
             services.AddTransient<IMailService, MailService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IAppHttpClient, AppHttpClient>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
 
         public static void AddConfigurations(this IServiceCollection services, IConfiguration configuration)

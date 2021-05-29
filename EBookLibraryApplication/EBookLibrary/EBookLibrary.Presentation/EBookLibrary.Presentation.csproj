@@ -23,11 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EBookLibrary.Commons\EBookLibrary.Commons.csproj" />
+    <ProjectReference Include="..\EBookLibrary.Core\EBookLibrary.Client.Core.csproj" />
     <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
-
-  <ItemGroup>
 
   <ItemGroup>
 
@@ -39,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EBookLibrary.DataAccess\EBookLibrary.DataAccess.csproj" />
+    <ProjectReference Include="..\EBookLibrary.ViewModels\EBookLibrary.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
