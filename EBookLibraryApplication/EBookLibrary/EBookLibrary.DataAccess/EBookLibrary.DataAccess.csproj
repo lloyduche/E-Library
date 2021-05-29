@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\" />
-    <Folder Include="Implementations\" />
     <Folder Include="DbConfigurations\" />
     <Folder Include="DataSeed\" />
   </ItemGroup>
@@ -17,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EBookLibrary.DTOs\EBookLibrary.DTOs.csproj" />
     <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
   </ItemGroup>
 
