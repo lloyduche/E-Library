@@ -1,3 +1,5 @@
+
+using EBookLibrary.Server.Core;
 using EBookLibrary.DataAccess;
 using EBookLibrary.DataAccess.DataSeed;
 using EBookLibrary.Models;
@@ -39,6 +41,8 @@ namespace EBookLibrary.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHttpClient();
+            services.Configure<ApplicationBaseAddress>(Configuration.GetSection("BaseAddress"));
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.Configure<JWTData>(Configuration.GetSection(JWTData.Data));
@@ -67,6 +71,7 @@ namespace EBookLibrary.Presentation
             services.AddIdentityConfigurations();
             services.AddServices(Configuration);
             services.AddConfigurations(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
