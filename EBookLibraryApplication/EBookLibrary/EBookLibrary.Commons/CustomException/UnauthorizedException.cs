@@ -4,9 +4,9 @@ using System.Text;
 
 namespace EBookLibrary.Commons.CustomException
 {
-    public class AccessViolationException: Exception
+    public class UnauthorizedException : Exception
     {
-        public AccessViolationException(string msg) : base(msg)
+        public UnauthorizedException(string msg) : base(msg)
         {
 
         }

@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EBookLibrary.DTOs\EBookLibrary.DTOs.csproj" />
+    <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -60,6 +60,9 @@ namespace EBookLibrary.Presentation.APIExceptionMiddleWare
             case NotFoundException notFoundException:
                 httpStatusCode = HttpStatusCode.NotFound;
                 break;
+            case UnauthorizedAccessException unauthorizedAccess:
+                httpStatusCode = HttpStatusCode.Unauthorized;
+                break;
             default:
                 httpStatusCode = HttpStatusCode.InternalServerError;
                 break;
@@ -67,7 +70,7 @@ namespace EBookLibrary.Presentation.APIExceptionMiddleWare
             context.Response.StatusCode = (int)httpStatusCode;
             var response = _env.IsDevelopment()
                     ? new Response<string>(context.Response.StatusCode, exception.Message, exception.StackTrace?.ToString()).ToString()
-                    : new Response<string>(context.Response.StatusCode, "Something went wrong from our end... We're working on it").ToString();
+                    : new Response<string>(context.Response.StatusCode, exception.Message).ToString();
 
             await context.Response.WriteAsync(response);
         }

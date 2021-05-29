@@ -21,11 +21,12 @@ namespace EBookLibrary.Server.Core.Implementations
         public async Task SendEmailAsync(MailRequest mailRequest)
         {
 
-            
-            string FilePath = Directory.GetCurrentDirectory() + "\\Email\\Mail.html";
-            StreamReader str = new StreamReader(FilePath);
-            string MailText = str.ReadToEnd();
-            str.Close();
+
+            //string FilePath = "../Views/Email/Mail.html";
+            //StreamReader str = new StreamReader(FilePath);
+            //string MailText = str.ReadToEnd();
+            //str.Close();
+            var MailText = File.ReadAllText("Views/Email/Mail.html");
             MailText = MailText.Replace("[username]", mailRequest.Name)
                                 .Replace("[Message]", mailRequest.RecipientMail)
                                 .Replace("[link]", mailRequest.Link);
