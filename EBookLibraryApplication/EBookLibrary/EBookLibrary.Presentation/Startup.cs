@@ -23,6 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using NLog.Extensions.Logging;
 
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace EBookLibrary.Presentation
 {

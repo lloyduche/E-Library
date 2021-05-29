@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\MVControllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EBookLibrary.Commons\EBookLibrary.Commons.csproj" />
     <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
     <ProjectReference Include="..\EBookLibrary.Server.Core\EBookLibrary.Server.Core.csproj" />
