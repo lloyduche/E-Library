@@ -1,21 +1,24 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace EBookLibrary.DTOs
 {
-    public class ErrorDetails
+    public class Response<T>
     {
-        public ErrorDetails(int statuCode, string message, string details = null)
+        public Response(int statuCode, string message, T details = default)
         {
             StatusCode = statuCode;
             Message = message;
-            Details = details;
+            Data = details;
+        }
+        public Response()
+        {
+
         }
         public int StatusCode { get; set; }
         public string Message { get; set; }
-        public string Details { get; set; }
+        public bool Success { get; set; }
+        public T Data { get; set; }
 
 
 
