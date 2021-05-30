@@ -24,6 +24,9 @@ namespace EBookLibrary.Presentation.DIServices
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IBookServices, BookServices>();
+            services.AddScoped<IBookRepository, BookRepository>();
             services.AddCustomConfiguredAutoMapper();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

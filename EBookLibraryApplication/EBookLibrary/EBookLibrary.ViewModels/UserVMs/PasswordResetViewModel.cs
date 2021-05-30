@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EBookLibrary.Presentation.Models
+namespace EBookLibrary.ViewModels.UserVMs
 {
     public class PasswordResetViewModel
     {
@@ -21,6 +21,9 @@ namespace EBookLibrary.Presentation.Models
         [Display(Name = "Confirm Password")]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string token { get; set; }
 
     }
 }

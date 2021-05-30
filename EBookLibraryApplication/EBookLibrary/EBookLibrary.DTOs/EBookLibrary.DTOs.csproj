@@ -5,11 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BookDTOs\" />
     <Folder Include="CategoryDTOs\" />
     <Folder Include="RatingDTOs\" />
     <Folder Include="ReviewDTOs\" />
-    <Folder Include="UserDTOs\" />
   </ItemGroup>
 
   <ItemGroup>

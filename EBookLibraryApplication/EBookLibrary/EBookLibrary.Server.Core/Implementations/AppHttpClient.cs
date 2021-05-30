@@ -46,11 +46,7 @@ namespace EBookLibrary.Server.Core.Implementations
             using var client = CustomHttpClient();
             {
                 var response = await client.GetAsync(Uri);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    result = await response.Content.ReadAsAsync<TResponse>();
-                }
+                result = await response.Content.ReadAsAsync<TResponse>();
             }
 
             return result;
