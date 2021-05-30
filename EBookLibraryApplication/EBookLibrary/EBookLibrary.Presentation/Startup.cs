@@ -63,7 +63,7 @@ namespace EBookLibrary.Presentation
             else
             {
                 app.UseStatusCodePagesWithReExecute("/Error/{0}");
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
 
             app.UseMiddleware<ApiExceptionMiddleware>();

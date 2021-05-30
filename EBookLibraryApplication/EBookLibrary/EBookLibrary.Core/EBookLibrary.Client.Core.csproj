@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Abstractions\" />
-    <Folder Include="Implementations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,6 +14,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EBookLibrary.Server.Core\EBookLibrary.Server.Core.csproj" />
+    <ProjectReference Include="..\EBookLibrary.ViewModels\EBookLibrary.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
