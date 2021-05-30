@@ -48,6 +48,10 @@ namespace EBookLibrary.Server.Core.Implementations
                 throw new NotFoundException("User with email provided does not exist");
             }
 
+            if (! await _userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new BadRequestException("Please confirm your mail to get access to the website");
+            }
             var passwordCheck = await _userManager.CheckPasswordAsync(user, password);
 
             if (!passwordCheck)

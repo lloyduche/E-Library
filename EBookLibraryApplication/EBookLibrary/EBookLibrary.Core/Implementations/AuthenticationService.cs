@@ -23,7 +23,7 @@ namespace EBookLibrary.Client.Core.Implementations
             RegistrationResponse response = new RegistrationResponse();
 
            var data =  await _httpClient.Create<ExpectedResponse<string>,
-               RegisterationViewModel>("api/v1/Authentication/Register", model);
+               RegisterationViewModel>("api/v1/Auth/Register", model);
             if (data.Success)
             {
                 response.Successful = true;

@@ -32,14 +32,10 @@ namespace EBookLibrary.Server.Core.Implementations
         public async Task<TResponse> Create<TResponse, TRequest>(string Uri, TRequest model)
         {
             TResponse result = default;
-            using var client = HttpClient();
+            using var client = CustomHttpClient();
             {
                 var response =await client.PostAsJsonAsync(Uri, model);
-
-                if (response.StatusCode == HttpStatusCode.Created)
-                {
-                    result= await response.Content.ReadAsAsync<TResponse>();
-                }
+                result= await response.Content.ReadAsAsync<TResponse>();
             }
             return result;              
         }
@@ -47,7 +43,7 @@ namespace EBookLibrary.Server.Core.Implementations
         public async Task<TResponse> Get<TResponse>(string Uri)
         {
             TResponse result = default;
-            using var client = HttpClient();
+            using var client = CustomHttpClient();
             {
                 var response = await client.GetAsync(Uri);
 
@@ -68,7 +64,7 @@ namespace EBookLibrary.Server.Core.Implementations
 
             var requestContent = new StringContent(serializedDoc, Encoding.UTF8, "application/json-patch+json");
 
-            using var client = HttpClient();
+            using var client = CustomHttpClient();
             {
 
                 var response = await client.PatchAsync(Uri, requestContent);
@@ -86,7 +82,7 @@ namespace EBookLibrary.Server.Core.Implementations
         {
             TResponse result = default;
             
-            using var client = HttpClient();
+            using var client = CustomHttpClient();
             {
                 byte[] data;
                 using (var br = new BinaryReader(file.OpenReadStream()))
@@ -109,9 +105,9 @@ namespace EBookLibrary.Server.Core.Implementations
 
         }
 
-       public HttpClient HttpClient()
+       public HttpClient CustomHttpClient()
         {
-            var client = HttpClient();
+            var client = new HttpClient();
 
             client.BaseAddress = new Uri(baseAddress.BaseAddress);
 

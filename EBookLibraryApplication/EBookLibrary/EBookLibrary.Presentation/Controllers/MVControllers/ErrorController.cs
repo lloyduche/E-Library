@@ -25,27 +25,53 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [Route("/Error/{statusCode}")]
         public IActionResult ErrorHandler(int statusCode)
         {
-
+            var statusDetails = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
             switch (statusCode)
             {
                 case 404:
-                    var statusDetails = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+                     statusDetails = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
                     errPath = statusDetails.OriginalPath;
                     errString = statusDetails.OriginalQueryString;
                     _logger.LogError($"{errPath}, {errString}");
-                    break;
+                   return RedirectToAction("Error", new { message = "You seem lost, are you?", statusCode = 404 });
+
+                case 403:
+                     statusDetails = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+                    errPath = statusDetails.OriginalPath;
+                    errString = statusDetails.OriginalQueryString;
+                    _logger.LogError($"{errPath}, {errString}");
+                   return RedirectToAction("Error", new { message = "Access Denied", statusCode = 403 });
+
+                case 500:
+                    statusDetails = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+                    errPath = statusDetails.OriginalPath;
+                    errString = statusDetails.OriginalQueryString;
+                    _logger.LogError($"{errPath}, {errString}");
+                    return RedirectToAction("Error", new { message = "Sorry, something went wrong. We are working on it", statusCode = 500 });
+
+                case 401:
+                    statusDetails = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+                    errPath = statusDetails.OriginalPath;
+                    errString = statusDetails.OriginalQueryString;
+                    _logger.LogError($"{errPath}, {errString}");
+                    return RedirectToAction("Error", new { message = "Unauthorized", statusCode = 401 });
+
+                default:
+                    statusDetails = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+                    errPath = statusDetails.OriginalPath;
+                    errString = statusDetails.OriginalQueryString;
+                    _logger.LogError($"{errPath}, {errString}");
+                    return RedirectToAction("Error", new { message = "You're probably looking for somewhere else.", statusCode = 302 });
 
             }
-
-            return RedirectToAction("");
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult NotFoundPage()
+        public IActionResult Error(string message, int statusCode)
         {
-            ViewBag.ErrorPath = errPath;
-            ViewBag.ErrorString = errString;
+            ViewBag.Message = message;
+            ViewBag.StatusCode = statusCode;
             return View();
         }
     }
