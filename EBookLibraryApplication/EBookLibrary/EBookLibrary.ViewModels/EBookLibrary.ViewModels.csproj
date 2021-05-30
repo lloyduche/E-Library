@@ -9,7 +9,6 @@
     <Folder Include="CategoryVMs\" />
     <Folder Include="RatingsVM\" />
     <Folder Include="ReviewVMs\" />
-    <Folder Include="UserVMs\" />
   </ItemGroup>
 
 </Project>

@@ -44,11 +44,13 @@ namespace EBookLibrary.Presentation.APIExceptionMiddleWare
         }
 
     private async Task ConvertException(Exception exception, HttpContext context)
-    {
+    
+        {
         HttpStatusCode httpStatusCode = HttpStatusCode.BadRequest;
         context.Response.ContentType = "application/json";
 
-        switch (exception)
+        
+            switch (exception)
         {
             case BadRequestException accessViolationException:
                 httpStatusCode = HttpStatusCode.BadRequest;
@@ -60,14 +62,17 @@ namespace EBookLibrary.Presentation.APIExceptionMiddleWare
             case NotFoundException notFoundException:
                 httpStatusCode = HttpStatusCode.NotFound;
                 break;
+            case UnauthorizedAccessException unauthorizedAccess:
+                httpStatusCode = HttpStatusCode.Unauthorized;
+                break;
             default:
                 httpStatusCode = HttpStatusCode.InternalServerError;
                 break;
         }
             context.Response.StatusCode = (int)httpStatusCode;
             var response = _env.IsDevelopment()
-                    ? new ErrorDetails(context.Response.StatusCode, exception.Message, exception.StackTrace?.ToString()).ToString()
-                    : new ErrorDetails(context.Response.StatusCode, "Something went wrong from our end... We're working on it").ToString();
+                    ? new Response<string>(context.Response.StatusCode, exception.Message, exception.StackTrace?.ToString()).ToString()
+                    : new Response<string>(context.Response.StatusCode, exception.Message).ToString();
 
             await context.Response.WriteAsync(response);
         }
