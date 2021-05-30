@@ -5,50 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - EBookLibrary.Presentation</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-darkly.css" />*@
     <link rel="stylesheet" href="~/css/site.css" />
-<<<<<<< HEAD
     <link rel="stylesheet" href="~/css/newStyle.css" />
     <link rel="stylesheet" href="~/font-awesome/css/all.min.css" />
 
-=======
     <link href="~/css/error.css" rel="stylesheet" />
->>>>>>> develop
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow navbar-">
-            <div class="container-fluid p-4">
-                <a class="navbar-brand ml-lg-5" asp-area="" asp-controller="Home" asp-action="Index">EBookLibrary</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+            <div class="container-fluid p-5">
+                <a class="navbar-brand ml-lg-4" asp-area="" asp-controller="Home" asp-action="Index" >EB<i class="fa fa-glasses fa-2x text-primary"></i>kLibrary</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>     
 
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-<<<<<<< HEAD
                     <ul class="navbar-nav myNav">
                         <li class="nav-item">
                             <a class="nav-link text-secondary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link btn btn-outline-warning pr-4 pl-4 login" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                            
-=======
+                        </li>
+                    </ul>
                     <ul class="navbar-nav flex-grow-1">
                         
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Create account</a>
->>>>>>> develop
-                        </li>
+                        
                         
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container-fluid p-0 mb-3">
-        <main role="main" class="pb-3 mb-3">
+    <div class="container-fluid p-0 mb-3 bg-light">
+        <main role="main" class="pb-3 mb-3 ">
             @RenderBody()
         </main>
     </div>
