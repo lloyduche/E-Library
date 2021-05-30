@@ -1,0 +1,100 @@
+﻿body {
+}
+
+.myJumbotron {
+    background: url('../images/wallpapertip_book-wallpaper_157590.jpg') no-repeat;
+    background-position:center;
+    height:350px;
+   
+}
+
+
+.myCard-search {
+    margin-top: -25px;
+    border-radius: 5px;
+    border: solid 2px white;
+    width: 100%
+}
+
+.myBook-card {
+    line-height: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.mySection-header {
+    font-weight: bolder;
+    text-transform:capitalize;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight:bold;
+    font-stretch:extra-expanded;
+    
+}
+.mySection-header span{
+    font-size: 16px;
+    margin-left:10px;
+}
+
+.myNav {
+    margin-right: 4em;
+}
+    .myNav a {
+        font-size: 16px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+.jumboRow {
+    display:flex; flex-direction:row; justify-content:center;
+}
+.login {
+
+   margin-left:1em;
+   
+}
+
+.rowInterest {
+    justify-content: center;
+    font-stretch: ultra-expanded;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.pagin{
+    justify-content:center;
+}
+  
+
+
+
+
+
+
+
+
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+
+    .myCard-search {
+        margin-top: 10px;
+        border-radius: 5px;
+        border: solid 2px white;
+        width: 100%;
+    }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    .myCard-search {
+        margin-top: -25px;
+        border-radius: 5px;
+        border: solid 2px white;
+        width: 100%;
+    }
+}
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+    .myCard-search {
+        margin-top: -25px;
+        border-radius: 5px;
+        border: solid 2px white;
+        width: 100%;
+    }
+}

@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\MVControllers\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
