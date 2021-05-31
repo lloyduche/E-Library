@@ -42,12 +42,12 @@ namespace EBookLibrary.Server.Core.Implementations
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jWTData.SymmetricSecurityKey));
+            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jWTData.SecretKey));
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now + JWTData.Timespan,
+                Expires = DateTime.Now + _jWTData.TokenLifeTime,
                 Audience = _jWTData.Issuer,
                 Issuer = _jWTData.Issuer,
                 SigningCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature)

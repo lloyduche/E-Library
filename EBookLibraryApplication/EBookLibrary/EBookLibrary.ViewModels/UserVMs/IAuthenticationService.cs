@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using EBookLibrary.ViewModels.Common;
+
+using System;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.ViewModels.UserVMs
 {
     public interface IAuthenticationService
     {
-       Task<RegistrationResponse> Register(RegisterationViewModel model);
+        Task<RegistrationResponse> Register(RegisterationViewModel model);
 
-       Task<RegistrationResponse> ForgotPassword(ForgotPasswordViewModel model);
+        Task<RegistrationResponse> ForgotPassword(ForgotPasswordViewModel model);
 
         Task<RegistrationResponse> ResetPassword(PasswordResetViewModel model);
+
+        Task<ExpectedResponse<string>> Login(LoginViewModel model);
     }
 }

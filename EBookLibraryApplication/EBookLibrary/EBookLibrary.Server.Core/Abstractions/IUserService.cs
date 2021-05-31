@@ -1,9 +1,7 @@
 ﻿using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.UserDTOs;
-using EBookLibrary.Models;
+
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Server.Core.Abstractions
@@ -13,5 +11,7 @@ namespace EBookLibrary.Server.Core.Abstractions
         Task<bool> UpdateUser(UpdateUserDto user);
 
         Task<bool> DeleteUser(string Id);
+
+        Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO);
     }
 }
