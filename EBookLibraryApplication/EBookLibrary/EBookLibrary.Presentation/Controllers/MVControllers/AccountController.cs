@@ -1,4 +1,5 @@
-﻿using EBookLibrary.ViewModels.UserVMs;
+﻿using EBookLibrary.Client.Core.Abstractions;
+using EBookLibrary.ViewModels.UserVMs;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,13 +17,23 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         {
             _auth = authenticationService;
         }
-
+        
         [HttpGet]
         public ActionResult Registration()
         {
             return View();
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Register(RegisterationViewModel model)
+        {
+           var response = await _auth.Register(model);
+            if (response.Successful is true)
+            {
+                return RedirectToAction("successReg");
+            }
+           return BadRequest();
+        }
         public ActionResult successReg()
         {
             return View();
@@ -40,17 +51,24 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             return BadRequest();
 
         }
-
-
-
-
-
-
-        [HttpPost]
-        public async Task<ActionResult> Register(RegisterationViewModel model)
+        
+        [HttpGet]
+        public ActionResult Update(string email, string firstname, string lastname, string gender)
         {
-            var response = await _auth.Register(model);
-            if (response.Successful is true)
+            var update = new UpdateViewModel
+            {
+                Email = email,
+                FirstName = firstname,
+                LastName = lastname,
+                Gender = gender
+            };
+            return View(update);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Update(UpdateViewModel model)
+        {
+            var response = await _auth.Update(model);
+            if (response is true)
             {
                 ViewBag.Title = "Registration";
                 ViewBag.Message = "Registration Successful";
@@ -92,5 +110,19 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             ModelState.AddModelError("", response.Message);
             return View(model);
         }
+
+        public ActionResult Delete()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteUser()
+        {
+            
+            return View();
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using EBookLibrary.Commons.ExceptionHandler;
 using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.BookDtos;
+using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,7 +46,24 @@ namespace EBookLibrary.Server.Core.Implementations
 
             return response;
         }
+        public async Task<Response<FindBookByAuthorDto>> GetBookByAuthor(string authorid)
+        {
+            Response<FindBookByAuthorDto> response = new Response<FindBookByAuthorDto>();
+            var book = await _bookRepository.GetBookByAuthor(authorid);
+            if (book == null)
+                throw new NotFoundException("No available book for this author");
 
-       
+            var books = _mapper.Map<FindBookByAuthorDto>(book);
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Message = "Search Successful";
+            response.Success = true;
+            response.Data = books;
+
+            return response;
+
+        }
+
+
     }
 }

@@ -36,7 +36,7 @@ namespace EBookLibrary.Models
         public string Description { get; set; }
 
         [Required]
-        public int Pages { get; set; }
+        public string Pages { get; set; }
 
         [Required]
         public string Author { get; set; }

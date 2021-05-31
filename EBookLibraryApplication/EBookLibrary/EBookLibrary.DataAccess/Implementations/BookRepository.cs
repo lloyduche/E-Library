@@ -1,4 +1,5 @@
 ﻿using EBookLibrary.DataAccess.Abstractions;
+using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,6 +29,16 @@ namespace EBookLibrary.DataAccess.Implementations
                 .Include(book => book.Reviews)
                 .Include(book=> book.Category)
                 .FirstOrDefaultAsync(book => book.Id == Id);
+        }
+
+        public async Task<Book> GetBookByAuthor(string authorid)
+        {
+            return _context.Books.Where(b => b.Id == authorid).FirstOrDefault();
+        }
+        
+        public async Task<Book> GetBookByCategory(string categoryid)
+        {
+            return _context.Books.Where(b => b.CategoryId == categoryid).FirstOrDefault();
         }
     }
 }
