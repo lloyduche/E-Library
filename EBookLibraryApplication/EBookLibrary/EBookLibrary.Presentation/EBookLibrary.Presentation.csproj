@@ -38,6 +38,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\MVControllers\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
 
     <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
     <ProjectReference Include="..\EBookLibrary.Commons\EBookLibrary.Commons.csproj" />
