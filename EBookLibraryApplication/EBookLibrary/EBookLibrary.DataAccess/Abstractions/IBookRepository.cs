@@ -9,5 +9,6 @@ namespace EBookLibrary.DataAccess.Abstractions
     public interface IBookRepository : IGenericRepository<Book>
     {
         Task<Book> GetDetailedBook(string Id);
+        Task<Book> GetBookByAuthor(string authorid);
     }
 }

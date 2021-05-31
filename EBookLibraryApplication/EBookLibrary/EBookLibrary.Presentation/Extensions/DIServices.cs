@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-
+using EBookLibrary.Client.Core.Abstractions;
 using EBookLibrary.Client.Core.Implementations;
 using EBookLibrary.Commons.Profiles;
 using EBookLibrary.DataAccess.Abstractions;
@@ -32,7 +32,6 @@ namespace EBookLibrary.Presentation.DIServices
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddCustomConfiguredAutoMapper();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddScoped<IAppHttpClient, AppHttpClient>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
