@@ -8,5 +8,9 @@ namespace EBookLibrary.ViewModels.UserVMs
     public interface IAuthenticationService
     {
        Task<RegistrationResponse> Register(RegisterationViewModel model);
+
+       Task<RegistrationResponse> ForgotPassword(ForgotPasswordViewModel model);
+
+        Task<RegistrationResponse> ResetPassword(PasswordResetViewModel model);
     }
 }

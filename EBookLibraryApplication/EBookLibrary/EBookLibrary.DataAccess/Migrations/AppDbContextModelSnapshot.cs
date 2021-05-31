@@ -115,6 +115,10 @@ namespace EBookLibrary.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Ratings");
                 });
 
@@ -137,6 +141,10 @@ namespace EBookLibrary.DataAccess.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -171,7 +179,6 @@ namespace EBookLibrary.DataAccess.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
@@ -357,11 +364,33 @@ namespace EBookLibrary.DataAccess.Migrations
 
             modelBuilder.Entity("EBookLibrary.Models.Book", b =>
                 {
-                    b.HasOne("EBookLibrary.Models.Category", null)
+                    b.HasOne("EBookLibrary.Models.Category", "Category")
                         .WithMany("Books")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EBookLibrary.Models.Rating", b =>
+                {
+                    b.HasOne("EBookLibrary.Models.Book", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("BookId");
+
+                    b.HasOne("EBookLibrary.Models.User", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("EBookLibrary.Models.Review", b =>
+                {
+                    b.HasOne("EBookLibrary.Models.Book", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("BookId");
+
+                    b.HasOne("EBookLibrary.Models.User", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
