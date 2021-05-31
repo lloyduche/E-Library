@@ -11,6 +11,7 @@ using EBookLibrary.ViewModels.UserVMs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using EBookLibrary.Client.Core.Abstractions;
 
 namespace EBookLibrary.Presentation.DIServices
 {
@@ -24,6 +25,7 @@ namespace EBookLibrary.Presentation.DIServices
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IBookService, BookService>();
             services.AddCustomConfiguredAutoMapper();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

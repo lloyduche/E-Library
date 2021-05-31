@@ -1,0 +1,110 @@
+﻿@model EBookLibrary.ViewModels.BookVMs.UpdateBookViewModel
+
+@{
+    Layout = "_DashboardLayout";
+}
+
+<!-- Page Content  -->
+<div id="content">
+
+    <div class="row">
+
+
+
+        <div class="col-lg-8 col-md-8 col-sm-12 border-0 bg-transparent userImgContaine">
+            <div class="card">
+                <div class="card-body text-center">
+
+                    <div>
+                        <form method="post" asp-action="UpdateBook" asp-controller="Book">
+                            <div class="form-group">
+                                <label>Book Title</label>
+                                <input type="text" asp-for="Title" class="form-control" />
+                            </div>
+                            <input type="hidden" asp-for="Id" class="form-control" />
+
+                            <div class="form-group">
+                                <label>Author</label>
+                                <input type="text" asp-for="Author" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Publisher</label>
+                                <input type="text" asp-for="Publisher" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>ISBN</label>
+                                <input type="text" asp-for="Isbn" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Pages</label>
+                                <input type="number" asp-for="Pages" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Copies Available</label>
+                                <input type="number" asp-for="CopiesAvailable" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date Published</label>
+                                <input type="date" asp-for="DatePublished" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Category</label>
+                                        <select class="form-control" asp-for="Category">
+                                            <option value="Sci-fi">Sci-fi</option>
+                                            <option value="Horror">Horror</option>
+                                            <option value="Mystery">Mystery</option>
+                                            <option value="Drama">Drama</option>
+                                            <option value="Art">Art</option>
+                                            <option value="Biography">Biography</option>
+                                            <option value="Sports">Sports</option>
+                                            <option value="Travel">Travel</option>
+                                            <option value="Sports">Sports</option>
+                                        </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" asp-for="Description"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-block btn-primary">Submit</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center userImgContainer">
+                        <img class="userImage card-img-top rounded-circle" asp-append-version="true" src="~/images/dummyman.jpg" alt="image" width="250" height="300" />
+                    </div>
+                    <button class="btn btn-block btn-info">Update Book Cover</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
