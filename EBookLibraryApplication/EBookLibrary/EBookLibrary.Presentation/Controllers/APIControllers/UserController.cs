@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
-    public class UserController : Controller
+    public class UserController : BaseAPIController
     {
         private readonly IUserService _userservice;
         public UserController(IUserService userservice)
@@ -17,8 +17,8 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpPut]
-        [Route("update-user/{id}")]
-        public async Task<IActionResult> UpdateUser(UpdateUserDto updateuserdto)
+        [Route("update-user")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateuserdto)
         {
            await _userservice.UpdateUser(updateuserdto);
             return NoContent();
@@ -26,11 +26,11 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
 
         [HttpDelete]
-        [Route("delete-user/{id}")]
-        public async Task<IActionResult> DeleteUser(string id)
+        [Route("delete-user")]
+        public async Task<IActionResult> DeleteUser([FromBody] string id)
         {
            await _userservice.DeleteUser(id);
-            return NoContent();
+           return NoContent();
         }
     }
 }

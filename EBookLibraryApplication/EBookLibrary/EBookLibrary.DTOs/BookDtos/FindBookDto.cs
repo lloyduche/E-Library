@@ -31,10 +31,10 @@ namespace EBookLibrary.DTOs.BookDtos
 
         public DateTime DatePublished { get; set; }
 
-        public ICollection<ReviewsDto> Reviews;
+        public ICollection<ReviewsDto> Reviews { get; set; }
 
-        public ICollection<RatingsDto> Ratings;
+        public ICollection<RatingsDto> Ratings { get; set; }
 
-        public string Category;
+        public string Category { get; set; }
     }
 }

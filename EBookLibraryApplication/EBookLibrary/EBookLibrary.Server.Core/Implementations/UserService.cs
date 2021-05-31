@@ -44,10 +44,16 @@ namespace EBookLibrary.Server.Core.Implementations
 
             if (checkuser == null)
                 throw new NotFoundException("User with id provided does not exist");
-            
-            var updatedUser = _mapper.Map<UpdateUserDto, User>(updateuserdto);
 
-            var result = await _userManager.UpdateAsync(updatedUser);
+            checkuser.FirstName = updateuserdto.FirstName;
+            checkuser.LastName = updateuserdto.LastName;
+            checkuser.Gender = updateuserdto.Gender;
+            checkuser.Email = updateuserdto.Email;
+            
+                
+                //_mapper.Map<UpdateUserDto, User>(updateuserdto);
+
+            var result = await _userManager.UpdateAsync(checkuser);
 
             if(!result.Succeeded)
                 throw new BadRequestException("User not updated");

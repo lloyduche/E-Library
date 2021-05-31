@@ -28,8 +28,6 @@ namespace EBookLibrary.Presentation.DIServices
             services.AddScoped<IBookServices, BookServices>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddCustomConfiguredAutoMapper();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 
             services.AddScoped<IAppHttpClient, AppHttpClient>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();

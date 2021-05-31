@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
-    public class BooksController : ControllerBase
+    public class BooksController : BaseAPIController
     {
         private readonly IBookServices _bookservices;
         public BooksController(IBookServices bookservices)
@@ -18,9 +18,9 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPost]
         [Route("get-book-by-name")]
-        public IActionResult GetBook(string Id)
+        public async Task<IActionResult> GetBook([FromBody] string Id)
         {
-            var response = _bookservices.FindBook(Id);
+            var response = await _bookservices.FindBook(Id);
             return Ok(response);
            
         }

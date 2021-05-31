@@ -23,10 +23,11 @@ namespace EBookLibrary.DataAccess.Implementations
 
         public async Task<Book> GetDetailedBook(string Id)
         {
-            return await _dbSet.Where(book => book.Id == Id)
+            return await _context.Books
                 .Include(book => book.Ratings)
                 .Include(book => book.Reviews)
-                .FirstOrDefaultAsync();
+                .Include(book=> book.Category)
+                .FirstOrDefaultAsync(book => book.Id == Id);
         }
     }
 }

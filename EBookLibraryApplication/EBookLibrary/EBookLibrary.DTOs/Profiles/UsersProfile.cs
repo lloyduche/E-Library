@@ -11,9 +11,12 @@ namespace EBookLibrary.Commons.Profiles
         {
             CreateMap<User, RegisterDTO>().ReverseMap();
             CreateMap<UpdateUserDto, User>().ReverseMap();
-            CreateMap<Book, FindBookDto>().ReverseMap()
-                .ForMember(book=> book.Ratings, findBook=> findBook.MapFrom(book=> book.Ratings))
-                .ForMember(book=> book.Reviews, findBook => findBook.MapFrom(book => book.Reviews));
+            CreateMap<Rating, RatingsDto>().ReverseMap();
+            CreateMap<Review, ReviewsDto>().ReverseMap();
+            CreateMap<Book, FindBookDto>()
+                .ForMember(book => book.Reviews, findBook => findBook.MapFrom(book => book.Reviews))
+                .ForMember(book => book.Ratings, findBook => findBook.MapFrom(book => book.Ratings))
+                .ForMember(book=> book.Category, findBook => findBook.MapFrom(book=> book.Category.Name));
         }
     }
 }
