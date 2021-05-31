@@ -79,36 +79,3 @@
 }
   
 
-
-
-
-
-
-/*
-
-
-@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
-
-    .myCard-search {
-        margin-top: 10px;
-        border-radius: 5px;
-        border: solid 2px white;
-        width: 100%;
-    }
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
-    .myCard-search {
-        margin-top: -25px;
-        border-radius: 5px;
-        border: solid 2px white;
-        width: 100%;
-    }
-}
-@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
-    .myCard-search {
-        margin-top: -25px;
-        border-radius: 5px;
-        border: solid 2px white;
-        width: 100%;
-    }
-}*/
