@@ -1,11 +1,10 @@
-﻿using EBookLibrary.Models;
+﻿using EBookLibrary.Client.Core.Abstractions;
 using EBookLibrary.ViewModels.UserVMs;
+
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.MVControllers
@@ -13,21 +12,18 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
     public class AccountController : Controller
     {
         private readonly IAuthenticationService _auth;
+
         public AccountController(IAuthenticationService authenticationService)
         {
             _auth = authenticationService;
         }
-
+        
         [HttpGet]
         public ActionResult Registration()
         {
             return View();
         }
 
-        public ActionResult successReg()
-        {
-            return View();
-        }
         [HttpPost]
         public async Task<ActionResult> Register(RegisterationViewModel model)
         {
@@ -38,5 +34,95 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             }
            return BadRequest();
         }
+        public ActionResult successReg()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            var response = await _auth.ForgotPassword(model);
+            if (response.Successful is true)
+            {
+                ViewBag.Title = "Forgot Password";
+                ViewBag.Message = "A Password Reset Link Has Been Sent To Your Mail";
+                return RedirectToAction("successReg");
+            }
+            return BadRequest();
+
+        }
+        
+        [HttpGet]
+        public ActionResult Update(string email, string firstname, string lastname, string gender)
+        {
+            var update = new UpdateViewModel
+            {
+                Email = email,
+                FirstName = firstname,
+                LastName = lastname,
+                Gender = gender
+            };
+            return View(update);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Update(UpdateViewModel model)
+        {
+            var response = await _auth.Update(model);
+            if (response is true)
+            {
+                ViewBag.Title = "Registration";
+                ViewBag.Message = "Registration Successful";
+                return RedirectToAction("successReg");
+            }
+           return BadRequest();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> PasswordReset(PasswordResetViewModel model)
+        {
+            var response = await _auth.ResetPassword(model);
+            if (response.Successful is true)
+            {
+                ViewBag.Title = "Password Reset";
+                ViewBag.Message = "Password Reset Successful";
+                return RedirectToAction("successReg");
+            }
+            return BadRequest();
+
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            var response = await _auth.Login(model);
+            if (response.Success)
+            {
+                HttpContext.Session.SetString("access_token", response.Data);
+                return View("successReg");
+            }
+            ModelState.AddModelError("", response.Message);
+            return View(model);
+        }
+
+        public ActionResult Delete()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteUser()
+        {
+            
+            return View();
+        }
+
     }
 }

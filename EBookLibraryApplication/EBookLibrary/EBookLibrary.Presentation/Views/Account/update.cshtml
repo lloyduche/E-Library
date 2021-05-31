@@ -1,0 +1,46 @@
+﻿@model EBookLibrary.ViewModels.UserVMs.UpdateViewModel
+
+
+@{
+    ViewData["Title"] = "User Update";
+
+}
+
+<div class="form_wrapper">
+    <div class="form_container">
+        <div class="title_container">
+            <h2>Update your Information</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="">
+                <form method="post" asp-action="Update" asp-controller="Account">
+                    <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                        <input type="email" placeholder="Email" asp-for="Email" />
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col_half">
+                            <div class="input_field">
+                                <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                                <input type="text" placeholder="First Name" asp-for="FirstName" />
+                            </div>
+                        </div>
+                        <div class="col_half">
+                            <div class="input_field">
+                                <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                                <input type="text" placeholder="Last Name" asp-for="LastName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_field radio_option">
+                        <input type="radio" id="rd1" asp-for="Gender" value="Male">
+                        <label for="rd1">Male</label>
+                        <input type="radio" id="rd2" asp-for="Gender" value="Female">
+                        <label for="rd2">Female</label>
+                    </div>
+                    <input class="button" type="submit" value="Update" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

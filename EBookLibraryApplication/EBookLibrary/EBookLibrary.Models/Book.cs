@@ -28,15 +28,15 @@ namespace EBookLibrary.Models
         [Required]
         public string Isbn { get; set; }
 
-        [Required]
-        public string AvatarUrl { get; set; }
+        //[Required]
+        public string? AvatarUrl { get; set; }
 
         [Required]
         [StringLength(maximumLength: 150, ErrorMessage = "The property {0} should have not have more than {1} characters")]
         public string Description { get; set; }
 
         [Required]
-        public int Pages { get; set; }
+        public string Pages { get; set; }
 
         [Required]
         public string Author { get; set; }
@@ -50,11 +50,11 @@ namespace EBookLibrary.Models
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        public ICollection<Review> Reviews;
+        public ICollection<Review> Reviews { get; set; }
 
-        public ICollection<Rating> Ratings;
+        public ICollection<Rating> Ratings { get; set; }
 
-        public Category Category;
+        public Category Category { get; set; }
 
     }
 }

@@ -19,9 +19,9 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             _authService = authService;
         }
 
-       [HttpPost("Login")]
-       [AllowAnonymous]
-       public async Task<IActionResult> Login([FromBody] LoginDTO model)
+        [HttpPost("Login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginDTO model)
         {
             var user = await _authService.Login(model.Email, model.Password);
 
@@ -47,11 +47,11 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
 
-        [HttpPost]
-        [Route("reset-password-link")]
-        public async Task<IActionResult> SendResetPasswordLink(GetEmailToResetPasswordDto model)
+        [HttpGet]
+        [Route("reset-password-link/{email}")]
+        public async Task<IActionResult> SendResetPasswordLink(string email)
         {
-            var response = await _authService.SendResetPasswordLink(model.Email, Url, Request.Scheme);
+            var response = await _authService.SendResetPasswordLink(email, Url, Request.Scheme);
                 return NoContent();
         }
 
