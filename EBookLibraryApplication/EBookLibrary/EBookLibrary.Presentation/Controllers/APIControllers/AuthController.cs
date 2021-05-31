@@ -19,9 +19,9 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             _authService = authService;
         }
 
-       [HttpPost("Login")]
-       [AllowAnonymous]
-       public async Task<IActionResult> Login([FromBody] LoginDTO model)
+        [HttpPost("Login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginDTO model)
         {
             var user = await _authService.Login(model.Email, model.Password);
 
