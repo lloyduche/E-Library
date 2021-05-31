@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <None Remove="Views\Email\Mail.html" />
+    <None Remove="Views\Email\Mail2.html" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Views\Email\Mail.html" />
+    <Content Include="Views\Email\Mail2.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +37,11 @@
     <ProjectReference Include="..\EBookLibrary.Core\EBookLibrary.Client.Core.csproj" />
     <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\MVControllers\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
