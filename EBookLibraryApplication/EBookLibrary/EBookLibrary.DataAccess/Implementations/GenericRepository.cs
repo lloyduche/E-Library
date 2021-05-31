@@ -21,10 +21,10 @@ namespace EBookLibrary.DataAccess.Implementations
             _dbSet = _context.Set<T>();
         }
 
-        public async Task Delete(T entity)
+        public async Task<bool> Delete(T entity)
         {
             _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
+           return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<T> Get(string Id)
@@ -35,17 +35,17 @@ namespace EBookLibrary.DataAccess.Implementations
 
         public IQueryable<T> GetAll() => _dbSet.AsQueryable<T>();
 
-        public async Task Insert(T entity)
+        public async Task<bool> Insert(T entity)
         {
             _dbSet.Add(entity);
-            await _context.SaveChangesAsync();
+           return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task Update(T entity)
+        public async Task<bool> Update(T entity)
         {
             _dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+          return  await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<PagedResult<T>> GetByPage(int pageNumber, int pageSize)

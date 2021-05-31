@@ -28,8 +28,8 @@ namespace EBookLibrary.Models
         [Required]
         public string Isbn { get; set; }
 
-        [Required]
-        public string AvatarUrl { get; set; }
+        //[Required]
+        public string? AvatarUrl { get; set; }
 
         [Required]
         [StringLength(maximumLength: 150, ErrorMessage = "The property {0} should have not have more than {1} characters")]

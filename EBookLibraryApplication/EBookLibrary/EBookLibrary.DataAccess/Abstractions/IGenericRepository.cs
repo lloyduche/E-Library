@@ -13,11 +13,11 @@ namespace EBookLibrary.DataAccess.Abstractions
 
         Task<T> Get(string id);
 
-        Task Insert(T entity);
+        Task<bool> Insert(T entity);
 
-        Task Update(T entity);
+        Task<bool> Update(T entity);
 
-        Task Delete(T entity);
+        Task<bool> Delete(T entity);
 
         Task<T> Find(Expression<Func<T, bool>> expression);
 

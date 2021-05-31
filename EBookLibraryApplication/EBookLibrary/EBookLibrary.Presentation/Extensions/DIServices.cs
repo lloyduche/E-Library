@@ -20,6 +20,7 @@ namespace EBookLibrary.Presentation.DIServices
         public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IFileUpload, FileUpload>();
+            services.AddScoped<IBookService, BookService>();
             services.AddTransient<IMailService, MailService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
