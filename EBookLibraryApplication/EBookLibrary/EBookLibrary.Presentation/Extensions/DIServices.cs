@@ -30,6 +30,7 @@ namespace EBookLibrary.Presentation.DIServices
 
             services.AddScoped<IAppHttpClient, AppHttpClient>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IBookService, BookService>();
         }
 
         public static void AddConfigurations(this IServiceCollection services, IConfiguration configuration)

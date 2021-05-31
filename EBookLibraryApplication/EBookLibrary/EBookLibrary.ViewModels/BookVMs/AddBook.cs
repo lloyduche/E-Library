@@ -1,24 +1,13 @@
-﻿using System;
+﻿using EBookLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace EBookLibrary.Models
+namespace EBookLibrary.ViewModels.BookVMs
 {
-    public class Book
+    public class AddBook
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string PublicId { get; set; }
-
-        [Required]
-        [ForeignKey("CategoryId")]
-        public string CategoryId { get; set; }
-
         [Required]
         public string Title { get; set; }
 
@@ -36,25 +25,14 @@ namespace EBookLibrary.Models
         public string Description { get; set; }
 
         [Required]
-        public string Pages { get; set; }
+        public int Pages { get; set; }
 
         [Required]
         public string Author { get; set; }
-
+        public string Category { get; set; }
         [Required]
         public string CopiesAvailable { get; set; }
-
         public DateTime DatePublished { get; set; }
-
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-        public ICollection<Review> Reviews;
-
-        public ICollection<Rating> Ratings;
-
-        public Category Category;
-
     }
 }

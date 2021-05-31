@@ -1,31 +1,18 @@
-﻿@model EBookLibrary.ViewModels.UserVMs.Users
-@{ 
-    Layout = "_Layout";
+﻿@model EBookLibrary.ViewModels.UserVMs.UpdateViewModel
+@{
 }
-
-<style>
-
-</style>
 
 <div class="form_wrapper">
     <div class="form_container">
         <div class="title_container">
-            <h2>Register</h2>
+            <h2>Update your Information</h2>
         </div>
         <div class="row clearfix">
             <div class="">
-                <form method="post" asp-action="Register" asp-controller="Account">
+                <form method="post" asp-action="Update" asp-controller="Account">
                     <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-                        <input type="email" placeholder="Email" required asp-for="Email" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <input type="password" placeholder="Password" required asp-for="Password" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <input type="password" placeholder="Confirm Password" required asp-for="ConfirmPassword" />
+                        <input type="email" placeholder="Email" asp-for="Email" />
                     </div>
                     <div class="row clearfix">
                         <div class="col_half">
@@ -37,7 +24,7 @@
                         <div class="col_half">
                             <div class="input_field">
                                 <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                                <input type="text" placeholder="Last Name" required asp-for="LastName" />
+                                <input type="text" placeholder="Last Name" asp-for="LastName" />
                             </div>
                         </div>
                     </div>
@@ -47,13 +34,7 @@
                         <input type="radio" id="rd2" asp-for="Gender" value="Female">
                         <label for="rd2">Female</label>
                     </div>
-                    <div class="input_field checkbox_option">
-                        <input type="checkbox" id="cb1">
-                        <label for="cb1">I agree with terms and conditions</label>
-                    </div>
-                    <input class="button" type="submit" value="Register" />
-                    <p style="text-align: center;">Already have an accont?</p>
-                    <input class="button" type="submit" value="Login" />
+                    <input class="button" type="submit" value="Update" />
                 </form>
             </div>
         </div>

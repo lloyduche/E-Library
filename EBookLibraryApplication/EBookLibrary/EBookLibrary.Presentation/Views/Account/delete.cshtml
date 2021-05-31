@@ -1,0 +1,40 @@
+﻿@model IEnumerable<EBookLibrary.Models.User>
+@{
+}
+
+<style>
+    .tabs {
+        padding: 1em;
+        margin-bottom: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    }
+</style>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+<div class=" activity col-md-10" style="background-color: white; padding: 50px; background-color: #efeeee">
+    <div class="btns-upper pt-3 pb-3">
+        <a class="btn btn-dark " asp-action="" style="margin-left: 20px;" id="confirm-delete"><i class="fas fa-user-friends fas fa-user-circle"></i>&nbsp;Manage User</a>
+        <input style="margin-left: 300px; background-color: white; padding: 5px; " href="#"/>
+        @*<a class="search-it btn btn-dark" href="#" style="background-color: cadetblue"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</a>*@
+        <a class=" btn btn-dark" href="Search" style="background-color: cadetblue">Search</a>
+    </div>
+    @foreach (var user in Model)
+    {
+        <div class=" activity col-md-8">
+            <div class="tabs" style="width: 800px; padding: 10px; margin-bottom: 20px;">
+                <h5>@user.Id</h5>
+                <h5>@user.FirstName</h5>
+                <h5>@user.LastName</h5>
+                <h5>@user.Email</h5>
+                <div class="btn-tabs">
+                    <a class="btn btn-danger" asp-route-id="@user.Id" asp-controller="Account" asp-action="Delete"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

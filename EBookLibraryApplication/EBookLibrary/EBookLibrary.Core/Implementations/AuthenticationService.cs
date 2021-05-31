@@ -18,16 +18,23 @@ namespace EBookLibrary.Client.Core.Implementations
         }
 
 
-        public async Task<RegistrationResponse> Register(RegisterationViewModel model)
+        public async Task<ExpectedResponse<string>> Register(Users model)
         {
-            RegistrationResponse response = new RegistrationResponse();
 
            var data =  await _httpClient.Create<ExpectedResponse<string>,
-               RegisterationViewModel>("api/v1/Auth/Register", model);
+               Users>("api/v1/Auth/Register", model);
+           
+            return data;
+        }
+        public async Task<UpdateResponse> Update(UpdateViewModel model)
+        {
+            UpdateResponse response = new UpdateResponse();
+            var data = await _httpClient.Create<ExpectedResponse<string>,
+                UpdateViewModel>("api/v1/Auth/Update", model);
             if (data.Success)
             {
                 response.Successful = true;
-                response.Message = "Registered successfully. Check your email for confirmation link";
+                response.Message = "You have successfully updated your information";
                 return response;
             }
             response.Message = data.Message;

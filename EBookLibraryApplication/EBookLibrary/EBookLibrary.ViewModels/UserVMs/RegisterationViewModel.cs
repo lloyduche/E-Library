@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.ViewModels.UserVMs
 {
-    public class RegisterationViewModel
+    public class Users
     {
         [Required]
         public string FirstName { get; set; }
