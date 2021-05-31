@@ -1,11 +1,9 @@
-﻿using EBookLibrary.Models;
-using EBookLibrary.ViewModels.UserVMs;
+﻿using EBookLibrary.ViewModels.UserVMs;
+
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.MVControllers
@@ -13,6 +11,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
     public class AccountController : Controller
     {
         private readonly IAuthenticationService _auth;
+
         public AccountController(IAuthenticationService authenticationService)
         {
             _auth = authenticationService;
@@ -28,25 +27,6 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         {
             return View();
         }
-
-        public IActionResult PasswordForgot()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult PasswordReset(string email, string token)
-        {
-            var passviewmodel = new PasswordResetViewModel
-            {
-                Email = email,
-                token = token
-            };
-            return View(passviewmodel);
-        }
-
-
-
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -69,7 +49,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpPost]
         public async Task<ActionResult> Register(RegisterationViewModel model)
         {
-           var response = await _auth.Register(model);
+            var response = await _auth.Register(model);
             if (response.Successful is true)
             {
                 ViewBag.Title = "Registration";
@@ -94,10 +74,23 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
 
         }
 
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
 
-
-
-
-
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            var response = await _auth.Login(model);
+            if (response.Success)
+            {
+                HttpContext.Session.SetString("access_token", response.Data);
+                return View("successReg");
+            }
+            ModelState.AddModelError("", response.Message);
+            return View(model);
+        }
     }
 }

@@ -1,29 +1,23 @@
-using EBookLibrary.Server.Core;
 using EBookLibrary.DataAccess;
 using EBookLibrary.DataAccess.DataSeed;
 using EBookLibrary.Models;
-using EBookLibrary.DataAccess.Abstractions;
-using EBookLibrary.DataAccess.Implementations;
-using EBookLibrary.Models.Settings;
 using EBookLibrary.Presentation.APIExceptionMiddleWare;
 using EBookLibrary.Presentation.DIServices;
 using EBookLibrary.Presentation.Extensions;
-using EBookLibrary.Server.Core.Abstractions;
-using EBookLibrary.Server.Core.Implementations;
 
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 
 using NLog.Extensions.Logging;
+
 using System;
-using Microsoft.AspNetCore.Identity;
 
 namespace EBookLibrary.Presentation
 {
@@ -47,7 +41,11 @@ namespace EBookLibrary.Presentation
                 (Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentityConfigurations();
             services.AddServices(Configuration);
-            services.AddConfigurations(Configuration);
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time
+            }); services.AddConfigurations(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +72,16 @@ namespace EBookLibrary.Presentation
 
             Seeder.Seed(context, roleManager, userManager).Wait();
 
+            app.UseSession();
+            app.Use(async (ctx, next) =>
+            {
+                var jwt = ctx.Session.GetString("access_token");
+                if (!string.IsNullOrWhiteSpace(jwt))
+                {
+                    ctx.Request.Headers.Add("Authorization", "Bearer " + jwt);
+                }
+                await next();
+            });
             app.UseAuthentication();
             app.UseAuthorization();
 
