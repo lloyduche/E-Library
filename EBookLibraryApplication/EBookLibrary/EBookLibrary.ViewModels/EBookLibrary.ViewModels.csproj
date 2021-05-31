@@ -5,10 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BookVMs\" />
     <Folder Include="CategoryVMs\" />
     <Folder Include="RatingsVM\" />
     <Folder Include="ReviewVMs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EBookLibrary.Models\EBookLibrary.Models.csproj" />
   </ItemGroup>
 
 </Project>

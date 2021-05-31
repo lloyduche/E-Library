@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using EBookLibrary.Commons.Profiles;
+using EBookLibrary.Client.Core.Abstractions;
 using EBookLibrary.Client.Core.Implementations;
+using EBookLibrary.Commons.Profiles;
 using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DataAccess.Implementations;
 using EBookLibrary.Models;
@@ -8,15 +9,16 @@ using EBookLibrary.Models.Settings;
 using EBookLibrary.Server.Core.Abstractions;
 using EBookLibrary.Server.Core.Implementations;
 using EBookLibrary.ViewModels.UserVMs;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using System;
 
 namespace EBookLibrary.Presentation.DIServices
 {
     public static class DIServices
     {
-
         public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IFileUpload, FileUpload>();
@@ -29,7 +31,7 @@ namespace EBookLibrary.Presentation.DIServices
             services.AddScoped<IBookServices, BookServices>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddCustomConfiguredAutoMapper();
-
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IAppHttpClient, AppHttpClient>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
@@ -39,8 +41,7 @@ namespace EBookLibrary.Presentation.DIServices
             services.Configure<ApplicationBaseAddress>(configuration.GetSection("ApplicationBaseAddress"));
             services.Configure<CloudinaryConfig>(configuration.GetSection("CloudinaryConfig"));
             services.Configure<MailConfig>(configuration.GetSection("SmtpConfig"));
-            services.Configure<JWTData>(configuration.GetSection("JWTConfigurations"));
-           
+            services.Configure<JWTData>(configuration.GetSection(JWTData.Data));
         }
     }
 

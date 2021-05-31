@@ -1,4 +1,5 @@
-﻿using EBookLibrary.DTOs.BookDTOs;
+﻿using EBookLibrary.DTOs;
+using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Server.Core.Abstractions;
@@ -67,6 +68,12 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         public async Task<IActionResult> UploadPhoto([FromForm] UploadPhotoDto uploadphotodto)
         {
             var response = await  _bookService.UploadPhoto(uploadphotodto);
+            return Ok(response);
+        }
+        [Route("(authors{authorId:int}/books")]
+        public async Task<IActionResult> GetBookByAuthor(string authorId)
+        {
+            var response = await _bookService.GetBookByAuthor(authorId);
             return Ok(response);
         }
 
