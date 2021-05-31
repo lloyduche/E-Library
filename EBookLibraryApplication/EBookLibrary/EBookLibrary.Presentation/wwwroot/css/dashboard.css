@@ -26,7 +26,7 @@ a:focus {
 }
 
 .navbar {
-    padding: 15px 10px;
+    padding: 10px;
     background: #fff;
     border: none;
     border-radius: 0;
@@ -182,3 +182,41 @@ a.article:hover {
             display: none;
         }
     }
+
+
+
+/* my Uche's admin dashboard*/
+
+.myCard-Gradient1 {
+    background: rgb(0,191,255);
+    background: linear-gradient(90deg, rgba(0,191,255,1) 0%, rgba(52,87,213,1) 100%);
+}
+
+.myCard-Gradient2 {
+    background: rgb(254,159,162);
+    background: linear-gradient(90deg, rgba(254,159,162,1) 0%, rgba(234,8,44,0.8) 100%);
+}
+
+.myCard-Gradient3 {
+    background: rgb(0,255,64);
+    background: linear-gradient(90deg, rgba(0,255,64,1) 0%, rgba(1,135,73,0.8) 100%);
+}
+
+.myCard-Title{
+font-weight:normal;
+font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+font-size:18px;
+}
+.num {
+   
+    font-size: 70px;
+}
+.sideNav li{
+   
+   margin:0px
+}
+.sideNav li a{
+    padding: 0.5em 0 0.5em 0;
+}
+    
+/*...............*/
