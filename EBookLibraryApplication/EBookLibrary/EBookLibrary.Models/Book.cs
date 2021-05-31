@@ -50,11 +50,11 @@ namespace EBookLibrary.Models
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        public ICollection<Review> Reviews;
+        public ICollection<Review> Reviews { get; set; }
 
-        public ICollection<Rating> Ratings;
+        public ICollection<Rating> Ratings { get; set; }
 
-        public Category Category;
+        public Category Category { get; set; }
 
     }
 }

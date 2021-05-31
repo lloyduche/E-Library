@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210530211701_Initial.cs" />
+    <Compile Remove="Migrations\20210530211701_Initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="DbConfigurations\" />
   </ItemGroup>
 

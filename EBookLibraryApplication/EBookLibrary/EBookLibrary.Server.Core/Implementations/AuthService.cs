@@ -175,7 +175,7 @@ namespace EBookLibrary.Server.Core.Implementations
             var result = await _userManager.ResetPasswordAsync(user, normalToken, resetpassword.Password);
             if (!result.Succeeded)
             {
-                throw new BadRequestException("Something went wrong");
+                throw new BadRequestException("Invalid credentials");
             }
             responseObject.StatusCode = (int)HttpStatusCode.OK;
             responseObject.Message = "Password Reset Successful";

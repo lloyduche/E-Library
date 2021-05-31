@@ -1,8 +1,216 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@{ ViewData["Title"] = "Home Page"; }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+
+
+<div class="col-lg-12 col-sm-12 myJumbotron">
+    <div class="overlay"></div>
+
+    <div class="col-lg-12 col-sm-12">
+
+        <div class="d-flex justify-content-center bg-transparent pb-3">
+
+            <div class="col-lg-6 col-sm-12 p-sm-0 myCard-search ">
+                <div class="input-group text-center mb-3 box-shadow ">
+                    <input type="text" class="form-control" style="font-size:25px; padding:1.2em;" placeholder="Search For Books..." aria-label="Recipient's username" aria-describedby="basic-addon3">
+                    <input type="submit" class="input-group-text bg-primary pl-4 pr-4" style="color:aliceblue;" id="basic-addon3" value="Search" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="d-flex justify-content-center bg-transparent pb-3">
+
+        <div class="card col-lg-9 col-sm-3 bg-transparent border-0">
+
+            <div class="row pb-3 mt-3 rowInterest">
+                <p>
+                    What Interests you?
+                </p>
+            </div>
+
+            <div class="row jumboRow">
+                <div class="col-lg-6 col-sm-6 text-center pb-3">
+                    <h5 style="font-size:24px; font-weight:bold;">
+                        Fiction Books
+                    </h5>
+                    <div class="p-2">
+
+                        <a class="btn btn-lg  btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Drama</a>
+                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Horror</a>
+                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Mystery</a>
+                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Sci-Fi</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 text-center pb-3">
+
+                    <h5 style="font-size:24px; font-weight:bold;">
+                        Non-Fiction Books
+                    </h5>
+                    <div class="p-2">
+                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Biography</a>
+                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Sports</a>
+
+                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Arts</a>
+
+                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Travels</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+<section>
+
+
+    <div class="d-flex flex-wrap flex-lg-wrap justify-content-center pt-2 mb-4">
+
+        <div class="col-lg-12 border-0 mb-3 mt-4 text-center mySection-header">
+            <h4>
+                New Releases  <span class="ml-3 ">  Books  </span> <span class="badge bg-warning">20</span>
+            </h4>
+        </div>
+        <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image03.jpg" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+        <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image02.jpg" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+        <div class="card border-0 col-lg-2 col-sm-6 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image01.png" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+        <div class="card border-0 col-lg-2 col-sm-6 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image05.jpg" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+        <div class="card border-0 col-lg-2 col-sm-6 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image03.jpg" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="d-flex flex-wrap flex-lg-wrap justify-content-center pt-2 mb-4">
+        <div class=border-0 col-lg-12 col-sm-12 mt-4">
+            <div class="btn-group-lg">
+                <a href="#" class="btn btn-outline-primary" aria-current="page"><i class="fa fa-angle-double-left"></i></a>
+                <a href="#" class="btn btn-outline-primary"><i class="fa fa-angle-double-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+
+
+    <div class="d-flex flex-wrap justify-content-center pt-2 mb-4">
+
+
+        <div class="col-lg-12  border-0 mb-3 mt-4 text-center mySection-header">
+            <h4>
+                Most Popular  <span class="ml-3">  Books  </span> <span class="badge bg-warning">27</span>
+            </h4>
+        </div>
+
+        <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image05.jpg" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+        <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image02.jpg" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+        <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image05.jpg" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+        <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image03.jpg" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+        <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
+            <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image05.jpg" alt="image" width="200" height="250" /></a>
+            <div class="card-body p-0 mt-3 myBook-card">
+                <p class="text-secondary text-capitalize">Book Name</p>
+                <p class="text-secondary text-capitalize">Book Category</p>
+                <p class="text-secondary text-capitalize">Book Author</p>
+                <p>*****</p>
+                <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section>
+    <div class="d-flex flex-wrap flex-lg-wrap justify-content-center pt-2 mb-4">
+        <div class=border-0 col-lg-12 col-sm-12 mt-4">
+            <div class="btn-group-lg">
+                <a href="#" class="btn btn-outline-primary" aria-current="page"><i class="fa fa-angle-double-left"></i></a>
+                <a href="#" class="btn btn-outline-primary"><i class="fa fa-angle-double-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>

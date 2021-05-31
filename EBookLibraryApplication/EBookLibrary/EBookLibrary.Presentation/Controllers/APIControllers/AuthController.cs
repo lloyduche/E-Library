@@ -47,11 +47,11 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
 
-        [HttpPost]
-        [Route("reset-password-link")]
-        public async Task<IActionResult> SendResetPasswordLink(GetEmailToResetPasswordDto model)
+        [HttpGet]
+        [Route("reset-password-link/{email}")]
+        public async Task<IActionResult> SendResetPasswordLink(string email)
         {
-            var response = await _authService.SendResetPasswordLink(model.Email, Url, Request.Scheme);
+            var response = await _authService.SendResetPasswordLink(email, Url, Request.Scheme);
                 return NoContent();
         }
 

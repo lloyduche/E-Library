@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.DataAccess.Implementations
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly DbContext _context;
+        private readonly AppDbContext _context;
         private readonly DbSet<T> _dbSet;
 
         public GenericRepository(AppDbContext context)
@@ -65,5 +66,7 @@ namespace EBookLibrary.DataAccess.Implementations
             pagedResult.Result = await GetAll().Skip(pagesToSkip).Take(pageSize).ToListAsync();
             return pagedResult;
         }
+
+        public async Task<T> Find(Expression<Func<T, bool>> expression) => await _dbSet.FirstOrDefaultAsync(expression);
     }
 }
