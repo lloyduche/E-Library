@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <None Remove="Views\Email\Mail.html" />
+    <None Remove="Views\Email\Mail2.html" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Views\Email\Mail.html" />
+    <Content Include="Views\Email\Mail2.html" />
   </ItemGroup>
 
   <ItemGroup>

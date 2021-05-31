@@ -34,5 +34,39 @@ namespace EBookLibrary.Client.Core.Implementations
             return response;
         }
 
+        public async Task<RegistrationResponse> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            RegistrationResponse response = new RegistrationResponse();
+
+            var data = await _httpClient.Get<ExpectedResponse<string>>($"api/v1/Auth/reset-password-link/{model.Email}");
+
+            if (data.Success)
+            {
+                response.Successful = true;
+                response.Message = "Registered successfully. Check your email for confirmation link";
+                return response;
+            }
+            response.Message = "email not sent";
+            return response;
+        }
+
+
+        public async Task<RegistrationResponse> ResetPassword(PasswordResetViewModel model)
+        {
+            RegistrationResponse response = new RegistrationResponse();
+
+            var data = await _httpClient.Create<ExpectedResponse<string>,
+              PasswordResetViewModel>("api/v1/Auth/reset-password", model);
+
+            if (data.Success)
+            {
+                response.Successful = true;
+                response.Message = "Password Changed successfully";
+                return response;
+            }
+            response.Message = "Password Reset Failed";
+            return response;
+        }
+        
     }
 }
