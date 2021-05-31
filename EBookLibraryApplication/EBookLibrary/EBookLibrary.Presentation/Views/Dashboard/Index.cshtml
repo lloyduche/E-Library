@@ -1,56 +1,67 @@
 ﻿@{
     Layout = "_DashboardLayout";
 }
+@model UserDashboardViewModel
 
 <!-- Page Content  -->
 <div id="content">
 
-    <div class="d-flex flex-row justify-content-center">
-        <div class="card col-lg-9 col-sm-12 border-0 bg-transparent userImgContaine" >
+    <div class="d-flex flex-row justify-content-center row">
+        <!--<div class="card col-lg-9 col-sm-12 border-0 bg-transparent userImgContaine">-->
+        <div class="card col-lg-9 col-md-8 col-sm-12 border-0 bg-transparent userImgContaine mt-lg-5">
+            <div class="card-header bg-secondary mt-lg-5">
+                <h3 class="text-white">Your details</h3>
+            </div>
+
             <div class="card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1" style="width:110px;"><b>First name</b></span>
+                    </div>
+                    <input type="text" class="form-control" value="@Model.FirstName" aria-label="First name" aria-describedby="basic-addon1" disabled>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1" style="width:110px;"><b>Last name</b></span>
+                    </div>
+                    <input type="text" class="form-control" value="@Model.LastName" aria-label="Last name" aria-describedby="basic-addon1" disabled>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1" style="width:110px;"><b>Email</b></span>
+                    </div>
+                    <input type="text" class="form-control" value="@Model.Email" aria-label="Email" aria-describedby="basic-addon1" disabled>
+                </div>
 
                 <div class="line"></div>
-
-                <h2>Lorem Ipsum Dolor</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                <div class="line"></div>
-
-                <h2>Lorem Ipsum Dolor</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                <div class="line"></div>
-
-                <h3>Lorem Ipsum Dolor</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
         </div>
 
 
 
-        <div class=" card col-lg-3 col-sm-12 box-shadow border-1 w-50 p-3 h-75">
+        <!--<div class=" card col-lg-3 col-sm-12 box-shadow border-1 w-50 p-3 h-75">-->
+        <div class=" card col-sm-12 col-md-4 col-lg-3 box-shadow">
             <div class="text-center userImgContainer">
-                <img class="userImage card-img-top rounded-circle" asp-append-version="true" src="~/images/dummyman.jpg" alt="image" width="250" height="300" />
+                <img class="userImage card-img-top rounded-circle" asp-append-version="true" src="@Model.AvatarUrl" alt="image" width="250" height="300" />
             </div>
             <div class="card-body text-center">
                 <h6 class="text-secondary text-uppercase">
                     UserName
                 </h6>
 
-                <a class="btn btn-outline-success w-75 text-capitalize" style="cursor:pointer;">Update photo</a>
+                <button class="btn btn-outline-success" style="cursor:pointer;">Update photo</button>
             </div>
         </div>
     </div>
-
-    <h2>User Details</h2>
 
     <!--<div class="userImgContainer">
         <img id="userImage" src="~/images/dummyman.jpg" />
     </div>
         -->
-   
+
 </div>
 
 
