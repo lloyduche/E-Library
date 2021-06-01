@@ -122,12 +122,5 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
 
-        [HttpPost]
-        public ActionResult DeleteUser()
-        {
-            
-            return View();
-        }
-
     }
 }
