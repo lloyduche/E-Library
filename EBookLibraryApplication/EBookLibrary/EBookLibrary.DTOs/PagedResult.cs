@@ -13,7 +13,23 @@ namespace EBookLibrary.DTOs
 
         public int TotalRecords { get; set; }
 
-        public IList<T> Result;
+        public ICollection<T> Result { get; set; }
+
+        public int PreviousPage
+        {
+            get
+            {
+                return CurrentPage == 1 ? 1 : CurrentPage - 1;
+            }
+        }
+
+        public int NextPage
+        {
+            get
+            {
+                return CurrentPage == TotalPages ? TotalPages : CurrentPage + 1;
+            }
+        }
 
         public PagedResult()
         {
