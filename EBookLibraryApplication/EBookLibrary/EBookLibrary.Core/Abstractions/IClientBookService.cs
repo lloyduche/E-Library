@@ -1,8 +1,8 @@
-﻿using EBookLibrary.ViewModels.BookVMs;
+﻿using EBookLibrary.ViewModels;
+using EBookLibrary.ViewModels.BookVMs;
 using EBookLibrary.ViewModels.Common;
+
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Client.Core.Implementations
@@ -14,5 +14,7 @@ namespace EBookLibrary.Client.Core.Implementations
         Task<BookResponse> UpdateBook(UpdateBookViewModel model, string Id);
 
         Task<UpdateBookViewModel> GetBook(string Id);
+
+        Task<HomePageViewModel> GetHomePageData(PagingParametersViewModel model);
     }
 }
