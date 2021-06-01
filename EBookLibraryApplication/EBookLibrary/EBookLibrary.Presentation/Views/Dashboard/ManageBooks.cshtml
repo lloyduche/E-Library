@@ -1,14 +1,12 @@
-﻿@{
-    Layout = "_DashboardLayout";
-}
-
+﻿@{ Layout = "_DashboardLayout"; }
+@model UpdateBookViewModel
 <div class="d-flex flex-row justify-content-around">
 
     <div class="card col-lg-9 box-shadow border-0 p-4">
 
         <div class="card-header border-0">
             <h5>
-                List Of Books <a class="btn-sm btn-outline-success float-right " asp-action="add" asp-controller="Book">Add Books</a>
+                List Of Books <a class="btn-sm btn-outline-success float-right " asp-action="Add" asp-controller="Book">Add Books</a>
             </h5>
 
         </div>
@@ -30,8 +28,10 @@
                         <td>Otto</td>
                         <td class="justify-content-end">
                             <div class="btn-group" role="group" aria-label="">
-                                <a class="btn btn-info" asp-action="" asp-controller=""><i class="fa fa-edit mr-2"></i></a>
+
+                                <a class="btn btn-info" asp-action="UpdateBook" asp-controller="Book" asp-route-id="6f02c0e6-5173-4f09-a614-93506e4e4be0"><i class="fa fa-edit mr-2"></i></a>
                                 <a class="btn btn-danger " asp-action="" asp-controller=""><i class="fa fa-trash mr-2"></i></a>
+                                <input type="hidden" asp-for="Id" />
                             </div>
                         </td>
                     </tr>
@@ -45,7 +45,7 @@
                                 <a href="#" class="btn-sm btn-primary"><i class="fa fa-angle-double-right"></i>Next</a>
                             </div>
                         </td>
-                      
+
                     </tr>
                 </tfoot>
             </table>

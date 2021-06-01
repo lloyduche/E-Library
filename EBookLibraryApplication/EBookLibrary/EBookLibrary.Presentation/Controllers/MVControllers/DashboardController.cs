@@ -37,12 +37,14 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpGet]
         public IActionResult ManageAccount()
         {
+
             return View();
         }
 
         [HttpGet]
         public IActionResult ManageBooks()
         {
+            var my
             return View();
         }
     }

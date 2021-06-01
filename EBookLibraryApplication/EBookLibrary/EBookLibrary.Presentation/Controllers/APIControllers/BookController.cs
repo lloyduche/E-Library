@@ -47,6 +47,19 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             return NoContent();
         }
 
+        [HttpGet]
+        public async Task<PagedResult<Book>> GetAllBooks(int pageNumber, int numberToReturn)
+        {
+            return await _bookRepo.GetByPage(pageNumber, numberToReturn);
+        }
+
+        [HttpPost]
+        [Route("search")]
+        public async Task<IActionResult> Search(SearchTermDto term)
+        {
+            var response = await _bookService.GetAllBooksWhere(term);
+            return Ok(response);
+        }
         [HttpPost]
         [Route("add-rating")]
         public async Task<IActionResult> RateBook([FromBody] AddRatingDto addratingdto)
@@ -68,13 +81,6 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         public async Task<IActionResult> UploadPhoto([FromForm] UploadPhotoDto uploadphotodto)
         {
             var response = await _bookService.UploadPhoto(uploadphotodto);
-            return Ok(response);
-        }
-
-        [Route("(authors{authorId:int}/books")]
-        public async Task<IActionResult> GetBookByAuthor(string authorId)
-        {
-            var response = await _bookService.GetBookByAuthor(authorId);
             return Ok(response);
         }
 

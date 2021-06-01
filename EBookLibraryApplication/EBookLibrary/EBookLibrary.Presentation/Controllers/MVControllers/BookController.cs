@@ -19,7 +19,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return View(new AddBook());
         }
 
         [HttpPost]

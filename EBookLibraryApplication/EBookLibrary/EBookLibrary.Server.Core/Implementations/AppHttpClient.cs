@@ -1,4 +1,5 @@
-﻿using EBookLibrary.Models;
+﻿using EBookLibrary.DTOs;
+using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
 
 using Microsoft.AspNetCore.Http;
@@ -53,8 +54,6 @@ namespace EBookLibrary.Server.Core.Implementations
 
         public async Task<bool> Update<TRequest>(string Uri, TRequest patchDoc)
         {
-            bool result = false;
-
             var serializedDoc = JsonConvert.SerializeObject(patchDoc);
 
             var requestContent = new StringContent(serializedDoc, Encoding.UTF8, "application/json-patch+json");
@@ -62,14 +61,8 @@ namespace EBookLibrary.Server.Core.Implementations
             using var client = CustomHttpClient();
             {
                 var response = await client.PatchAsync(Uri, requestContent);
-
-                if (response.StatusCode == HttpStatusCode.NoContent)
-                {
-                    result = true;
-                }
+                return response.IsSuccessStatusCode;
             }
-
-            return result;
         }
 
         public async Task<TResponse> UploadPhoto<TResponse, TRequest>(string Uri, IFormFile file)
@@ -105,6 +98,15 @@ namespace EBookLibrary.Server.Core.Implementations
             client.BaseAddress = new Uri(baseAddress.BaseAddress);
 
             return client;
+        }
+
+        public async Task<bool> Delete(string Uri)
+        {
+            using var client = CustomHttpClient();
+            {
+                var response = await client.DeleteAsync(Uri);
+                return response.IsSuccessStatusCode;
+            }
         }
     }
 }

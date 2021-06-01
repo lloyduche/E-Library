@@ -4,12 +4,12 @@
     <div class="d-flex flex-row justify-content-center mt-4" >
         
         <div class="wrapper">
-            <div class="box">
-                <h1>@ViewBag.StatusCode</h1>
-                <p>@ViewBag.Message</p>
-                <p>😊</p>
-                <p>&#58;&#40;</p>
-                <p><a href="#">Home</a></p>
+            <div class="text-center mt-4">
+                <h1 style="font-size:75px;">@ViewBag.StatusCode</h1>
+                <p><strong>@ViewBag.Message</strong></p>
+                <p style="font-size:30px">😊</p>
+                
+                <h5 style="text-decoration:none"><a  asp-controller="Home" asp-action="Index">Go Back To Home</a></h5>
             </div>
         </div>
     </div>

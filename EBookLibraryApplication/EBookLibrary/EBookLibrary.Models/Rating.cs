@@ -22,8 +22,8 @@ namespace EBookLibrary.Models
 
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public Book Book;
+        public Book Book { get; set; }
 
-        public User User;
+        public User User { get; set; }
     }
 }

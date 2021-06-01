@@ -1,9 +1,6 @@
 ﻿@model IEnumerable<EBookLibrary.ViewModels.UserVMs.DeleteViewModel>
 
-@{
-    ViewData["Title"] = "Delete User";
 
-}
 
 <style>
     .tabs {
@@ -16,6 +13,7 @@
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 </style>
+<<<<<<< HEAD
 
 <div class=" activity col-md-10" style="background-color: white; padding: 50px; background-color: #efeeee">
     <div class="btns-upper pt-3 pb-3">
@@ -34,8 +32,30 @@
                 <h5>@user.Email</h5>
                 <div class="btn-tabs">
                     <a class="btn btn-danger" asp-route-id="@user.Id" asp-controller="Account" asp-action="Delete"><i class="fas fa-trash-alt"></i></a>
+=======
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<form method="post" asp-action="DeleteUser" asp-controller="Account">
+    <div class=" activity col-md-10" style="background-color: white; padding: 50px; background-color: #efeeee">
+        <div class="btns-upper pt-3 pb-3">
+            <a class="btn btn-dark " asp-action="" style="margin-left: 20px;" id="confirm-delete"><i class="fas fa-user-friends fas fa-user-circle"></i>&nbsp;Manage User</a>
+            <input style="margin-left: 300px; background-color: white; padding: 5px; " href="#" />
+            <a class=" btn btn-dark" href="Search" style="background-color: cadetblue">Search</a>
+        </div>
+        @foreach (var user in Model)
+        {
+            <div class=" activity col-md-8">
+                <div class="tabs" style="width: 800px; padding: 10px; margin-bottom: 20px;">
+                    <h5>@user.Id</h5>
+                    <h5>@user.FirstName</h5>
+                    <h5>@user.LastName</h5>
+                    <h5>@user.Email</h5>
+                    <div class="btn-tabs">
+                        <a class="btn btn-danger" asp-route-id="@user.Id" asp-controller="Account" asp-action="Delete"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+>>>>>>> 224775c2cb372b60c635e9aabc67af96e4a1862a
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
+</form>
+

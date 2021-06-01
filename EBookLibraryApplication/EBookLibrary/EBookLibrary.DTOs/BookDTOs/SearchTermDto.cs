@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EBookLibrary.ViewModels.BookVMs
+namespace EBookLibrary.DTOs.BookDTOs
 {
-    public class SearchTermViewModel
+    public class SearchTermDto
     {
         public string Category { get; set; }
         public string ISBN { get; set; }
@@ -12,6 +12,10 @@ namespace EBookLibrary.ViewModels.BookVMs
         public string Title { get; set; }
 
         public string Author { get; set; }
+
+        public int PageNumber { get; set; }
+
+        public int PageSize { get; set; }
 
         public DateTime YearPublished { get; set; }
     }
