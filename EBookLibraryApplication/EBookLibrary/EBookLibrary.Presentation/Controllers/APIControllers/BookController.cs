@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class BookController : BaseAPIController
     {
         private readonly IBookService _bookService;
@@ -71,11 +73,10 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             return Ok(response);
         }
         [Route("(authors{authorId:int}/books")]
-        public async Task<IActionResult> GetBookByAuthor(string authorId)
+        public async Task<IActionResult> Search([FromQuery] SearchTermDto term)
         {
-            var response = await _bookService.GetBookByAuthor(authorId);
+            var response = await _bookService.GetAllBooksWhere(term);
             return Ok(response);
         }
-
     }
 }

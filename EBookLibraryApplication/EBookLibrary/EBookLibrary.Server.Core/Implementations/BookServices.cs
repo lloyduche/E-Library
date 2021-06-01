@@ -28,9 +28,9 @@ namespace EBookLibrary.Server.Core.Implementations
         }
 
 
-        public async Task<Response<FindBookDto>> FindBook(string Id)
+        public async Task<TResponse<FindBookDto>> FindBook(string Id)
         {
-            Response<FindBookDto> response = new Response<FindBookDto>();
+            TResponse<FindBookDto> response = new TResponse<FindBookDto>();
 
             //get reviews and ratings
             var book = await _bookRepository.GetDetailedBook(Id);
@@ -46,14 +46,15 @@ namespace EBookLibrary.Server.Core.Implementations
 
             return response;
         }
-        public async Task<Response<FindBookByAuthorDto>> GetBookByAuthor(string authorid)
-        {
-            Response<FindBookByAuthorDto> response = new Response<FindBookByAuthorDto>();
-            var book = await _bookRepository.GetBookByAuthor(authorid);
-            if (book == null)
-                throw new NotFoundException("No available book for this author");
 
-            var books = _mapper.Map<FindBookByAuthorDto>(book);
+        public async Task<TResponse<IReadOnlyList<FindBookBySearchDTO>>> GetAllBooksWhere(SearchTermDto term)
+        {
+            TResponse<IReadOnlyList<FindBookBySearchDTO>> response = new TResponse<IReadOnlyList<FindBookBySearchDTO>>();
+            var book = await _bookRepository.GetAllBooksWhere(term);
+            if (book == null)
+                throw new NotFoundException("Not available");
+
+            var books = _mapper.Map<IReadOnlyList<FindBookBySearchDTO>>(book);
 
             response.StatusCode = (int)HttpStatusCode.OK;
             response.Message = "Search Successful";
@@ -61,9 +62,9 @@ namespace EBookLibrary.Server.Core.Implementations
             response.Data = books;
 
             return response;
-
         }
 
+       
 
     }
 }

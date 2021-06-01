@@ -19,7 +19,7 @@ namespace EBookLibrary.Server.Core.Implementations
 {
     public class BookService : IBookService
     {
-        private readonly IGenericRepository<Book> _bookRepository;
+        private readonly IBookRepository _bookRepository;
         private readonly IGenericRepository<Rating> _ratingRepository;
         private readonly IGenericRepository<Review> _reviewRepository;
         private readonly UserManager<User> _userManager;
@@ -30,15 +30,15 @@ namespace EBookLibrary.Server.Core.Implementations
         {
             _mapper = serviceProvider.GetRequiredService<IMapper>();
             _fileUpload = serviceProvider.GetRequiredService<IFileUpload>();
-            _bookRepository = serviceProvider.GetRequiredService<IGenericRepository<Book>>();
+            _bookRepository = serviceProvider.GetRequiredService<IBookRepository>();
             _ratingRepository = serviceProvider.GetRequiredService<IGenericRepository<Rating>>();
             _reviewRepository = serviceProvider.GetRequiredService<IGenericRepository<Review>>();
             _userManager = userManager;
 
         }
-        public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
+        public async Task<TResponse<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
         {
-            Response<AddBookResponseDto> response = new Response<AddBookResponseDto>();
+            TResponse<AddBookResponseDto> response = new TResponse<AddBookResponseDto>();
             
             //check if dto is valid
             if (addbookdto == null)
@@ -91,10 +91,10 @@ namespace EBookLibrary.Server.Core.Implementations
             return await _bookRepository.Delete(bookToDelete);
         }
 
-        public async Task<Response<string>> UploadPhoto(UploadPhotoDto uploadphotodto)
+        public async Task<TResponse<string>> UploadPhoto(UploadPhotoDto uploadphotodto)
         {
            
-            Response<string> response = new Response<string>();
+            TResponse<string> response = new TResponse<string>();
             UploadAvatarResponse uploadAvatarResponse = new UploadAvatarResponse();
             var file = uploadphotodto.BookPhoto;
             if(file == null)
@@ -124,7 +124,7 @@ namespace EBookLibrary.Server.Core.Implementations
 
         }
 
-        public async Task<Response<AddRatingResponseDto>> AddRating(AddRatingDto addratingdto)
+        public async Task<TResponse<AddRatingResponseDto>> AddRating(AddRatingDto addratingdto)
         {
             var user = _userManager.FindByIdAsync(addratingdto.UserId);
             var book = _bookRepository.Get(addratingdto.BookId);
@@ -134,7 +134,7 @@ namespace EBookLibrary.Server.Core.Implementations
                 throw new BadRequestException("Invalid Input");
             }
 
-            Response<AddRatingResponseDto> response = new Response<AddRatingResponseDto>();
+            TResponse<AddRatingResponseDto> response = new TResponse<AddRatingResponseDto>();
             var rating = _mapper.Map<AddRatingDto,Rating>(addratingdto);
 
             var result = await _ratingRepository.Insert(rating);
@@ -154,7 +154,7 @@ namespace EBookLibrary.Server.Core.Implementations
 
         }
 
-        public async Task<Response<AddReviewResponseDto>> AddReview(AddReviewDto addreviewdto)
+        public async Task<TResponse<AddReviewResponseDto>> AddReview(AddReviewDto addreviewdto)
         {
             var user = _userManager.FindByIdAsync(addreviewdto.UserId);
             var book = _bookRepository.Get(addreviewdto.BookId);
@@ -164,7 +164,7 @@ namespace EBookLibrary.Server.Core.Implementations
                 throw new BadRequestException("Invalid Input");
             }
 
-            Response<AddReviewResponseDto> response = new Response<AddReviewResponseDto>();
+            TResponse<AddReviewResponseDto> response = new TResponse<AddReviewResponseDto>();
 
 
             var review = _mapper.Map<AddReviewDto,Review>(addreviewdto);
@@ -185,5 +185,26 @@ namespace EBookLibrary.Server.Core.Implementations
 
         }
 
+        public async Task<TResponse<SearchTermDto>> GetAllBooksWhere(SearchTermDto term)
+        {
+            TResponse<SearchTermDto> response = new TResponse<SearchTermDto>();
+            var book = await _bookRepository.GetAllBooksWhere(term);
+            if (book == null)
+                throw new NotFoundException("Not available");
+
+            var books = _mapper.Map<SearchTermDto>(book);
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Message = "Search Successful";
+            response.Success = true;
+            response.Data = books;
+
+            return response;
+        }
+
+        Task<bool> IBookService.GetAllBooksWhere(SearchTermDto term)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

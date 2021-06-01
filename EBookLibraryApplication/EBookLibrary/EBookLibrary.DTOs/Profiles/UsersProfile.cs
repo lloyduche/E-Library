@@ -41,7 +41,10 @@ namespace EBookLibrary.Commons.Profiles
             CreateMap<Book, FindBookDto>()
                 .ForMember(book => book.Reviews, findBook => findBook.MapFrom(book => book.Reviews))
                 .ForMember(book => book.Ratings, findBook => findBook.MapFrom(book => book.Ratings))
-                .ForMember(book=> book.Category, findBook => findBook.MapFrom(book=> book.Category.Name));
+                .ForMember(book => book.Category, findBook => findBook.MapFrom(book => book.Category.Name));
+
+            CreateMap<Book, FindBookBySearchDTO>().ReverseMap();
+
         }
     }
 }

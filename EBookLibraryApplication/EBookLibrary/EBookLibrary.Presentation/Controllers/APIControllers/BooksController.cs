@@ -1,5 +1,6 @@
 ﻿using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DTOs;
+using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
 
@@ -34,6 +35,14 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         public async Task<PagedResult<Book>> GetAllBooks(int pageNumber, int numberToReturn)
         {
             return await _bookRepo.GetByPage(pageNumber, numberToReturn);
+        }
+
+        [HttpPost]
+        [Route("search")]
+        public async Task<IActionResult> Search(SearchTermDto term)
+        {
+            var response = await _bookservices.GetAllBooksWhere(term);
+            return Ok(response);
         }
     }
 }

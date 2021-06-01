@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EBookLibrary.DTOs.BookDTOs
 {
-    public class FindBookByAuthorDto
+    public class FindBookBySearchDTO
     {
 
         public string Title { get; set; }
@@ -14,10 +14,6 @@ namespace EBookLibrary.DTOs.BookDTOs
         public string Author { get; set; }
 
         public string CopiesAvailable { get; set; }
-
-        public string Ratings { get; set; }
-
-        public string Category { get; set; }
     }
 }
 

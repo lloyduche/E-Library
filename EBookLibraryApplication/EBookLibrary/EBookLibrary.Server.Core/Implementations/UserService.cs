@@ -70,9 +70,9 @@ namespace EBookLibrary.Server.Core.Implementations
             return true;
         }
 
-        public async Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO)
+        public async Task<TResponse<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO)
         {
-            Response<string> response = new Response<string>();
+            TResponse<string> response = new TResponse<string>();
             UploadAvatarResponse uploadAvatarResponse = new UploadAvatarResponse();
             var file = photoUploadDTO.Photo;
             if (file == null)

@@ -12,6 +12,6 @@ namespace EBookLibrary.Server.Core.Abstractions
 
         Task<bool> DeleteUser(string Id);
 
-        Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO);
+        Task<TResponse<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO);
     }
 }

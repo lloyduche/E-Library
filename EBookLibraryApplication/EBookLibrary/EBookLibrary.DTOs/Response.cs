@@ -3,15 +3,15 @@
 
 namespace EBookLibrary.DTOs
 {
-    public class Response<T>
+    public class TResponse<T>
     {
-        public Response(int statuCode, string message, T details = default)
+        public TResponse(int statuCode, string message, T details = default)
         {
             StatusCode = statuCode;
             Message = message;
             Data = details;
         }
-        public Response()
+        public TResponse()
         {
 
         }

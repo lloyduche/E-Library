@@ -31,14 +31,13 @@ namespace EBookLibrary.DataAccess.Implementations
                 .FirstOrDefaultAsync(book => book.Id == Id);
         }
 
-        public async Task<Book> GetBookByAuthor(string authorid)
+        public async Task<IReadOnlyList<Book>> GetAllBooksWhere(SearchTermDto search)
         {
-            return _context.Books.Where(b => b.Id == authorid).FirstOrDefault();
-        }
-        
-        public async Task<Book> GetBookByCategory(string categoryid)
-        {
-            return _context.Books.Where(b => b.CategoryId == categoryid).FirstOrDefault();
+            return await _context.Books.Include(book => book.Category).Where(b =>
+            b.Author.Contains(search.Author)
+            || b.Category.Name.Contains(search.Category)
+            || b.Title.Contains(search.Title)
+            || b.Isbn.Contains(search.ISBN)).ToListAsync();
         }
     }
 }
