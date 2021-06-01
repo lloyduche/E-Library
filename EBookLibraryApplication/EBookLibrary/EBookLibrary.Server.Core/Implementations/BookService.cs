@@ -1,45 +1,56 @@
 ﻿using AutoMapper;
+
 using EBookLibrary.Commons.ExceptionHandler;
 using EBookLibrary.Commons.Exceptions;
+using EBookLibrary.Commons.Helpers;
 using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DTOs;
+using EBookLibrary.DTOs.BookDtos;
 using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.DTOs.Commons;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Server.Core.Implementations
 {
-    public class BookService : IBookService
+    public class BookService : IBookServices
     {
-        private readonly IGenericRepository<Book> _bookRepository;
+        private readonly IBookRepository _bookRepository;
+        private readonly IGenericRepository<Category> _categoryRepository;
         private readonly IGenericRepository<Rating> _ratingRepository;
         private readonly IGenericRepository<Review> _reviewRepository;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IFileUpload _fileUpload;
+        private readonly IBookRepository _bookRepo;
 
-        public BookService(IServiceProvider serviceProvider, UserManager<User> userManager)
+        public BookService(IServiceProvider serviceProvider, UserManager<User> userManager, IBookRepository bookRepo)
         {
             _mapper = serviceProvider.GetRequiredService<IMapper>();
             _fileUpload = serviceProvider.GetRequiredService<IFileUpload>();
-            _bookRepository = serviceProvider.GetRequiredService<IGenericRepository<Book>>();
+            _bookRepository = serviceProvider.GetRequiredService<IBookRepository>();
+            _categoryRepository = serviceProvider.GetRequiredService<IGenericRepository<Category>>();
+            _bookRepo = bookRepo;
             _ratingRepository = serviceProvider.GetRequiredService<IGenericRepository<Rating>>();
             _reviewRepository = serviceProvider.GetRequiredService<IGenericRepository<Review>>();
             _userManager = userManager;
-
         }
-        public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
+
+         public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
         {
             Response<AddBookResponseDto> response = new Response<AddBookResponseDto>();
-            
+
             //check if dto is valid
             if (addbookdto == null)
             {
@@ -47,47 +58,54 @@ namespace EBookLibrary.Server.Core.Implementations
             }
 
             //create book
-            var book = _mapper.Map<AddBookDto,Book>(addbookdto);
+            var book = _mapper.Map<AddBookDto, Book>(addbookdto);
 
             //Add book to database
-            var x = await _bookRepository.Insert(book);
-            
+             await _bookRepository.Insert(book);
+
             //construct response
             var addbookresponsedto = _mapper.Map<AddBookResponseDto>(book);
- 
+
             response.StatusCode = (int)HttpStatusCode.OK;
             response.Data = addbookresponsedto;
             response.Message = "Book Added Successfully";
             response.Success = true;
-            
-            return response;
 
+            return response;
         }
 
-        
-        public  async Task<bool> UpdateBook(UpdateBookDto updatebookdto)
-        { 
+        public async Task<bool> UpdateBook(UpdateBookDto updatebookdto, string Id)
+        {
             if (updatebookdto == null)
             {
                 throw new BadRequestException("Invalid Input");
             }
 
-            var existingbook = await _bookRepository.Get(updatebookdto.Id);
+            var existingbook = await _bookRepository.Get(Id);
+            var findcatid = await _categoryRepository.Find(e => e.Name == updatebookdto.Category);
 
-            //existingbook = _mapper.Map<Book>(updatebookdto);
-            _mapper.Map(updatebookdto, existingbook);
+            existingbook.CategoryId = findcatid.Id;
+            existingbook.Author = updatebookdto.Author;
+            existingbook.Title = updatebookdto.Title;
+            existingbook.Pages = updatebookdto.Pages.ToString();
+            existingbook.Publisher = updatebookdto.Publisher;
+            existingbook.Isbn = updatebookdto.Isbn;
+            existingbook.Description = updatebookdto.Description;
+            existingbook.CopiesAvailable = updatebookdto.CopiesAvailable;
+            existingbook.DatePublished = updatebookdto.DatePublished;
+
+            // _mapper.Map(updatebookdto, existingbook);
             return await _bookRepository.Update(existingbook);
-
         }
 
         public async Task<bool> DeleteBook(string bookid)
         {
             var bookToDelete = await _bookRepository.Get(bookid);
-            if(bookToDelete == null)
+            if (bookToDelete == null)
             {
                 throw new NotFoundException("Book Does not exist");
             }
-            
+
             return await _bookRepository.Delete(bookToDelete);
         }
 
@@ -97,31 +115,30 @@ namespace EBookLibrary.Server.Core.Implementations
             Response<string> response = new Response<string>();
             UploadAvatarResponse uploadAvatarResponse = new UploadAvatarResponse();
             var file = uploadphotodto.BookPhoto;
-            if(file == null)
+            if (file == null)
             {
                 throw new BadRequestException("Invalid Photo");
             }
 
             var book = await _bookRepository.Get(uploadphotodto.BookId);
-            if(book == null)
+            if (book == null)
             {
                 throw new BadRequestException("Something went wrong");
             }
-            
+
             uploadAvatarResponse = _fileUpload.UploadAvatar(file);
-                
+
             book.AvatarUrl = uploadAvatarResponse.AvatarUrl;
             book.PublicId = uploadAvatarResponse.PublicId;
 
             await _bookRepository.Update(book);
-            
+
             response.StatusCode = (int)HttpStatusCode.OK;
             response.Data = uploadAvatarResponse.AvatarUrl;
             response.Message = "Photo Upload Successfull";
             response.Success = true;
 
             return response;
-
         }
 
         public async Task<Response<AddRatingResponseDto>> AddRating(AddRatingDto addratingdto)
@@ -129,7 +146,7 @@ namespace EBookLibrary.Server.Core.Implementations
             var user = _userManager.FindByIdAsync(addratingdto.UserId);
             var book = _bookRepository.Get(addratingdto.BookId);
 
-            if(user == null || book == null)
+            if (user == null || book == null)
             {
                 throw new BadRequestException("Invalid Input");
             }
@@ -138,7 +155,7 @@ namespace EBookLibrary.Server.Core.Implementations
             var rating = _mapper.Map<AddRatingDto,Rating>(addratingdto);
 
             var result = await _ratingRepository.Insert(rating);
-            if(!result)
+            if (!result)
             {
                 throw new BadRequestException("Something went wrong");
             }
@@ -151,7 +168,6 @@ namespace EBookLibrary.Server.Core.Implementations
             response.Success = true;
 
             return response;
-
         }
 
         public async Task<Response<AddReviewResponseDto>> AddReview(AddReviewDto addreviewdto)
@@ -166,8 +182,7 @@ namespace EBookLibrary.Server.Core.Implementations
 
             Response<AddReviewResponseDto> response = new Response<AddReviewResponseDto>();
 
-
-            var review = _mapper.Map<AddReviewDto,Review>(addreviewdto);
+            var review = _mapper.Map<AddReviewDto, Review>(addreviewdto);
 
             var result = await _reviewRepository.Insert(review);
             if (!result)
@@ -182,8 +197,55 @@ namespace EBookLibrary.Server.Core.Implementations
             response.Success = true;
 
             return response;
-
         }
 
+        public async Task<Response<FindBookDto>> FindBook(string Id)
+        {
+            Response<FindBookDto> response = new Response<FindBookDto>();
+
+            //get reviews and ratings
+            var book = await _bookRepo.GetDetailedBook(Id);
+            if (book == null)
+                throw new NotFoundException("The Book With This Title Cannot Be Found");
+
+            var books = _mapper.Map<FindBookDto>(book);
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Message = "Search Successful";
+            response.Success = true;
+            response.Data = books;
+
+            return response;
+        }
+
+        public async Task<Response<IReadOnlyList<FindBookBySearchDTO>>> GetAllBooksWhere(SearchTermDto term)
+        {
+            Response<IReadOnlyList<FindBookBySearchDTO>> response = new Response<IReadOnlyList<FindBookBySearchDTO>>();
+            var book = await _bookRepository.GetAllBooksWhere(term);
+            if (book == null)
+                throw new NotFoundException("Not available");
+
+            var books = _mapper.Map<IReadOnlyList<FindBookBySearchDTO>>(book);
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Message = "Search Successful";
+            response.Success = true;
+            response.Data = books;
+
+            return response;
+        }
+
+        public HomePageDTO GetHomePageData(HomePageFetchData paging)
+        {
+            var RecentResult = _bookRepo.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostRecent, paging.PageSize);
+            var RecentMappedResult = _mapper.Map<PagedResult<BookCardDTO>>(RecentResult);
+            var popularResult = _bookRepository.GetAll().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostPopular, paging.PageSize);
+            var PopularMappedResult = _mapper.Map<PagedResult<BookCardDTO>>(popularResult);
+            HomePageDTO dto = new HomePageDTO();
+            dto.MostPopular = PopularMappedResult;
+            dto.Recent = RecentMappedResult;
+            dto.PagingParams = paging;
+            return dto;
+        }
     }
 }

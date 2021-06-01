@@ -31,5 +31,29 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             }
             return BadRequest();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateBook(string id)
+        {
+            var data = await _book.GetBook(id);
+             return View(data);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateBooks(UpdateBookViewModel model, string Id)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _book.UpdateBook(model,Id);
+                if (response.Successful is true)
+                {
+                    ViewBag.Message = "Update Successful";
+                    return View("successReg");
+                }
+            }
+            return BadRequest();
+
+        }
     }
 }
