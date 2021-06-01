@@ -67,7 +67,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpPost]
         public async Task<ActionResult> Update(UpdateViewModel model)
         {
-            var response = await _auth.Update(model);
+            var response = await _auth.UpdateUser(model);
             if (response is true)
             {
                 ViewBag.Title = "Registration";
@@ -111,18 +111,6 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             return View(model);
         }
 
-        public ActionResult Delete()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult DeleteUser()
-        {
-            
-            return View();
-        }
 
     }
 }

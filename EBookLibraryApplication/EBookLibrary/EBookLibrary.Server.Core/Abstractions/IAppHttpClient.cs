@@ -13,5 +13,6 @@ namespace EBookLibrary.Server.Core.Abstractions
         Task<TResponse> Create<TResponse, TRequest>(string Uri, TRequest model);
         Task<bool> Update<TRequest>(string Uri, TRequest patchDoc);
         Task<TResponse> UploadPhoto<TResponse, TRequest>(string Uri, IFormFile file);
+        Task<bool> Delete(string Uri);
     }
 }

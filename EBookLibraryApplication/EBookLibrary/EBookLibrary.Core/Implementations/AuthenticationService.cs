@@ -34,7 +34,7 @@ namespace EBookLibrary.Client.Core.Implementations
             response.Message = data.Message;
             return response;
         }
-        public async Task<bool> Update(UpdateViewModel model)
+        public async Task<bool> UpdateUser(UpdateViewModel model)
         {
             UpdateResponse response = new UpdateResponse();
             var data = await _httpClient.Update<UpdateViewModel>("api/v1/Auth/Update", model);
@@ -78,5 +78,13 @@ namespace EBookLibrary.Client.Core.Implementations
         {
             return await _httpClient.Create<ExpectedResponse<string>, LoginViewModel>("api/v1/Auth/login", model);
         }
+        
+        public async Task<bool> DeleteUser(string Id)
+        {
+            var data = await _httpClient.Delete($"api/v1/User/delete-user/{Id}");
+            return data;
+        }
+
+       
     }
 }
