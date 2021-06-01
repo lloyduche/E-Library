@@ -114,7 +114,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             return View(model);
         }
 
-<<<<<<< HEAD
+
         [HttpGet]
         public IActionResult Delete()
         {
@@ -128,8 +128,6 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             
             return View();
         }
-=======
->>>>>>> 224775c2cb372b60c635e9aabc67af96e4a1862a
 
     }
 }

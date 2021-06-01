@@ -1,5 +1,5 @@
 ﻿@{ Layout = "_DashboardLayout"; }
-@model UpdateBookViewModel
+@model EBookLibrary.DTOs.PagedResult<BookCardViewModel>
 <div class="d-flex flex-row justify-content-around">
 
     <div class="card col-lg-9 box-shadow border-0 p-4">
@@ -22,27 +22,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>Otto</td>
-                        <td class="justify-content-end">
-                            <div class="btn-group" role="group" aria-label="">
+                    @foreach (var item in Model.Result)
+                    {
 
-                                <a class="btn btn-info" asp-action="UpdateBook" asp-controller="Book" asp-route-id="6f02c0e6-5173-4f09-a614-93506e4e4be0"><i class="fa fa-edit mr-2"></i></a>
-                                <a class="btn btn-danger " asp-action="" asp-controller=""><i class="fa fa-trash mr-2"></i></a>
-                                <input type="hidden" asp-for="Id" />
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.Author</td>
+                            <td>@item.Category</td>
+                            <td class="justify-content-end">
+                                <div class="btn-group" role="group" aria-label="">
+
+                                    <a class="btn btn-info" asp-action="UpdateBook" asp-controller="Book" asp-route-id="@item.Id"><i class="fa fa-edit mr-2"></i></a>
+                                    <a class="btn btn-danger " asp-action="" asp-controller=""><i class="fa fa-trash mr-2"></i></a>
+                                    <input type="hidden" asp-for="@item.Id" />
+                                </div>
+                            </td>
+                        </tr>}
                 </tbody>
                 <tfoot>
                     <tr>
                         <td>
 
                             <div class="btn-group-lg">
-                                <a href="#" class="btn-sm btn-primary" aria-current="page"><i class="fa fa-angle-double-left"></i> Prev</a>
-                                <a href="#" class="btn-sm btn-primary"><i class="fa fa-angle-double-right"></i>Next</a>
+                                <a  class="btn-sm btn-primary" asp-route-pageSize="@Model.PageSize" asp-route-pagenumber="@Model.PreviousPage" aria-current="page"><i class="fa fa-angle-double-left"></i> Prev</a>
+                                <a class="btn-sm btn-primary" asp-route-pageSize="@Model.PageSize" asp-route-pagenumber="@Model.NextPage"><i class="fa fa-angle-double-right"></i>Next</a>
                             </div>
                         </td>
 

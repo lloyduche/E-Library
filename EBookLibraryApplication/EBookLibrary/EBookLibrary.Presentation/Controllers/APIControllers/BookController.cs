@@ -98,5 +98,13 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         {
             return _bookService.GetHomePageData(data);
         }
+
+        [HttpPost]
+        [Route("get-books-paginated")]
+        public ActionResult<PagedResult<BookCardDTO>> GetBooks(SearchPagingParametersDTO model)
+        {
+            var result =  _bookService.GetAllBooksPaginated(model);
+            return Ok(result);
+        }
     }
 }
