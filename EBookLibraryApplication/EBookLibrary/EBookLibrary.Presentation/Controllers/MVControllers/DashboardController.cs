@@ -29,5 +29,9 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
 
             return View(user.Data);
         }
+        public IActionResult Admin()
+        {
+            return View();
+        }
     }
 }

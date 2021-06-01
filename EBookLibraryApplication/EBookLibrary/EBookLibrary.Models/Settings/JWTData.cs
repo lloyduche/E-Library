@@ -4,10 +4,13 @@ namespace EBookLibrary.Models.Settings
 {
     public class JWTData
     {
-        public const string Data = "JWT";
-        public static readonly TimeSpan Timespan = new TimeSpan(1, 0, 0);
-        public string SymmetricSecurityKey { get; set; }
+        public const string Data = "JWTConfigurations";
+        public TimeSpan TokenLifeTime { get; set; }
+
+        public string SecretKey { get; set; }
 
         public string Issuer { get; set; }
+
+        public string Audience { get; set; }
     }
 }
