@@ -33,12 +33,12 @@ namespace EBookLibrary.DataAccess.Implementations
 
         public async Task<Book> GetBookByAuthor(string authorid)
         {
-            return _context.Books.Where(b => b.Id == authorid).FirstOrDefault();
+            return await _context.Books.Where(b => b.Id == authorid).FirstOrDefaultAsync();
         }
         
         public async Task<Book> GetBookByCategory(string categoryid)
         {
-            return _context.Books.Where(b => b.CategoryId == categoryid).FirstOrDefault();
+            return  await _context.Books.Where(b => b.CategoryId == categoryid).FirstOrDefaultAsync();
         }
     }
 }
