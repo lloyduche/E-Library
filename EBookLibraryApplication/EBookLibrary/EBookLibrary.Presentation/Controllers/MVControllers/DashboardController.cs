@@ -20,7 +20,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
         public async Task<IActionResult> Index()
         {
-            var user = await _userService.GetUserById("0af0a8f9-5c24-461e-89ab-24883356170a");
+            var user = await _userService.GetUserById("");
 
             if(user.Data.AvatarUrl == null)
             {
