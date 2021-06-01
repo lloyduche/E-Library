@@ -71,8 +71,8 @@ namespace EBookLibrary.Presentation.APIExceptionMiddleWare
         }
             context.Response.StatusCode = (int)httpStatusCode;
             var response = _env.IsDevelopment()
-                    ? new TResponse<string>(context.Response.StatusCode, exception.Message, exception.StackTrace?.ToString()).ToString()
-                    : new TResponse<string>(context.Response.StatusCode, exception.Message).ToString();
+                    ? new Response<string>(context.Response.StatusCode, exception.Message, exception.StackTrace?.ToString()).ToString()
+                    : new Response<string>(context.Response.StatusCode, exception.Message).ToString();
 
             await context.Response.WriteAsync(response);
         }

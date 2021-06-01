@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,27 +16,34 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container-fluid p-4">
-                <a class="navbar-brand ml-lg-4" asp-area="" asp-controller="Home" asp-action="Index" >EB<i class="fa fa-glasses fa-2x text-primary"></i>kLibrary</a>
+                <a class="navbar-brand ml-lg-4" asp-area="" asp-controller="Home" asp-action="Index">EB<i class="fa fa-glasses fa-2x text-primary"></i>kLibrary</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>     
+                </button>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav myNav">
                         <li class="nav-item">
                             <a class="nav-link text-secondary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-outline-warning pr-4 pl-4 login" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-outline-warning pr-4 pl-4 login" asp-area="" asp-controller="Account" asp-action="DeleteUser"></a>
-                        </li>
-                    </ul>                  
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-warning pr-4 pl-4 login" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-warning pr-4 pl-4 login" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                            </li>
+                        }
+
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -44,11 +53,11 @@
             @RenderBody()
         </main>
     </div>
-    
-    
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/font-awesome/js/all.min.js"type="text/javascript" asp-append-version="false"> </script>
+    <script src="~/font-awesome/js/all.min.js" type="text/javascript" asp-append-version="false"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

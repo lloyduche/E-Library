@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-
 using EBookLibrary.Commons.ExceptionHandler;
 using EBookLibrary.Commons.Exceptions;
 using EBookLibrary.DataAccess.Abstractions;
@@ -70,9 +69,48 @@ namespace EBookLibrary.Server.Core.Implementations
             return true;
         }
 
-        public async Task<TResponse<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO)
+        public async Task<Response<UserDTO>> GetUserById(string Id)
         {
-            TResponse<string> response = new TResponse<string>();
+            var user = await _userManager.FindByIdAsync(Id);
+
+            Response<UserDTO> response = new Response<UserDTO>();
+
+            if (user == null)   
+            {
+                throw new NotFoundException("User does not exist");
+            }
+
+            var mappedUser = _mapper.Map<UserDTO>(user);
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Success = true;
+            response.Data = mappedUser;
+
+            return response;
+        }
+
+        public async Task<Response<UserDTO>> GetUserByEmail(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            Response<UserDTO> response = new Response<UserDTO>();
+
+            if (user == null)
+            {
+                throw new NotFoundException("User does not exist");
+            }
+
+            var mappedUser = _mapper.Map<UserDTO>(user);
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Success = true;
+            response.Data = mappedUser;
+
+            return response;
+        }
+        public async Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO)
+        {
+            Response<string> response = new Response<string>();
             UploadAvatarResponse uploadAvatarResponse = new UploadAvatarResponse();
             var file = photoUploadDTO.Photo;
             if (file == null)

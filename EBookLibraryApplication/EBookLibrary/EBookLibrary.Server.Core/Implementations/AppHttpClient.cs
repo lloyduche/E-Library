@@ -1,13 +1,14 @@
 ﻿using EBookLibrary.DTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
+
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+
 using Newtonsoft.Json;
+
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Server.Core.Implementations
 {
-    public class AppHttpClient: IAppHttpClient
+    public class AppHttpClient : IAppHttpClient
     {
         private readonly IConfiguration _config;
         private readonly ApplicationBaseAddress baseAddress;
@@ -25,20 +26,18 @@ namespace EBookLibrary.Server.Core.Implementations
         {
             _config = config;
             baseAddress = options.Value;
-            
         }
 
-       
-     
         public async Task<TResponse> Create<TResponse, TRequest>(string Uri, TRequest model)
         {
             TResponse result = default;
             using var client = CustomHttpClient();
             {
-                var response =await client.PostAsJsonAsync(Uri, model);
-                result= await response.Content.ReadAsAsync<TResponse>();
+                var response = await client.PostAsJsonAsync(Uri, model);
+
+                result = await response.Content.ReadAsAsync<TResponse>();
             }
-            return result;              
+            return result;
         }
 
         public async Task<TResponse> Get<TResponse>(string Uri)
@@ -61,7 +60,6 @@ namespace EBookLibrary.Server.Core.Implementations
 
             using var client = CustomHttpClient();
             {
-
                 var response = await client.PatchAsync(Uri, requestContent);
                 return response.IsSuccessStatusCode;
             }
@@ -70,7 +68,7 @@ namespace EBookLibrary.Server.Core.Implementations
         public async Task<TResponse> UploadPhoto<TResponse, TRequest>(string Uri, IFormFile file)
         {
             TResponse result = default;
-            
+
             using var client = CustomHttpClient();
             {
                 byte[] data;
@@ -91,10 +89,9 @@ namespace EBookLibrary.Server.Core.Implementations
             }
 
             return result;
-
         }
 
-       public HttpClient CustomHttpClient()
+        public HttpClient CustomHttpClient()
         {
             var client = new HttpClient();
 

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+
+using EBookLibrary.DTOs;
+using EBookLibrary.DTOs.BookDtos;
 using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
-using EBookLibrary.DTOs.BookDtos;
 using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Models;
 
@@ -14,8 +16,10 @@ namespace EBookLibrary.Commons.Profiles
         {
             CreateMap<User, RegisterDTO>();
             CreateMap<RegisterDTO, User>();
-             CreateMap<Book, UpdateBookDto>();
+            CreateMap<Book, UpdateBookDto>();
             CreateMap<UpdateBookDto, Book>();
+
+            CreateMap<User, UserDTO>().ReverseMap();
 
             CreateMap<AddBookDto, Book>();
             CreateMap<Book, AddBookDto>();
@@ -32,6 +36,10 @@ namespace EBookLibrary.Commons.Profiles
             CreateMap<Review, AddReviewResponseDto>();
             CreateMap<AddReviewResponseDto, Review>();
 
+            CreateMap<Book, BookCardDTO>().ReverseMap();
+
+            CreateMap<PagedResult<Book>, PagedResult<BookCardDTO>>()
+                .ForMember(book => book.Result, dto => dto.MapFrom(book => book.Result));
 
             CreateMap<Book, AddBookResponseDto>();
             CreateMap<User, RegisterDTO>().ReverseMap();

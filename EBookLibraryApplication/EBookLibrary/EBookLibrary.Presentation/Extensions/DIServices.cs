@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using System;
+using EBookLibrary.Client.Core.Abstractions;
+
 
 namespace EBookLibrary.Presentation.DIServices
 {
@@ -22,14 +24,16 @@ namespace EBookLibrary.Presentation.DIServices
         public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IFileUpload, FileUpload>();
-            services.AddScoped<IBookService, BookService>();
+            //services.AddScoped<IBookService, BookService>();
             services.AddTransient<IMailService, MailService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IBookServices, BookServices>();
+            services.AddScoped<IBookServices, BookService>();
             services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IClientUserService, ClientUserService>();
+            services.AddScoped<IClientBookService, ClientBookService>();
             services.AddCustomConfiguredAutoMapper();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IAppHttpClient, AppHttpClient>();

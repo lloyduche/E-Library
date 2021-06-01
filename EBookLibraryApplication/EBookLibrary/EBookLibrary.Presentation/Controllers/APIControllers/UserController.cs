@@ -1,4 +1,5 @@
-﻿using EBookLibrary.DTOs.UserDTOs;
+﻿using AutoMapper;
+using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Server.Core.Abstractions;
 
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,11 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
     {
         private readonly IUserService _userservice;
 
-        public UserController(IUserService userservice)
+        private readonly IMapper _mapper;
+        public UserController(IUserService userservice, IMapper mapper)
         {
             _userservice = userservice;
+            _mapper = mapper;
         }
 
         [HttpPut]
@@ -42,6 +45,15 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
             var response = await _userservice.UploadPhoto(model);
             return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("get-user/{Id}")]
+        public async Task<IActionResult> GetUserById(string Id)
+        {
+            var result = await _userservice.GetUserById(Id);
+
+            return Ok(result);
         }
     }
 }

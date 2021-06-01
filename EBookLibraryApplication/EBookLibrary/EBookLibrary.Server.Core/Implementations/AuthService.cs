@@ -37,9 +37,9 @@ namespace EBookLibrary.Server.Core.Implementations
         }
 
 
-        public async Task<TResponse<string>> Login(string email, string password)
+        public async Task<Response<string>> Login(string email, string password)
         {
-            TResponse<string> responseObject = new TResponse<string>();
+            Response<string> responseObject = new Response<string>();
 
             var user = await _userManager.FindByEmailAsync(email);
 
@@ -69,10 +69,10 @@ namespace EBookLibrary.Server.Core.Implementations
             return responseObject;
         }
 
-        public async Task<TResponse<string>> Register(RegisterDTO model, string scheme, IUrlHelper url)
+        public async Task<Response<string>> Register(RegisterDTO model, string scheme, IUrlHelper url)
         {
 
-            TResponse<string> responseObject = new TResponse<string>();
+            Response<string> responseObject = new Response<string>();
            
             var existingUser = await _userManager.FindByEmailAsync(model.Email);
 
@@ -161,9 +161,9 @@ namespace EBookLibrary.Server.Core.Implementations
         }
 
 
-        public async Task<TResponse<string>> ResetPassword(ResetPasswordDto resetpassword)
+        public async Task<Response<string>> ResetPassword(ResetPasswordDto resetpassword)
         {
-            TResponse<string> responseObject = new TResponse<string>();
+            Response<string> responseObject = new Response<string>();
             var user = await _userManager.FindByEmailAsync(resetpassword.Email);
             if (user == null)
             {
