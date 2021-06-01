@@ -5,24 +5,22 @@ using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
+
 using Microsoft.AspNetCore.Mvc;
+
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
     public class BookController : BaseAPIController
     {
-
         private readonly IBookServices _bookService;
         private readonly IGenericRepository<Book> _bookRepo;
 
         public BookController(IBookServices bookService, IGenericRepository<Book> bookRepo)
         {
-
             _bookService = bookService;
             _bookRepo = bookRepo;
-
-
         }
 
         [HttpPost]
@@ -33,26 +31,21 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             return Ok(response);
         }
 
-
         [HttpPatch]
         [Route("update-book/{Id}")]
-
         public async Task<IActionResult> UpdateBook(UpdateBookDto updatebookdto, string Id)
         {
             await _bookService.UpdateBook(updatebookdto, Id);
             return NoContent();
         }
 
-
         [HttpDelete]
         [Route("delete")]
-
         public async Task<IActionResult> DeleteBook([FromBody] string bookid)
         {
             await _bookService.DeleteBook(bookid);
             return NoContent();
         }
-
 
         [HttpPost]
         [Route("add-rating")]
@@ -90,14 +83,14 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         public async Task<IActionResult> GetBook(string Id)
         {
             var response = await _bookService.FindBook(Id);
-                return Ok(response);
+            return Ok(response);
         }
 
-        [HttpGet]
-        public async Task<PagedResult<Book>> GetAllBooks(int pageNumber, int numberToReturn)
+        [HttpPost]
+        [Route("homepagedata")]
+        public HomePageDTO GetAllBooksPaginated(HomePageFetchData data)
         {
-            return await _bookRepo.GetByPage(pageNumber, numberToReturn);
+            return _bookService.GetHomePageData(data);
         }
-
     }
 }
