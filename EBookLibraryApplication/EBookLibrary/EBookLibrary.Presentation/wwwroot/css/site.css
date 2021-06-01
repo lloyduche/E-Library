@@ -73,3 +73,42 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
+
+#errorPageBody {
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    text-align : center;
+}
+
+#errorPageBody h1{
+    font-family : Arial, Helvetica, sans-serif;
+    font-size : 250px;
+    color : #135e7e;
+    font-weight : 900;
+}
+
+#errorPageBody p{
+    font-size : 20px;
+    font-weight : 900;
+}
+
+#homeBtn {
+    background-color: #135e7e;
+    width : 500px;
+    height : 400px;
+    padding : 10px;
+    border-radius : 10px;
+    text-decoration : none;
+    color : #fff;
+}
+
+#homeBtn:hover{
+    background-color : #013c5d;
+}
+
+@media screen and (max-width: 600px) {
+    #errorPageBody h1 {
+        font-size : 150px;
+    }
+}
