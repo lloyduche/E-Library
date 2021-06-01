@@ -3,6 +3,7 @@ using EBookLibrary.Commons.ExceptionHandler;
 using EBookLibrary.Commons.Exceptions;
 using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DTOs;
+using EBookLibrary.DTOs.BookDtos;
 using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.DTOs.Commons;
 using EBookLibrary.DTOs.RatingDTOs;
@@ -17,20 +18,24 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Server.Core.Implementations
 {
-    public class BookService : IBookService
+    public class BookService : IBookServices
     {
         private readonly IGenericRepository<Book> _bookRepository;
+        private readonly IGenericRepository<Category> _categoryRepository;
         private readonly IGenericRepository<Rating> _ratingRepository;
         private readonly IGenericRepository<Review> _reviewRepository;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IFileUpload _fileUpload;
+        private readonly IBookRepository _bookRepo;
 
-        public BookService(IServiceProvider serviceProvider, UserManager<User> userManager)
+        public BookService(IServiceProvider serviceProvider, UserManager<User> userManager, IBookRepository bookRepo)
         {
             _mapper = serviceProvider.GetRequiredService<IMapper>();
             _fileUpload = serviceProvider.GetRequiredService<IFileUpload>();
             _bookRepository = serviceProvider.GetRequiredService<IGenericRepository<Book>>();
+            _categoryRepository = serviceProvider.GetRequiredService<IGenericRepository<Category>>();
+            _bookRepo = bookRepo;
             _ratingRepository = serviceProvider.GetRequiredService<IGenericRepository<Rating>>();
             _reviewRepository = serviceProvider.GetRequiredService<IGenericRepository<Review>>();
             _userManager = userManager;
@@ -65,17 +70,27 @@ namespace EBookLibrary.Server.Core.Implementations
         }
 
         
-        public  async Task<bool> UpdateBook(UpdateBookDto updatebookdto)
+        public  async Task<bool> UpdateBook(UpdateBookDto updatebookdto, string Id)
         { 
             if (updatebookdto == null)
             {
                 throw new BadRequestException("Invalid Input");
             }
 
-            var existingbook = await _bookRepository.Get(updatebookdto.Id);
-
-            //existingbook = _mapper.Map<Book>(updatebookdto);
-            _mapper.Map(updatebookdto, existingbook);
+            var existingbook = await _bookRepository.Get(Id);
+            var findcatid = await _categoryRepository.Find(e => e.Name == updatebookdto.Category);
+            
+            existingbook.CategoryId = findcatid.Id;
+            existingbook.Author = updatebookdto.Author;
+            existingbook.Title = updatebookdto.Title;
+            existingbook.Pages = updatebookdto.Pages.ToString();
+            existingbook.Publisher = updatebookdto.Publisher;
+            existingbook.Isbn = updatebookdto.Isbn;
+            existingbook.Description = updatebookdto.Description;
+            existingbook.CopiesAvailable = updatebookdto.CopiesAvailable;
+            existingbook.DatePublished = updatebookdto.DatePublished;
+            
+           // _mapper.Map(updatebookdto, existingbook);
             return await _bookRepository.Update(existingbook);
 
         }
@@ -180,6 +195,42 @@ namespace EBookLibrary.Server.Core.Implementations
             response.Data = addreviewresponsedto;
             response.Message = "Rating Added";
             response.Success = true;
+
+            return response;
+
+        }
+
+        public async Task<Response<FindBookDto>> FindBook(string Id)
+        {
+            Response<FindBookDto> response = new Response<FindBookDto>();
+
+            //get reviews and ratings
+            var book = await _bookRepo.GetDetailedBook(Id);
+            if (book == null)
+                throw new NotFoundException("The Book With This Title Cannot Be Found");
+
+            var books = _mapper.Map<FindBookDto>(book);
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Message = "Search Successful";
+            response.Success = true;
+            response.Data = books;
+
+            return response;
+        }
+        public async Task<Response<FindBookByAuthorDto>> GetBookByAuthor(string authorid)
+        {
+            Response<FindBookByAuthorDto> response = new Response<FindBookByAuthorDto>();
+            var book = await _bookRepo.GetBookByAuthor(authorid);
+            if (book == null)
+                throw new NotFoundException("No available book for this author");
+
+            var books = _mapper.Map<FindBookByAuthorDto>(book);
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Message = "Search Successful";
+            response.Success = true;
+            response.Data = books;
 
             return response;
 
