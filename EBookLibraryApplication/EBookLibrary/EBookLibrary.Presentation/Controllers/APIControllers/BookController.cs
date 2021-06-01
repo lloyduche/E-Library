@@ -1,21 +1,26 @@
-﻿using EBookLibrary.DTOs;
+﻿using EBookLibrary.DataAccess.Abstractions;
+using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
+using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
+
 using Microsoft.AspNetCore.Mvc;
+
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
     public class BookController : BaseAPIController
     {
-        private readonly IBookService _bookService;
+        private readonly IBookServices _bookService;
+        private readonly IGenericRepository<Book> _bookRepo;
 
-        public BookController(IBookService bookService)
+        public BookController(IBookServices bookService, IGenericRepository<Book> bookRepo)
         {
-
             _bookService = bookService;
+            _bookRepo = bookRepo;
         }
 
         [HttpPost]
@@ -26,26 +31,21 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             return Ok(response);
         }
 
-
-        [HttpPut]
-        [Route("update-book")]
-
-        public async Task<IActionResult> UpdateBook([FromBody] UpdateBookDto updatebookdto)
+        [HttpPatch]
+        [Route("update-book/{Id}")]
+        public async Task<IActionResult> UpdateBook(UpdateBookDto updatebookdto, string Id)
         {
-            await _bookService.UpdateBook(updatebookdto);
+            await _bookService.UpdateBook(updatebookdto, Id);
             return NoContent();
         }
 
-
         [HttpDelete]
         [Route("delete")]
-
         public async Task<IActionResult> DeleteBook([FromBody] string bookid)
         {
             await _bookService.DeleteBook(bookid);
             return NoContent();
         }
-
 
         [HttpPost]
         [Route("add-rating")]
@@ -59,7 +59,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         [Route("add-review")]
         public async Task<IActionResult> ReviewBook([FromBody] AddReviewDto addreviewdto)
         {
-            var response = await  _bookService.AddReview(addreviewdto);
+            var response = await _bookService.AddReview(addreviewdto);
             return Ok(response);
         }
 
@@ -67,15 +67,30 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         [Route("uploadphoto")]
         public async Task<IActionResult> UploadPhoto([FromForm] UploadPhotoDto uploadphotodto)
         {
-            var response = await  _bookService.UploadPhoto(uploadphotodto);
+            var response = await _bookService.UploadPhoto(uploadphotodto);
             return Ok(response);
         }
-        //[Route("(authors{authorId:int}/books")]
-        //public async Task<IActionResult> GetBookByAuthor(string authorId)
-        //{
-        //    var response = await _bookService.GetBookByAuthor(authorId);
-        //    return Ok(response);
-        //}
 
+        [Route("(authors{authorId:int}/books")]
+        public async Task<IActionResult> GetBookByAuthor(string authorId)
+        {
+            var response = await _bookService.GetBookByAuthor(authorId);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("get-book-by-id/{Id}")]
+        public async Task<IActionResult> GetBook(string Id)
+        {
+            var response = await _bookService.FindBook(Id);
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("homepagedata")]
+        public HomePageDTO GetAllBooksPaginated(HomePageFetchData data)
+        {
+            return _bookService.GetHomePageData(data);
+        }
     }
 }
