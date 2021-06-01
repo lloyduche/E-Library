@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+
 using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Server.Core.Abstractions;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using System;
@@ -9,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
+    [Authorize]
     public class UserController : BaseAPIController
     {
         private readonly IUserService _userservice;
 
         private readonly IMapper _mapper;
+
         public UserController(IUserService userservice, IMapper mapper)
         {
             _userservice = userservice;
@@ -30,6 +34,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpDelete]
         [Route("delete-user")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser([FromBody] string id)
         {
             await _userservice.DeleteUser(id);

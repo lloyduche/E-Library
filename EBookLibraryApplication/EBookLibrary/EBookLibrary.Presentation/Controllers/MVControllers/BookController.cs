@@ -1,9 +1,10 @@
 ﻿using EBookLibrary.Client.Core.Implementations;
 using EBookLibrary.ViewModels.BookVMs;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.MVControllers
@@ -11,17 +12,21 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
     public class BookController : Controller
     {
         private readonly IClientBookService _book;
+
         public BookController(IClientBookService book)
         {
             _book = book;
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add()
         {
             return View();
         }
+
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Add(AddBook model)
         {
             var response = await _book.Add(model);
@@ -33,19 +38,20 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBook(string id)
         {
             var data = await _book.GetBook(id);
-             return View(data);
+            return View(data);
         }
 
-
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBooks(UpdateBookViewModel model, string Id)
         {
             if (ModelState.IsValid)
             {
-                var response = await _book.UpdateBook(model,Id);
+                var response = await _book.UpdateBook(model, Id);
                 if (response.Successful is true)
                 {
                     ViewBag.Message = "Update Successful";
@@ -53,7 +59,6 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                 }
             }
             return BadRequest();
-
         }
     }
 }
