@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "_DashboardLayout";
+}
+
+<div class="d-flex flex-row justify-content-around">
+
+    <div class="card col-lg-9 box-shadow border-0 p-4">
+
+        <div class="card-header border-0">
+            <h5>
+                List Of Books <a class="btn-sm btn-outline-success float-right " asp-action="add" asp-controller="Book">Add Books</a>
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+            <table class="table table-borderless table-hover p-2">
+                <thead>
+                    <tr>
+                        <th scope="col">Book Title</th>
+                        <th scope="col"> Author</th>
+                        <th scope="col">SubCategory</th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td class="justify-content-end">
+                            <div class="btn-group" role="group" aria-label="">
+                                <a class="btn btn-info" asp-action="" asp-controller=""><i class="fa fa-edit mr-2"></i></a>
+                                <a class="btn btn-danger " asp-action="" asp-controller=""><i class="fa fa-trash mr-2"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+
+                            <div class="btn-group-lg">
+                                <a href="#" class="btn-sm btn-primary" aria-current="page"><i class="fa fa-angle-double-left"></i> Prev</a>
+                                <a href="#" class="btn-sm btn-primary"><i class="fa fa-angle-double-right"></i>Next</a>
+                            </div>
+                        </td>
+                      
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+
+</div>

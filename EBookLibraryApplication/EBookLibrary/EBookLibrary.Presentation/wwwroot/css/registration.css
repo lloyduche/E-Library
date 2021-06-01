@@ -1,8 +1,4 @@
-﻿body {
-    font-family: Verdana, Geneva, sans-serif;
-    font-size: 14px;
-    background: #135e7e;
-}
+﻿
 
 
 .clearfix:after {
@@ -13,16 +9,17 @@
     height: 0;
 }
 
+
 .form_wrapper {
-    background: #fff;
-    width: 400px;
-    max-width: 100%;
+    background-color:white;
+    width: 450px;
+    max-width: 80%;
     box-sizing: border-box;
-    padding: 25px;
-    margin: 8% auto 0;
+    padding: 25px 25px 0px 25px;
+    margin: 4% auto 0;
     position: relative;
     z-index: 1;
-    border-top: 5px solid #135e7e;
+    border-top: 5px solid #135e7e;*
     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
@@ -35,6 +32,7 @@
     -webkit-animation: expand 0.8s 0.6s ease-out forwards;
     animation: expand 0.8s 0.6s ease-out forwards;
     opacity: 0;
+    border-radius:.3em;
 }
 
     .form_wrapper h2 {
@@ -76,6 +74,7 @@
     .form_wrapper .input_field {
         position: relative;
         margin-bottom: 20px;
+
         -webkit-animation: bounce 0.6s ease-out;
         animation: bounce 0.6s ease-out;
     }
@@ -101,7 +100,8 @@
 
     .form_wrapper input[type="text"], .form_wrapper input[type="email"], .form_wrapper input[type="password"] {
         width: 100%;
-        padding: 8px 10px 9px 35px;
+        padding: 10px 10px 9px 35px;
+        border-radius: 5px;
         height: 35px;
         border: 1px solid #cccccc;
         box-sizing: border-box;
@@ -125,7 +125,7 @@
 
     .form_wrapper input[type="submit"] {
         background: #135e7e;
-        height: 35px;
+        height: 40px;
         line-height: 35px;
         width: 100%;
         border: none;
@@ -137,6 +137,7 @@
         -webkit-transition: all 0.3s ease-in-out;
         -moz-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
+        border-radius: .3em;
     }
 
         .form_wrapper input[type="submit"]:hover {
@@ -150,12 +151,10 @@
     .form_wrapper input[type="checkbox"], .form_wrapper input[type="radio"] {
         border: 0;
         clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
         overflow: hidden;
-        padding: 0;
+        padding: 1em;
         position: absolute;
-        width: 1px;
+        
     }
 
 .form_container .row .col_half.last {

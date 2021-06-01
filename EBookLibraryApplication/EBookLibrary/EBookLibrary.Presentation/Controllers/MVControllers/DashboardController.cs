@@ -17,5 +17,17 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult ManageAccount()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ManageBooks()
+        {
+            return View();
+        }
     }
 }

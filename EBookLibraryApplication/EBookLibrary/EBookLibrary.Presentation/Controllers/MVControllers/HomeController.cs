@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EBookLibrary.Presentation.Controllers.APIControllers
+namespace EBookLibrary.Presentation.Controllers.MVControllers
 {
     public class HomeController : Controller
     {

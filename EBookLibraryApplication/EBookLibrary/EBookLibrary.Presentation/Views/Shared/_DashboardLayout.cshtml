@@ -25,24 +25,25 @@
             <!-- Sidebar  -->
 
             <nav id="sidebar" style="height:100vh">
-                <div class="sidebar-header ">
+                <div class="sidebar-header" >
                     <a class="navbar-brand ml-lg-4" asp-area="" asp-controller="Home" asp-action="Index">EB<i class="fa fa-glasses fa-2x text-primary"></i>kLibrary</a>
                 </div>
                 @*@{ //var className = baseAddress == "bgtn" ? "active" : null; }*@
                 <div class="d-flex flex-column">
                     <ul class="list-unstyled sideNav">
                         <li class="active">
-                            <a href="#" class="p-4">Dashboard</a>
+                            <a class="nav-link p-4" asp-area="" asp-controller="Dashboard" asp-action="Admin"> Dashboard</a>
                         </li>
                         <li>
                             <a target="_blank" class="p-4" href="#">My Profile</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="p-4" aria-expanded="false">Manage Accounts </a>
+                        <li class="nav-item">      
+                            <a class="nav-link p-4" asp-area="" asp-controller="Dashboard" asp-action="ManageAccount"> Manage Accounts</a>
                         </li>
                         <li class="">
-                            <a href="#"class="p-4" aria-expanded="false">Manage Books </a>
+                            <a class="nav-link p-4" asp-area="" asp-controller="Dashboard" asp-action="ManageBooks">Manage Books</a>
+
                         </li>
                     </ul>
                 </div>
