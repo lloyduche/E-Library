@@ -78,12 +78,72 @@
             foreach (var book in Model.Recent.Result)
             {
                 <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
-                    <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image03.jpg" alt="image" width="200" height="250" /></a>
+                    <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~@book.AvatarUrl" alt="image" width="200" height="250" /></a>
                     <div class="card-body p-0 mt-3 myBook-card">
                         <p class="text-secondary text-capitalize">@book.Title</p>
                         <p class="text-secondary text-capitalize">@book.Category</p>
                         <p class="text-secondary text-capitalize" style=" font-size:20px;">@book.Author</p>
-                        <p>*****</p>
+                        @if (@book.Rating == 5)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                            </p>
+                        }
+                        else if (@book.Rating == 4)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+                        else if (@book.Rating == 3)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+                        else if (@book.Rating == 2)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+                        else if (@book.Rating == 1)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+
                         <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
                     </div>
                 </div>
@@ -122,12 +182,72 @@
             foreach (var book in Model.MostPopular.Result)
             {
                 <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
-                    <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~/images/image05.jpg" alt="image" width="200" height="250" /></a>
+                    <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~@book.AvatarUrl" alt="image" width="200" height="250" /></a>
                     <div class="card-body p-0 mt-3 myBook-card">
                         <p class="text-secondary text-capitalize">@book.Title</p>
                         <p class="text-secondary text-capitalize">@book.Category</p>
-                        <p class="text-secondary text-capitalize">@book.Author</p>
-                        <p>*****</p>
+                        <p class="text-secondary text-capitalize" style=" font-size:20px;">@book.Author</p>
+                        @if (@book.Rating == 5)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                            </p>
+                        }
+                        else if (@book.Rating == 4)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+                        else if (@book.Rating == 3)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+                        else if (@book.Rating == 2)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+                        else if (@book.Rating == 1)
+                        {
+                            <p>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                        }
+
                         <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
                     </div>
                 </div>

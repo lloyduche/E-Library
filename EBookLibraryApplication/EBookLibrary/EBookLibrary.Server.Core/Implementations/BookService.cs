@@ -47,7 +47,7 @@ namespace EBookLibrary.Server.Core.Implementations
             _userManager = userManager;
         }
 
-         public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
+        public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
         {
             Response<AddBookResponseDto> response = new Response<AddBookResponseDto>();
 
@@ -61,7 +61,7 @@ namespace EBookLibrary.Server.Core.Implementations
             var book = _mapper.Map<AddBookDto, Book>(addbookdto);
 
             //Add book to database
-             await _bookRepository.Insert(book);
+            await _bookRepository.Insert(book);
 
             //construct response
             var addbookresponsedto = _mapper.Map<AddBookResponseDto>(book);
@@ -111,7 +111,6 @@ namespace EBookLibrary.Server.Core.Implementations
 
         public async Task<Response<string>> UploadPhoto(UploadPhotoDto uploadphotodto)
         {
-           
             Response<string> response = new Response<string>();
             UploadAvatarResponse uploadAvatarResponse = new UploadAvatarResponse();
             var file = uploadphotodto.BookPhoto;
@@ -152,7 +151,7 @@ namespace EBookLibrary.Server.Core.Implementations
             }
 
             Response<AddRatingResponseDto> response = new Response<AddRatingResponseDto>();
-            var rating = _mapper.Map<AddRatingDto,Rating>(addratingdto);
+            var rating = _mapper.Map<AddRatingDto, Rating>(addratingdto);
 
             var result = await _ratingRepository.Insert(rating);
             if (!result)
@@ -239,7 +238,7 @@ namespace EBookLibrary.Server.Core.Implementations
         {
             var RecentResult = _bookRepo.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostRecent, paging.PageSize);
             var RecentMappedResult = _mapper.Map<PagedResult<BookCardDTO>>(RecentResult);
-            var popularResult = _bookRepository.GetAll().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostPopular, paging.PageSize);
+            var popularResult = _bookRepository.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostPopular, paging.PageSize);
             var PopularMappedResult = _mapper.Map<PagedResult<BookCardDTO>>(popularResult);
             HomePageDTO dto = new HomePageDTO();
             dto.MostPopular = PopularMappedResult;

@@ -34,6 +34,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpDelete]
         [Route("delete-user/{Id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(string Id)
         {
             await _userservice.DeleteUser(Id);

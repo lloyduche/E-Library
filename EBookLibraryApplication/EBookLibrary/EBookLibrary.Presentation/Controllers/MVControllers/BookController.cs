@@ -19,7 +19,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin")]
         public IActionResult Add()
         {
             return View();

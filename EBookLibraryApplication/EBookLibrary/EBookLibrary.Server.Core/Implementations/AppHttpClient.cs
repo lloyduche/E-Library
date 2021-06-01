@@ -1,9 +1,9 @@
-﻿using EBookLibrary.DTOs;
-using EBookLibrary.Models;
+﻿using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 using Newtonsoft.Json;
@@ -12,6 +12,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,9 +22,11 @@ namespace EBookLibrary.Server.Core.Implementations
     {
         private readonly IConfiguration _config;
         private readonly ApplicationBaseAddress baseAddress;
+        private readonly IHttpContextAccessor HttpContext;
 
-        public AppHttpClient(IConfiguration config, IOptions<ApplicationBaseAddress> options)
+        public AppHttpClient(IConfiguration config, IOptions<ApplicationBaseAddress> options, IServiceProvider serviceProvider)
         {
+            HttpContext = serviceProvider.GetRequiredService<IHttpContextAccessor>();
             _config = config;
             baseAddress = options.Value;
         }
@@ -94,6 +97,8 @@ namespace EBookLibrary.Server.Core.Implementations
         public HttpClient CustomHttpClient()
         {
             var client = new HttpClient();
+            var token = HttpContext.HttpContext.Session.GetString("access_token");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             client.BaseAddress = new Uri(baseAddress.BaseAddress);
 
