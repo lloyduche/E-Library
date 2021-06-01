@@ -1,6 +1,5 @@
 [
   {
-    "AvatarUrl": "http://placehold.it/32x32",
     "FirstName": "Claudia",
     "LastName": "Norris",
     "gender": "female",
@@ -8,7 +7,6 @@
     "UserName": "claudianorris@zentry.com"
   },
   {
-    "AvatarUrl": "http://placehold.it/32x32",
     "FirstName": "Summer",
     "LastName": "Higgins",
     "gender": "female",
@@ -17,7 +15,6 @@
 
   },
   {
-    "AvatarUrl": "http://placehold.it/32x32",
     "FirstName": "Maryann",
     "LastName": "Lamb",
     "gender": "female",

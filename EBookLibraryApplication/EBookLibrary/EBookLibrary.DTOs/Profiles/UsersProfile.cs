@@ -17,6 +17,8 @@ namespace EBookLibrary.Commons.Profiles
              CreateMap<Book, UpdateBookDto>();
             CreateMap<UpdateBookDto, Book>();
 
+            CreateMap<User, UserDTO>().ReverseMap();
+
             CreateMap<AddBookDto, Book>();
             CreateMap<Book, AddBookDto>();
 

@@ -77,6 +77,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             var response = await _bookService.UploadPhoto(uploadphotodto);
             return Ok(response);
         }
+
         [Route("(authors{authorId:int}/books")]
         public async Task<IActionResult> GetBookByAuthor(string authorId)
         {
