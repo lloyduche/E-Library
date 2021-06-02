@@ -1,13 +1,12 @@
 ﻿@model EBookLibrary.DTOs.Response<string>
 
-<div class="container">
-    <div class="d-flex justify-content-center align-items-center" style="height:70vh">
+    <div class="wrapper" id="errorPageBody">
         <div class="box">
             <h1>@ViewBag.StatusCode</h1>
             <p>@ViewBag.Message</p>
             <p>😊</p>
             @*<p>&#58;&#40;</p>*@
-            <p><a href="#">Home</a></p>
+        <p><a href="/" id="homeBtn">Home</a></p>
         </div>
     </div>
 </div>
