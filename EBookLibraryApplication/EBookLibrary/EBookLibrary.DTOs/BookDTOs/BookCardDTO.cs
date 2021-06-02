@@ -19,7 +19,7 @@ namespace EBookLibrary.DTOs.BookDTOs
         [Required]
         public string Isbn { get; set; }
 
-        //[Required]
+        //[Required
         public string? AvatarUrl { get; set; }
 
         [Required]
