@@ -73,8 +73,11 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPost]
         [Route("search")]
-        public IActionResult Search(SearchParametersDTO1 model)
+        public IActionResult SearchBooks(SearchParametersDTO1 model)
         {
+            if (model.PageNumber == 0) model.PageNumber++;
+            if (model.PageSize == 0) model.PageSize = 15;
+            if (string.IsNullOrEmpty(model.Query)) return Redirect("/");
             var response = _bookService.Search(model);
             return Ok(response);
         }

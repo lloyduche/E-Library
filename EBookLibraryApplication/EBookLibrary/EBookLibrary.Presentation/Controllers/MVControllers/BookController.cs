@@ -59,6 +59,8 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
 
         public async Task<IActionResult> Search(SearchParametersViewModel1 model)
         {
+            if (string.IsNullOrEmpty(model.Query)) return Redirect("/");
+            ViewBag.query = model.Query;
             var resp = await _book.Search(model);
             return View(resp);
         }
