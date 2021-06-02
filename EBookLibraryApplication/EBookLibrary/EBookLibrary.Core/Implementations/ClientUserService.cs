@@ -34,7 +34,7 @@ namespace EBookLibrary.Client.Core.Implementations
 
         public async Task<ExpectedResponse<int>> GetUsersCount()
         {
-            return await _httpClient.Get<ExpectedResponse<int>>($"api/v1/user/get-users-count");
+            return await _httpClient.Get<ExpectedResponse<int>>("api/v1/user/get-users-count");
         }
     }
 }

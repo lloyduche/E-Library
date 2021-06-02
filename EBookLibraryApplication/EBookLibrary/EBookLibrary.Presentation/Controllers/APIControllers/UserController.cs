@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
-    [Authorize]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     public class UserController : BaseAPIController
     {
         private readonly IUserService _userservice;

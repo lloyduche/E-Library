@@ -23,9 +23,10 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             _clientBookService = clientBookService;
             
         }
+        [HttpGet]
         public async Task<IActionResult> Index(string id)
         {
-            var user = await _userService.GetUserById(id);
+            var user = await _userService.GetUserById("fdb91b7a-1d81-4f58-a46d-185f50d870a3");
 
             if(user.Data.AvatarUrl == null)
             {
@@ -34,6 +35,8 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
 
             return View(user.Data);
         }
+
+        [HttpGet]
         public async Task<IActionResult> Admin()
         {
             var totalNumOfUsers = await _userService.GetUsersCount();

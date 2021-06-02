@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EBookLibrary.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210601221535_initial")]
-    partial class initial
+    [Migration("20210602133254_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

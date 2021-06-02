@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
-    [Authorize]
+   // [Authorize]
     public class BookController : BaseAPIController
     {
         private readonly IBookServices _bookService;
