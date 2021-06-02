@@ -68,5 +68,10 @@ namespace EBookLibrary.DataAccess.Implementations
         }
 
         public async Task<T> Find(Expression<Func<T, bool>> expression) => await _dbSet.FirstOrDefaultAsync(expression);
+
+        public int GetCount()
+        {
+            return _dbSet.Count();
+        }
     }
 }

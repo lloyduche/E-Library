@@ -10,6 +10,12 @@ namespace EBookLibrary.DTOs.BookDTOs
         [Required]
         public string Title { get; set; }
 
+        [Required]
+        public string Publisher { get; set; }
+
+        [Required]
+        public string Isbn { get; set; }
+
         //[Required]
         public string? AvatarUrl { get; set; }
 

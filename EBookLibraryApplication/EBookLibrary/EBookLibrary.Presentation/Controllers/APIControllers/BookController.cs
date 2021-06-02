@@ -6,7 +6,7 @@ using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
 
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Threading.Tasks;
@@ -60,15 +60,6 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpPost]
-        [Route("search")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Search(SearchTermDto term)
-        {
-            var response = await _bookService.GetAllBooksWhere(term);
-            return Ok(response);
-        }
-
-        [HttpPost]
         [Route("add-rating")]
         public async Task<IActionResult> RateBook([FromBody] AddRatingDto addratingdto)
         {
@@ -85,11 +76,21 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpPost]
-        [Route("uploadphoto")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UploadPhoto([FromForm] UploadPhotoDto uploadphotodto)
+        [Route("uploadphoto/{Id}")]
+        public async Task<IActionResult> UploadPhoto(string Id, [FromForm] IFormFile image)
         {
-            var response = await _bookService.UploadPhoto(uploadphotodto);
+            var response = await _bookService.UploadPhoto(image, Id);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("search")]
+        public IActionResult SearchBooks(SearchParametersDTO1 model)
+        {
+            if (model.PageNumber == 0) model.PageNumber++;
+            if (model.PageSize == 0) model.PageSize = 15;
+            if (string.IsNullOrEmpty(model.Query)) return Redirect("/");
+            var response = _bookService.Search(model);
             return Ok(response);
         }
 
@@ -108,6 +109,33 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         public HomePageDTO GetAllBooksPaginated(HomePageFetchData data)
         {
             return _bookService.GetHomePageData(data);
+        }
+
+        [HttpPost]
+        [Route("get-books-paginated")]
+        public ActionResult<PagedResult<BookCardDTO>> GetBooks(SearchPagingParametersDTO model)
+        {
+            var result = _bookService.GetAllBooksPaginated(model);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("get-books-count")]
+        public ActionResult GetTotalNumberOfBooks()
+        {
+            var result = _bookService.GetTotalBooksCount();
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("get-reviews-count")]
+        public ActionResult GetTotalNumberOfReviews()
+
+        {
+            var result = _bookService.GetTotalReviewsCount();
+
+            return Ok(result);
         }
     }
 }

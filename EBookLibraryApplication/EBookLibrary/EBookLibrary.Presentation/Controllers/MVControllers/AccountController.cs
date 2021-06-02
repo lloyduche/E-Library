@@ -19,13 +19,13 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
         
         [HttpGet]
-        public ActionResult Registration()
+        public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Register(RegisterationViewModel model)
+        public async Task<IActionResult> Register(RegisterationViewModel model)
         {
            var response = await _auth.Register(model);
             if (response.Successful is true)
@@ -34,10 +34,13 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             }
            return BadRequest();
         }
-        public ActionResult successReg()
+
+
+        public IActionResult SuccessReg()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -105,10 +108,17 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             if (response.Success)
             {
                 HttpContext.Session.SetString("access_token", response.Data);
-                return View("successReg");
+                return RedirectToAction("Index","Dashboard", new {Id = "6f07f58e-d3af-465f-8a75-62786e8179a3" });
             }
             ModelState.AddModelError("", response.Message);
             return View(model);
+        }
+
+
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            return View();
         }
 
 

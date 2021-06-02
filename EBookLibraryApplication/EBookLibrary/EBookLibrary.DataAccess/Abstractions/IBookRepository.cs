@@ -1,8 +1,6 @@
-﻿using EBookLibrary.DTOs.BookDTOs;
-using EBookLibrary.Models;
+﻿using EBookLibrary.Models;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,6 +14,10 @@ namespace EBookLibrary.DataAccess.Abstractions
 
         IQueryable<Book> GetPaginatedBooks();
 
-       Task<IReadOnlyList<Book>> GetAllBooksWhere(SearchTermDto search);
+        IQueryable<Book> GetFilteredBooks(string query);
+
+        int GetTotalNumberOfBooks();
+
+        int GetTotalNumberOfReviews();
     }
 }
