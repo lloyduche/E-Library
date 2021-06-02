@@ -1,4 +1,5 @@
 ﻿using EBookLibrary.Client.Core.Implementations;
+using EBookLibrary.ViewModels;
 using EBookLibrary.ViewModels.BookVMs;
 
 using Microsoft.AspNetCore.Mvc;
@@ -56,10 +57,10 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             return BadRequest();
         }
 
-        public async Task<IActionResult> Search()
+        public async Task<IActionResult> Search(SearchParametersViewModel1 model)
         {
-            await Task.CompletedTask;
-            return View();
+            var resp = await _book.Search(model);
+            return View(resp);
         }
     }
 }

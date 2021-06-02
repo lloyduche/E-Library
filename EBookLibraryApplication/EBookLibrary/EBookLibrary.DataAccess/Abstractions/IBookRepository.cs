@@ -10,10 +10,10 @@ namespace EBookLibrary.DataAccess.Abstractions
     {
         Task<Book> GetDetailedBook(string Id);
 
-        Task<Book> GetBookByAuthor(string authorid);
-
         Task<Book> GetBookByCategory(string categoryid);
 
         IQueryable<Book> GetPaginatedBooks();
+
+        IQueryable<Book> GetFilteredBooks(string query);
     }
 }

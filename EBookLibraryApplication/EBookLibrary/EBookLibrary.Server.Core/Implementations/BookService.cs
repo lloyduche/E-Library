@@ -216,21 +216,11 @@ namespace EBookLibrary.Server.Core.Implementations
             return response;
         }
 
-        public async Task<Response<FindBookByAuthorDto>> GetBookByAuthor(string authorid)
+        public PagedResult<BookCardDTO> Search(SearchParametersDTO1 model)
         {
-            Response<FindBookByAuthorDto> response = new Response<FindBookByAuthorDto>();
-            var book = await _bookRepo.GetBookByAuthor(authorid);
-            if (book == null)
-                throw new NotFoundException("No available book for this author");
-
-            var books = _mapper.Map<FindBookByAuthorDto>(book);
-
-            response.StatusCode = (int)HttpStatusCode.OK;
-            response.Message = "Search Successful";
-            response.Success = true;
-            response.Data = books;
-
-            return response;
+            var books = _bookRepo.GetFilteredBooks(model.Query).Paginate(model.PageNumber, model.PageSize);
+            var mappedBooks = _mapper.Map<PagedResult<BookCardDTO>>(books);
+            return mappedBooks;
         }
 
         public HomePageDTO GetHomePageData(HomePageFetchData paging)

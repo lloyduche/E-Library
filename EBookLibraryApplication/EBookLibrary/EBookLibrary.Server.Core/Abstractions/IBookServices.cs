@@ -23,7 +23,7 @@ namespace EBookLibrary.Server.Core.Abstractions
 
         Task<Response<AddReviewResponseDto>> AddReview(AddReviewDto addreviewdto);
 
-        Task<Response<FindBookByAuthorDto>> GetBookByAuthor(string authorid);
+        PagedResult<BookCardDTO> Search(SearchParametersDTO1 model);
 
         Task<Response<FindBookDto>> FindBook(string Id);
 

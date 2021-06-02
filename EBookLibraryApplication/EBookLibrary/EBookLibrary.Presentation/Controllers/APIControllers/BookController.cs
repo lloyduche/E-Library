@@ -71,10 +71,11 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             return Ok(response);
         }
 
-        [Route("(authors{authorId:int}/books")]
-        public async Task<IActionResult> GetBookByAuthor(string authorId)
+        [HttpPost]
+        [Route("search")]
+        public IActionResult Search(SearchParametersDTO1 model)
         {
-            var response = await _bookService.GetBookByAuthor(authorId);
+            var response = _bookService.Search(model);
             return Ok(response);
         }
 
