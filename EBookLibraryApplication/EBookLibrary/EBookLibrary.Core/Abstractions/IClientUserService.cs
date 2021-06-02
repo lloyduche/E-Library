@@ -1,4 +1,6 @@
-﻿using EBookLibrary.ViewModels.Common;
+﻿using EBookLibrary.DTOs;
+using EBookLibrary.ViewModels;
+using EBookLibrary.ViewModels.Common;
 using EBookLibrary.ViewModels.UserVMs;
 using System;
 using System.Collections.Generic;
@@ -10,5 +12,6 @@ namespace EBookLibrary.Client.Core.Abstractions
     public interface IClientUserService
     {
         Task<ExpectedResponse<UserDashboardViewModel>> GetUserById(string Id);
+        Task<PagedResult<AdminUserViewModel>> GetAllUser(SearchParametersViewModel model);
     }
 }

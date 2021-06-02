@@ -1,6 +1,7 @@
 ﻿using EBookLibrary.Client.Core.Abstractions;
 using EBookLibrary.DTOs;
 using EBookLibrary.Server.Core.Abstractions;
+using EBookLibrary.ViewModels;
 using EBookLibrary.ViewModels.Common;
 using EBookLibrary.ViewModels.UserVMs;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,12 @@ namespace EBookLibrary.Client.Core.Implementations
         public ClientUserService(IServiceProvider serviceProvider)
         {
             _httpClient = serviceProvider.GetRequiredService<IAppHttpClient>();
+        }
+
+        public async Task<PagedResult<AdminUserViewModel>> GetAllUser(SearchParametersViewModel model)
+        {
+            return await _httpClient.Create<PagedResult<AdminUserViewModel>, SearchParametersViewModel>($"api/v1/user/get-all-user", model);
+            
         }
 
         public async Task<ExpectedResponse<UserDashboardViewModel>> GetUserById(string Id)

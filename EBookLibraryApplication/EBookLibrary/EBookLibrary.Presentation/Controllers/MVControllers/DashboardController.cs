@@ -40,16 +40,16 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
-        public IActionResult ManageAccount(int PageNumber = 1, int PageSize = 5)
+        public async Task<IActionResult> ManageAccount(int PageNumber = 1, int PageSize = 5)
         {
             var model = new SearchParametersViewModel
             {
                 PageNumber = PageNumber,
                 PageSize = PageSize
             };
+            var myUsers = await _userService.GetAllUser(model);
 
-
-            return View();
+            return View(myUsers);
         }
 
         [HttpGet]

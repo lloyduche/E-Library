@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Server.Core.Abstractions;
 
@@ -52,6 +53,14 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         public async Task<IActionResult> GetUserById(string Id)
         {
             var result = await _userservice.GetUserById(Id);
+
+            return Ok(result);
+        }
+        [HttpPost]
+        [Route("get-all-user")]
+        public IActionResult GetAllUser(SearchPagingParametersDTO model)
+        {
+            var result = _userservice.GetAllUser(model);
 
             return Ok(result);
         }
