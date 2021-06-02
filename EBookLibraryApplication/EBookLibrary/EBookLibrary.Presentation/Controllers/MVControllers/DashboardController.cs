@@ -38,9 +38,9 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         {
             var totalNumOfUsers = await _userService.GetUsersCount();
 
-            var totalNumOfBooks = await _bookService.GetBooksCount();
+            var totalNumOfBooks = await _clientBookService.GetBooksCount();
 
-            var totalNumOfReviews = await _bookService.GetReviewsCount();
+            var totalNumOfReviews = await _clientBookService.GetReviewsCount();
 
             var adminDashboardViewModel = new AdminDashboardViewModel
             {

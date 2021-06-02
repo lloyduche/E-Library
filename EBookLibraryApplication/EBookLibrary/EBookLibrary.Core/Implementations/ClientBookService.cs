@@ -1,6 +1,5 @@
 ﻿using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.BookDTOs;
-using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Server.Core.Abstractions;

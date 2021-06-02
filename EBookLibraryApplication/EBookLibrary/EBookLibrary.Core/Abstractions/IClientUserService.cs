@@ -1,4 +1,6 @@
-﻿using EBookLibrary.ViewModels.Common;
+﻿using EBookLibrary.DTOs;
+using EBookLibrary.ViewModels;
+using EBookLibrary.ViewModels.Common;
 using EBookLibrary.ViewModels.UserVMs;
 using System;
 using System.Collections.Generic;

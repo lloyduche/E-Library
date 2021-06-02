@@ -1,7 +1,6 @@
 ﻿using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.DTOs;
-using EBookLibrary.DTOs;
 using EBookLibrary.ViewModels;
 using EBookLibrary.ViewModels.BookVMs;
 using EBookLibrary.ViewModels.Common;
