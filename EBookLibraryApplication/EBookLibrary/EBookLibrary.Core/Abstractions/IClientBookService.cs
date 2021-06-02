@@ -12,11 +12,14 @@ namespace EBookLibrary.Client.Core.Implementations
 {
     public interface IClientBookService
     {
+
+        Task<bool> DeleteBook(string Id);
+
         Task<ExpectedResponse<string>> Add(AddBook model);
 
         Task<BookResponse> UpdateBook(UpdateBookViewModel model, string Id);
 
-        Task<GetBookDetailsResponseVM> GetBook(string Id);
+        Task<ExpectedResponse<GetBookDetailsResponseVM>> GetBook(string Id);
 
         Task<HomePageViewModel> GetHomePageData(PagingParametersViewModel model);
 

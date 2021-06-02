@@ -45,9 +45,6 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         [Route("upload-photo")]
         public async Task<IActionResult> UploadPhoto([FromForm] PhotoUploadDTO model)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
             var response = await _userservice.UploadPhoto(model);
             return Ok(response);
         }
@@ -76,6 +73,15 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             var result = _userservice.GetTotalNumberOfUsers();
 
             return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("get-user-role")]
+        public IActionResult GetUserByRole(string Id)
+        {
+            var userRole = _userservice.GetUserByRole(Id);
+
+            return Ok(userRole);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace EBookLibrary.Server.Core.Implementations
         }
         public async Task SendEmailAsync(MailRequest mailRequest)
         {
-            string FilePath = Directory.GetCurrentDirectory() + "\\Email\\Mail2.cshtml";
+            string FilePath = Directory.GetCurrentDirectory() + "\\Views\\Email\\Mail2.html";
             StreamReader str = new StreamReader(FilePath);
             string MailText = str.ReadToEnd();
             str.Close();
