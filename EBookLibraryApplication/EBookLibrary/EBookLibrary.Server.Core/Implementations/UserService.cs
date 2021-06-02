@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -48,6 +50,14 @@ namespace EBookLibrary.Server.Core.Implementations
             return true;
         }
 
+        public PagedResult<UserDTO> GetAllUsers()
+        {
+            var users = _userRepo.GetAll().Paginate(1, 5);
+            var RecentMappedResult = _mapper.Map<PagedResult<UserDTO>>(users); 
+            return RecentMappedResult;
+            
+        }
+
         public async Task<bool> UpdateUser(UpdateUserDto updateuserdto)
         {
             var checkuser = await _userManager.FindByIdAsync(updateuserdto.Id);
@@ -60,7 +70,6 @@ namespace EBookLibrary.Server.Core.Implementations
             checkuser.Gender = updateuserdto.Gender;
             checkuser.Email = updateuserdto.Email;
 
-            //_mapper.Map<UpdateUserDto, User>(updateuserdto);
 
             var result = await _userManager.UpdateAsync(checkuser);
 
@@ -167,6 +176,19 @@ namespace EBookLibrary.Server.Core.Implementations
             response.Success = true;
 
             return response;
+        }
+
+        public async Task<IEnumerable<string>> GetUserByRole(string email)
+        {
+
+            var user = await _userManager.FindByEmailAsync(email);
+            
+            if(user == null)
+            {
+                throw new BadRequestException("User doesn't exist");
+            }
+            var userRole = await _userManager.GetRolesAsync(user);
+            return userRole.ToList();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
            var response = await _auth.Register(model);
             if (response.Successful is true)
             {
-                return RedirectToAction("successReg");
+                return RedirectToAction(nameof(SuccessReg));
             }
            return BadRequest();
         }

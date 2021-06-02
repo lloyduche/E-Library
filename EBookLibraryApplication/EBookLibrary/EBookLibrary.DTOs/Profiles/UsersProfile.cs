@@ -61,6 +61,8 @@ namespace EBookLibrary.Commons.Profiles
                 .ForMember(book => book.Category, findBook => findBook.MapFrom(book => book.Category.Name));
 
             CreateMap<Book, FindBookBySearchDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
+
         }
     }
 }
