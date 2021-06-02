@@ -19,15 +19,16 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return View(new AddBook());
         }
+
         [HttpPost]
         public async Task<ActionResult> Add(AddBook model)
         {
             var response = await _book.Add(model);
             if (response.Success is true)
             {
-                return RedirectToAction("dashboard");
+                return RedirectToAction("Admin", "Dashboard");
             }
             return BadRequest();
         }

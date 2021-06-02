@@ -1,78 +1,68 @@
-﻿@model EBookLibrary.ViewModels.BookVMs.AddBook
-@{
-}
+﻿@model AddBook
+@{ Layout = "_DashboardLayout"; }
 
-<div class="form_wrapper">
-    <div class="form_container">
-        <div class="title_container">
-            <h2>Add Book</h2>
-        </div>
-        <div class="row clearfix">
-            <div class="">
-                <form method="post" asp-action="Register" asp-controller="Account" style="margin-left: 10px;">
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-                        <label>Title</label>
-                        <input type="text" required asp-for="Title" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <label>Publisher</label>
-                        <input type="text" required asp-for="Publisher" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <label>ISBN</label>
-                        <input type="text" required asp-for="Isbn" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <label>Description</label>
-                        <input type="text" required asp-for="Description" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <label>Pages</label>
-                        <input type="text" required asp-for="Pages" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <label>Author</label>
-                        <input type="text" required asp-for="Author" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <label>Available Copies</label>
-                        <input type="text" required asp-for="CopiesAvailable" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <label>Publisher Date</label>
-                        <input type="date" class="form-control" required asp-for="DatePublished" />
-                    </div>
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <label>Date Created</label>
-                        <input type="date" class="form-control" required asp-for="CreatedAt" />
-                    </div>
-                    <div class="input_field">
-                        <label for="cars">Choose a Category</label>
-                        <select name="Sci-fi" value="Sci-fi" asp-for="Category">
-                            <option value="Sci-fi">Sci-fi</option>
-                            <option value="Horror">Horror</option>
-                            <option value="Mystery">Mystery</option>
-                            <option value="Drama">Drama</option>
-                            <option value="Art">Art</option>
-                            <option value="Biography">Biography</option>
-                            <option value="Sports">Sports</option>
-                            <option value="Travel">Travel</option>
-                            <option value="Sports">Sports</option>
-                        </select>
-                    </div>
 
-                        <input class="button" type="submit" value="Add" />
-                </form>
-            </div>
+<div class="d-flex flex-row justify-content-center ">
+    <div class="card col-lg-6 border-0 box-shadow">
+        <div class="card-body">
+            <form method="post" asp-action="ManageBooks" asp-controller="Dashboard">
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-success" id="basic-addon1"><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                    <input type="text" class="form-control" placeholder="Title" required asp-for="Title">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-warning" id="basic-addon1"><i aria-hidden="true" class="fa fa-id-card"></i></span>
+                    <input type="text" class="form-control" placeholder="Publisher" required asp-for="Publisher">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-primary" id="basic-addon1"><i aria-hidden="true" class="fa fa-sort-alpha-down"></i></span>
+                    <input type="text" class="form-control" placeholder="Isbn" required asp-for="Isbn">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-success" id="basic-addon1"><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                    <input type="text" class="form-control" placeholder="Description" required asp-for="Description">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-info">Pages</span>
+                    <input type="number" class="form-control" placeholder="Pages" required asp-for="Pages">
+                    <input type="number" class="form-control" placeholder="Copies Available" required asp-for="CopiesAvailable">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-light" id="basic-addon1"><i aria-hidden="true" class="fa fa-users"></i></span>
+                    <input type="text" class="form-control" placeholder="Author" required asp-for="Author">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-danger" id="basic-addon1"><i aria-hidden="true" class="fa fa-calendar"></i></span>
+                    <input type="date" class="form-control" placeholder="Date" required asp-for="DatePublished">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-warning" id="basic-addon1"><i aria-hidden="true" class="fa fa-calendar-check"></i></span>
+                    <input type="date" class="form-control" placeholder="CreatedAt" required asp-for="CreatedAt">
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="cars">Choose a Category</label>
+                    <select value="Sci-fi" name="Sci-fi" asp-for="Category">
+                        <option value="Sci-fi">Sci-fi</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Art">Art</option>
+                        <option value="Biography">Biography</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Sports">Sports</option>
+                    </select>
+                </div>
+
+                <input class="btn btn-primary pr-4 pl-4" type="submit" value="Add" />
+            </form>
         </div>
+
+       
     </div>
 </div>

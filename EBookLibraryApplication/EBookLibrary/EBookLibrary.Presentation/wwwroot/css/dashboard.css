@@ -219,4 +219,14 @@ font-size:18px;
     padding: 0.5em 0 0.5em 0;
 }
     
-/*...............*/
+/*...............uadd bookss -------------------*/
+.input-group span {
+    border-radius: 3px 0px 0px 3px;
+}
+.input-group label {
+    border-radius: 3px 0px 0px 3px;
+}
+.input-group select {
+    border-radius: 0px 3px 3px 0px;
+    border: 1px solid gray;
+}
