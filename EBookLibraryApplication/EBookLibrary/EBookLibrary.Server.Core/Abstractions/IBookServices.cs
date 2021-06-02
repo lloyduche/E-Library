@@ -27,5 +27,7 @@ namespace EBookLibrary.Server.Core.Abstractions
         Task<Response<FindBookDto>> FindBook(string Id);
 
         HomePageDTO GetHomePageData(HomePageFetchData paging);
+        PagedResult<BookCardDTO> GetAllBooksPaginated(SearchPagingParametersDTO model);
+
     }
 }

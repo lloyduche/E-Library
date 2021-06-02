@@ -1,4 +1,5 @@
-﻿using EBookLibrary.ViewModels;
+﻿using EBookLibrary.DTOs;
+using EBookLibrary.ViewModels;
 using EBookLibrary.ViewModels.BookVMs;
 using EBookLibrary.ViewModels.Common;
 
@@ -18,5 +19,7 @@ namespace EBookLibrary.Client.Core.Implementations
         Task<HomePageViewModel> GetHomePageData(PagingParametersViewModel model);
 
         Task<bool> UploadPhoto(UploadPhotoVM model);
+        Task<PagedResult<BookCardViewModel>> Books(SearchParametersViewModel model);
+
     }
 }
