@@ -5,14 +5,14 @@
   },
   {
     "name": "Non-fiction",
-    "Type" :  0
+    "Type": 0
   },
   {
     "name": "Sci-fi",
     "Type": 1,
     "Books": [
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image05.jpg",
         "CopiesAvailable": 9,
         "Title": "Patton",
         "Author": "Cote Ball",
@@ -22,7 +22,7 @@
         "Description": "Ipsum id occaecat duis ullamco. In nulla in nostrud id laborum quis deserunt qui nisi qui eu mollit eiusmod ullamco. Velit deserunt veniam nisi amet aute fugiat reprehenderit non et. Officia minim esse consequat consequat minim exercitation ex fugiat occaecat dolor. Reprehenderit enim eiusmod Lorem aliqua duis nisi sint ex duis ea nisi incididunt ut. Dolore sint et id laborum eiusmod amet aliqua velit qui cillum veniam ad nulla ea.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image03.jpg",
         "CopiesAvailable": 10,
         "Title": "Vasquez",
         "Author": "Battle Gamble",
@@ -39,7 +39,7 @@
     "Type": 1,
     "Books": [
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image01.png",
         "CopiesAvailable": 17,
         "Title": "Sharp",
         "Author": "Josefina Mason",
@@ -49,7 +49,7 @@
         "Description": "Sunt fugiat elit officia amet proident. Ea mollit veniam veniam et non aliqua irure do anim qui ullamco cillum eu reprehenderit. Sint officia et proident eiusmod nulla culpa. Non aliquip esse incididunt adipisicing qui laborum deserunt reprehenderit Lorem ad laborum id dolore. Veniam officia nisi ea velit ex ullamco ad cupidatat tempor do.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image02.jpg",
         "CopiesAvailable": 16,
         "Title": "Gloria",
         "Author": "Wagner Mack",
@@ -65,7 +65,7 @@
     "Type": 1,
     "Books": [
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image01.png",
         "CopiesAvailable": 5,
         "Title": "Dean",
         "Author": "Lorna Barron",
@@ -75,7 +75,7 @@
         "Description": "Ut aliqua occaecat culpa et. Cillum nisi id cillum consectetur reprehenderit ea tempor labore ullamco. Aliqua consectetur non aliqua deserunt in id ex occaecat cupidatat consectetur exercitation officia. Tempor cupidatat sit non cillum mollit minim exercitation occaecat do tempor. Elit excepteur duis excepteur et occaecat et dolor cupidatat ex Lorem aute deserunt.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image03.jpg",
         "CopiesAvailable": 4,
         "Title": "Ava",
         "Author": "Hope Bridges",
@@ -85,7 +85,7 @@
         "Description": "Velit quis sint ullamco voluptate in aliquip. Anim ipsum incididunt nisi consectetur est est. Mollit consequat duis nulla aliqua nostrud nulla fugiat incididunt aliqua in ad aliqua anim. Ipsum laborum irure deserunt culpa eu. Consectetur reprehenderit do incididunt esse sint proident deserunt id non sit adipisicing et ipsum. Enim nulla amet ullamco cupidatat. Non ea ullamco adipisicing dolore magna incididunt sunt ea ea veniam consequat duis.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image05.jpg",
         "CopiesAvailable": 2,
         "Title": "Parsons",
         "Author": "Tamera Sims",
@@ -101,7 +101,7 @@
     "Type": 2,
     "Books": [
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image04.jpg",
         "CopiesAvailable": 11,
         "Title": "Dunlap",
         "Author": "Hancock Banks",
@@ -111,7 +111,7 @@
         "Description": "Nulla in sunt sunt id aliqua nulla culpa aliquip proident et officia incididunt enim elit. Sint reprehenderit ad mollit aliqua pariatur amet velit. Aliqua Lorem pariatur mollit non.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image01.png",
         "CopiesAvailable": 20,
         "Title": "Blackburn",
         "Author": "Williams Christian",
@@ -127,7 +127,7 @@
     "Type": 2,
     "Books": [
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image03.jpg",
         "CopiesAvailable": 14,
         "Title": "Edith",
         "Author": "Knapp Vega",
@@ -137,7 +137,7 @@
         "Description": "Tempor cillum officia do fugiat voluptate ea veniam duis duis incididunt consequat. Ut laboris consectetur enim do ea nulla id. Et aliqua nulla Lorem reprehenderit. Dolor culpa nostrud incididunt velit pariatur.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image05.jpg",
         "CopiesAvailable": 2,
         "Title": "Carolyn",
         "Author": "Vega Clayton",
@@ -153,7 +153,7 @@
     "Type": 2,
     "Books": [
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image02.jpg",
         "CopiesAvailable": 19,
         "Title": "Pacheco",
         "Author": "Ladonna Davis",
@@ -163,7 +163,7 @@
         "Description": "Qui culpa dolore nulla nostrud incididunt ex consectetur commodo aliquip labore. Veniam proident ea aliqua officia laborum amet. Fugiat tempor anim cupidatat amet dolor voluptate Lorem.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image01.png",
         "CopiesAvailable": 19,
         "Title": "Susana",
         "Author": "Prince Thornton",
@@ -179,7 +179,7 @@
     "Type": 1,
     "Books": [
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image03.jpg",
         "CopiesAvailable": 15,
         "Title": "Hillary",
         "Author": "Carver Gentry",
@@ -189,7 +189,7 @@
         "Description": "Do nostrud Lorem dolore deserunt qui cillum amet. Sunt quis ex qui aliquip sint aute ullamco voluptate amet reprehenderit eu tempor. Et nostrud ex ut et fugiat ex do. Occaecat ut aliquip fugiat commodo.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image02.jpg",
         "CopiesAvailable": 11,
         "Title": "Santana",
         "Author": "Livingston Graves",
@@ -199,7 +199,7 @@
         "Description": "Eiusmod esse labore in sint sit anim tempor dolor cupidatat quis fugiat magna adipisicing pariatur. Do qui labore aute ex. Laborum mollit id nostrud tempor. Veniam irure esse tempor esse aliquip aute mollit. Anim nostrud reprehenderit proident quis pariatur sint id. Id pariatur id id consectetur ipsum laborum. Magna dolore excepteur mollit aliqua.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image04.jpg",
         "CopiesAvailable": 3,
         "Title": "Short",
         "Author": "Vargas Holder",
@@ -215,7 +215,7 @@
     "Type": 2,
     "Books": [
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image04.jpg",
         "CopiesAvailable": 19,
         "Title": "Abby",
         "Author": "Hanson Roth",
@@ -225,7 +225,7 @@
         "Description": "Consequat sint minim exercitation eiusmod pariatur aliqua eiusmod aliqua. Duis et esse sunt veniam duis adipisicing cupidatat adipisicing. Cillum irure reprehenderit dolore mollit minim veniam. Nisi velit deserunt sunt eu labore adipisicing irure consequat sunt sit. Non tempor cillum laborum reprehenderit ipsum elit et laborum amet in. Dolor et dolor eiusmod ad tempor. Nostrud nostrud ex veniam quis aliquip aliqua.\r\n"
       },
       {
-        "AvatarUrl": "http://placehold.it/32x32",
+        "AvatarUrl": "/images/image01.png",
         "CopiesAvailable": 11,
         "Title": "Muriel",
         "Author": "Lee Harmon",

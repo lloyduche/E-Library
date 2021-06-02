@@ -1,12 +1,10 @@
 ﻿using EBookLibrary.Client.Core.Implementations;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
-using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.ViewModels;
 using EBookLibrary.ViewModels.BookVMs;
-using Microsoft.AspNetCore.Http;
-using EBookLibrary.ViewModels.ReviewVMs;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using System;
@@ -24,6 +22,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin")]
         public IActionResult Add()
         {
             return View(new AddBook());
@@ -42,6 +41,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Add(AddBook model)
         {
             var response = await _book.Add(model);
@@ -53,6 +53,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBook(string id)
         {
             var data = await _book.GetBook(id);
@@ -109,7 +110,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                 BookPhoto = model.UploadPhotoVM.BookPhoto
             };
 
-           var response = await _book.UploadPhoto(uploadphotodtovm);
+            var response = await _book.UploadPhoto(uploadphotodtovm);
             if (response)
             {
                 return RedirectToAction("UpdateBook", new { id = model.Id });
@@ -124,7 +125,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Wrong Review Format");
-                return RedirectToAction("BookDetail", new {id = model.Id });
+                return RedirectToAction("BookDetail", new { id = model.Id });
             }
 
             var reviewdto = new AddReviewDto
@@ -141,8 +142,9 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                 return RedirectToAction("BookDetail", new { id = model.Id });
             }
 
-            return RedirectToAction("BookDetail", new { id=model.Id}) ;
+            return RedirectToAction("BookDetail", new { id = model.Id });
         }
+
         [HttpPost]
         public async Task<IActionResult> AddRating(GetBookDetailsResponseVM model)
         {
@@ -168,7 +170,5 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
 
             return RedirectToAction("BookDetail", new { id = model.Id });
         }
-
-   
     }
 }
