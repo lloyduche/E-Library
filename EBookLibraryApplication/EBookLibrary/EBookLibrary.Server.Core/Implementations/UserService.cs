@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EBookLibrary.Commons.ExceptionHandler;
 using EBookLibrary.Commons.Exceptions;
+using EBookLibrary.Commons.Helpers;
 using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.Commons;
@@ -47,6 +48,14 @@ namespace EBookLibrary.Server.Core.Implementations
             return true;
         }
 
+        public PagedResult<UserDTO> GetAllUsers()
+        {
+            var users = _userRepo.GetAll().Paginate(1, 5);
+            var RecentMappedResult = _mapper.Map<PagedResult<UserDTO>>(users); 
+            return RecentMappedResult;
+            
+        }
+
         public async Task<bool> UpdateUser(UpdateUserDto updateuserdto)
         {
             var checkuser = await _userManager.FindByIdAsync(updateuserdto.Id);
@@ -59,7 +68,6 @@ namespace EBookLibrary.Server.Core.Implementations
             checkuser.Gender = updateuserdto.Gender;
             checkuser.Email = updateuserdto.Email;
 
-            //_mapper.Map<UpdateUserDto, User>(updateuserdto);
 
             var result = await _userManager.UpdateAsync(checkuser);
 

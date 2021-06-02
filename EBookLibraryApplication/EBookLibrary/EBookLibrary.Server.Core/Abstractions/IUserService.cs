@@ -17,5 +17,7 @@ namespace EBookLibrary.Server.Core.Abstractions
         Task<Response<UserDTO>> GetUserByEmail(string Id);
 
         Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO);
+
+        PagedResult<UserDTO> GetAllUsers();
     }
 }

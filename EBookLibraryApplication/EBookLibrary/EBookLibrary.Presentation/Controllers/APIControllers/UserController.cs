@@ -20,6 +20,13 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             _mapper = mapper;
         }
 
+        [HttpGet("all-users")]
+        public IActionResult GetAllUser()
+        {
+            var user = _userservice.GetAllUsers();
+            return Ok(user);
+        }
+
         [HttpPut]
         [Route("update-user")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateuserdto)
@@ -40,9 +47,6 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         [Route("upload-photo")]
         public async Task<IActionResult> UploadPhoto([FromForm] PhotoUploadDTO model)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
             var response = await _userservice.UploadPhoto(model);
             return Ok(response);
         }
@@ -55,5 +59,6 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
             return Ok(result);
         }
+
     }
 }
