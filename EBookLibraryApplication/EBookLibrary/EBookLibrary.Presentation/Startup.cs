@@ -42,6 +42,7 @@ namespace EBookLibrary.Presentation
             services.AddIdentityConfigurations();
             services.AddServices(Configuration);
             services.AddDistributedMemoryCache();
+            services.AddHttpContextAccessor();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time

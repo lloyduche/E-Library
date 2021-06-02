@@ -47,7 +47,9 @@ namespace EBookLibrary.DataAccess.Implementations
         public IQueryable<Book> GetPaginatedBooks()
         {
             return _context.Books
-                .Include(book => book.Category).AsQueryable();
+                .Include(book => book.Category)
+                .Include(book => book.Ratings)
+                .AsQueryable();
         }
 
         public int GetTotalNumberOfBooks()
