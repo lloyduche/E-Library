@@ -13,5 +13,7 @@ namespace EBookLibrary.Client.Core.Abstractions
     {
         Task<ExpectedResponse<UserDashboardViewModel>> GetUserById(string Id);
         Task<PagedResult<AdminUserViewModel>> GetAllUser(SearchParametersViewModel model);
+
+        Task<ExpectedResponse<int>> GetUsersCount();
     }
 }

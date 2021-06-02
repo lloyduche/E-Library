@@ -111,5 +111,24 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             var result = _bookService.GetAllBooksPaginated(model);
             return Ok(result);
         }
+        
+        [HttpGet]
+        [Route("get-books-count")]
+        public ActionResult GetTotalNumberOfBooks()
+        {
+            var result = _bookService.GetTotalBooksCount();
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("get-reviews-count")]
+        public ActionResult GetTotalNumberOfReviews()
+        
+        {
+            var result = _bookService.GetTotalReviewsCount();
+
+            return Ok(result);
+        }
     }
 }

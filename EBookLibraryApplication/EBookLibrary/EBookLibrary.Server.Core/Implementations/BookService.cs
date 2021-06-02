@@ -241,5 +241,32 @@ namespace EBookLibrary.Server.Core.Implementations
             var result = _bookRepo.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(model.PageNumber, model.PageSize);
             return _mapper.Map<PagedResult<BookCardDTO>>(result);
         }
+
+        public Response<int> GetTotalBooksCount()
+        {
+            Response<int> response = new Response<int>();
+
+            var numOfBooks = _bookRepo.GetTotalNumberOfBooks();
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Data = numOfBooks;
+            response.Success = true;
+
+            return response;
+        }
+
+
+        public Response<int> GetTotalReviewsCount()
+        {
+            Response<int> response = new Response<int>();
+
+            var numOfReviews = _bookRepo.GetTotalNumberOfReviews();
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Data = numOfReviews;
+            response.Success = true;
+
+            return response;
+        }
     }
 }

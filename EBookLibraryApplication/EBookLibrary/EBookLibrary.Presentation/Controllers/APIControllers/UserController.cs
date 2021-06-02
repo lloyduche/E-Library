@@ -64,5 +64,14 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("get-users-count")]
+        public ActionResult GetTotalNumberOfUsers()
+        {
+            var result = _userservice.GetTotalNumberOfUsers();
+
+            return Ok(result);
+        }
     }
 }

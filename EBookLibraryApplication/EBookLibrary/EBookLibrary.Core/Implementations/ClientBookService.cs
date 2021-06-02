@@ -1,6 +1,5 @@
 ﻿using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.BookDTOs;
-using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Server.Core.Abstractions;
@@ -106,6 +105,16 @@ namespace EBookLibrary.Client.Core.Implementations
         public async Task<PagedResult<BookCardViewModel>> Search(SearchParametersViewModel1 model)
         {
             return await _httpClient.Create<PagedResult<BookCardViewModel>, SearchParametersViewModel1>("api/v1/book/search", model);
+        }
+
+        public async Task<ExpectedResponse<int>> GetReviewsCount()
+        {
+            return await _httpClient.Get<ExpectedResponse<int>>($"api/v1/book/get-reviews-count");
+        }
+
+        public async Task<ExpectedResponse<int>> GetBooksCount()
+        {
+            return await _httpClient.Get<ExpectedResponse<int>>($"api/v1/book/get-books-count");
         }
     }
 }

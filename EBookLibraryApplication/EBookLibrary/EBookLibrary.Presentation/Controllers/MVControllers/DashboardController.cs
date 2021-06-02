@@ -7,8 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using EBookLibrary.Client.Core;
 using EBookLibrary.Client.Core.Abstractions;
-using EBookLibrary.Client.Core.Implementations;
 using EBookLibrary.ViewModels;
+using EBookLibrary.Client.Core.Implementations;
 
 namespace EBookLibrary.Presentation.Controllers.MVControllers
 {
@@ -34,9 +34,22 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
 
             return View(user.Data);
         }
-        public IActionResult Admin()
+        public async Task<IActionResult> Admin()
         {
-            return View();
+            var totalNumOfUsers = await _userService.GetUsersCount();
+
+            var totalNumOfBooks = await _clientBookService.GetBooksCount();
+
+            var totalNumOfReviews = await _clientBookService.GetReviewsCount();
+
+            var adminDashboardViewModel = new AdminDashboardViewModel
+            {
+                RegisteredUsers = totalNumOfUsers.Data,
+                TotalBooks = totalNumOfBooks.Data,
+                RecommendedReviews = totalNumOfReviews.Data
+            };
+
+            return View(adminDashboardViewModel);
         }
 
         [HttpGet]
