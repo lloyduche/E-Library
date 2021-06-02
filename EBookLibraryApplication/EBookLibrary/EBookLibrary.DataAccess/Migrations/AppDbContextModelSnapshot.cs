@@ -27,7 +27,6 @@ namespace EBookLibrary.DataAccess.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("AvatarUrl")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CategoryId")
@@ -53,8 +52,9 @@ namespace EBookLibrary.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Pages")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Pages")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PublicId")
                         .ValueGeneratedOnAdd()
@@ -373,24 +373,28 @@ namespace EBookLibrary.DataAccess.Migrations
 
             modelBuilder.Entity("EBookLibrary.Models.Rating", b =>
                 {
-                    b.HasOne("EBookLibrary.Models.Book", null)
+                    b.HasOne("EBookLibrary.Models.Book", "Book")
                         .WithMany("Ratings")
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EBookLibrary.Models.User", null)
+                    b.HasOne("EBookLibrary.Models.User", "User")
                         .WithMany("Ratings")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EBookLibrary.Models.Review", b =>
                 {
-                    b.HasOne("EBookLibrary.Models.Book", null)
+                    b.HasOne("EBookLibrary.Models.Book", "Book")
                         .WithMany("Reviews")
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EBookLibrary.Models.User", null)
+                    b.HasOne("EBookLibrary.Models.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
