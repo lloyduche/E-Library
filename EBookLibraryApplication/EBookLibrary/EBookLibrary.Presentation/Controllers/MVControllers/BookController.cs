@@ -66,7 +66,24 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteBooks([FromForm] string bookid)
+        {
+            var data = await _book.DeleteBook(bookid);
+            return Redirect("/Dashboard/ManageBooks");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        [HttpPost]
         public async Task<IActionResult> UpdateBooks(UpdateBookViewModel model, string Id)
         {
             if (ModelState.IsValid)

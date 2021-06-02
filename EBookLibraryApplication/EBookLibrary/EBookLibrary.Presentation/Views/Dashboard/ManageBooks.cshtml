@@ -31,10 +31,15 @@
                             <td>@item.Category</td>
                             <td class="justify-content-end">
                                 <div class="btn-group" role="group" aria-label="">
+                                   
+                                        <a  asp-controller="Book" asp-action="UpdateBook" asp-route-id="@item.Id"><i class="fa fa-edit mr-2"></i></a>
+                                    
+                                        <form method="post" asp-action="DeleteBooks" asp-controller="Book">
+                                            <input type="hidden" name="bookid" value="@item.Id" />
+                                            <input type="submit" value="Submit">
+                                        </form>
 
-                                    <a class="btn btn-info" asp-action="UpdateBook" asp-controller="Book" asp-route-id="@item.Id"><i class="fa fa-edit mr-2"></i></a>
-                                    <a class="btn btn-danger " asp-action="" asp-controller=""><i class="fa fa-trash mr-2"></i></a>
-                                    <input type="hidden" asp-for="@item.Id" />
+
                                 </div>
                             </td>
                         </tr>}
