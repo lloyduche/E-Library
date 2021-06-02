@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -174,6 +176,19 @@ namespace EBookLibrary.Server.Core.Implementations
             response.Success = true;
 
             return response;
+        }
+
+        public async Task<IEnumerable<string>> GetUserByRole(string email)
+        {
+
+            var user = await _userManager.FindByEmailAsync(email);
+            
+            if(user == null)
+            {
+                throw new BadRequestException("User doesn't exist");
+            }
+            var userRole = await _userManager.GetRolesAsync(user);
+            return userRole.ToList();
         }
     }
 }

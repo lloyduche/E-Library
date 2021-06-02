@@ -8,6 +8,8 @@ using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Models;
 
+using System.Linq;
+
 namespace EBookLibrary.Commons.Profiles
 {
     public class UsersProfile : Profile
@@ -36,7 +38,10 @@ namespace EBookLibrary.Commons.Profiles
             CreateMap<Review, AddReviewResponseDto>();
             CreateMap<AddReviewResponseDto, Review>();
 
-            CreateMap<Book, BookCardDTO>().ReverseMap();
+            CreateMap<Book, BookCardDTO>()
+                .ForMember(dto => dto.Rating, book => book.MapFrom(book => book.Ratings.Average(c => c.Ratings)))
+                .ForMember(dto => dto.Category, book => book.MapFrom(book => book.Category.Name))
+            .ReverseMap();
 
             CreateMap<PagedResult<Book>, PagedResult<BookCardDTO>>()
                 .ForMember(book => book.Result, dto => dto.MapFrom(book => book.Result));
