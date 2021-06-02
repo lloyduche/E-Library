@@ -15,5 +15,9 @@ namespace EBookLibrary.DataAccess.Abstractions
         Task<Book> GetBookByCategory(string categoryid);
 
         IQueryable<Book> GetPaginatedBooks();
+
+        int GetTotalNumberOfBooks();
+
+        int GetTotalNumberOfReviews();
     }
 }

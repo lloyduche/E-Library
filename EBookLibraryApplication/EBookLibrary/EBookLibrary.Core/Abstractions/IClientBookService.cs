@@ -16,5 +16,9 @@ namespace EBookLibrary.Client.Core.Implementations
         Task<UpdateBookViewModel> GetBook(string Id);
 
         Task<HomePageViewModel> GetHomePageData(PagingParametersViewModel model);
+
+        Task<ExpectedResponse<int>> GetReviewsCount();
+
+        Task<ExpectedResponse<int>> GetBooksCount();
     }
 }

@@ -19,5 +19,6 @@ namespace EBookLibrary.Server.Core.Abstractions
 
         Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO);
 
+        Response<int> GetTotalNumberOfUsers();
     }
 }

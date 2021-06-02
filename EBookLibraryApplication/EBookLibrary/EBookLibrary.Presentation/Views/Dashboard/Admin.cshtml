@@ -1,6 +1,8 @@
-﻿@{ 
+﻿@{
     Layout = "_DashboardLayout";
- }
+}
+@model AdminDashboardViewModel
+
 
 <section>
     <div class="row col-12 mb-4 pb-4 d-flex justify-content-center">
@@ -12,12 +14,12 @@
                     User Accounts <i class="fa fa-2x fa-chart-line float-right"> </i>
                 </div>
 
-                <span class="num">10</span>
+                <span class="num">@Model.RegisteredUsers</span>
                 <h5>Registered Users</h5>
 
             </div>
-            
-            
+
+
         </div>
         <div class="card col-lg-3 col-sm-12 p-2 offset-lg-1 border-0 box-shadow myCard-Gradient2">
             <div class="card-body text-white">
@@ -25,7 +27,7 @@
                     Books   <i class="fa fa-2x fa-chart-pie float-right"> </i>
                 </div>
                 <span class="num">
-                    150
+                    @Model.TotalBooks
                 </span>
                 <h5>Total Books</h5>
             </div>
@@ -38,14 +40,14 @@
 
                 </div>
                 <span class="num ">
-                    30
+                    @Model.RecommendedReviews
                 </span>
                 <h5> Recommended Reviews</h5>
             </div>
         </div>
 
     </div>
-    
+
 </section>
 <section>
     <div class="row col-12 mt-2 d-flex justify-content-center">

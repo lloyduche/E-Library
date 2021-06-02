@@ -22,5 +22,7 @@ namespace EBookLibrary.DataAccess.Abstractions
         Task<T> Find(Expression<Func<T, bool>> expression);
 
         Task<PagedResult<T>> GetByPage(int pageNumber, int pageSize);
+
+        int GetCount();
     }
 }

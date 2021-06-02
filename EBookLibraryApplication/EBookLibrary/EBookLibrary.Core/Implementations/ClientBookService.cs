@@ -54,5 +54,15 @@ namespace EBookLibrary.Client.Core.Implementations
         {
             return await _httpClient.Create<HomePageViewModel, PagingParametersViewModel>("api/v1/book/homepagedata", model);
         }
+
+        public async Task<ExpectedResponse<int>> GetReviewsCount()
+        {
+            return await _httpClient.Get<ExpectedResponse<int>>($"api/v1/book/get-reviews-count");
+        }
+
+        public async Task<ExpectedResponse<int>> GetBooksCount()
+        {
+            return await _httpClient.Get<ExpectedResponse<int>>($"api/v1/book/get-books-count");
+        }
     }
 }

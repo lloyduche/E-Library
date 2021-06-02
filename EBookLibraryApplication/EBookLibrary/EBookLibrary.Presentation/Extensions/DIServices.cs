@@ -14,7 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using System;
-using EBookLibrary.Client.Core.Abstractions;
 
 
 namespace EBookLibrary.Presentation.DIServices

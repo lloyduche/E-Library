@@ -245,5 +245,32 @@ namespace EBookLibrary.Server.Core.Implementations
             dto.PagingParams = paging;
             return dto;
         }
+
+        public Response<int> GetTotalBooksCount()
+        {
+            Response<int> response = new Response<int>();
+
+            var numOfBooks = _bookRepo.GetTotalNumberOfBooks();
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Data = numOfBooks;
+            response.Success = true;
+
+            return response;
+        }
+
+
+        public Response<int> GetTotalReviewsCount()
+        {
+            Response<int> response = new Response<int>();
+
+            var numOfReviews = _bookRepo.GetTotalNumberOfReviews();
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Data = numOfReviews;
+            response.Success = true;
+
+            return response;
+        }
     }
 }

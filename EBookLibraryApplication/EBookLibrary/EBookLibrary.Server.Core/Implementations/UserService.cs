@@ -138,5 +138,16 @@ namespace EBookLibrary.Server.Core.Implementations
 
             return response;
         }
+
+        public Response<int> GetTotalNumberOfUsers()
+        {
+            Response<int> response = new Response<int>();
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Data = _userRepo.GetCount();
+            response.Success = true;
+
+            return response;
+        }
     }
 }
