@@ -36,5 +36,16 @@ namespace EBookLibrary.Client.Core.Implementations
         {
             return await _httpClient.Get<ExpectedResponse<int>>($"api/v1/user/get-users-count");
         }
+
+
+        public async Task<bool> DeleteUser(string id)
+        {
+            var data = await _httpClient.Delete($"api/v1/User/delete-user/{id}");
+            return data;
+
+        }
+
+
+
     }
 }

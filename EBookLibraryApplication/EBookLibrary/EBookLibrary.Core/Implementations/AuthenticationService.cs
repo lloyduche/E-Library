@@ -1,4 +1,5 @@
 ﻿using EBookLibrary.Client.Core.Abstractions;
+using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Server.Core.Abstractions;
 using EBookLibrary.ViewModels.Common;
 using EBookLibrary.ViewModels.UserVMs;
@@ -74,9 +75,11 @@ namespace EBookLibrary.Client.Core.Implementations
             return response;
         }
 
-        public async Task<ExpectedResponse<string>> Login(LoginViewModel model)
+        public async Task<ExpectedResponse<LoginResponseVM>> Login(LoginViewModel model)
         {
-            return await _httpClient.Create<ExpectedResponse<string>, LoginViewModel>("api/v1/Auth/login", model);
+            var response = await _httpClient.Create<ExpectedResponse<LoginResponseVM>, LoginViewModel>("api/v1/Auth/login", model);
+           
+            return response;
         }
         
         public async Task<bool> DeleteUser(string Id)
