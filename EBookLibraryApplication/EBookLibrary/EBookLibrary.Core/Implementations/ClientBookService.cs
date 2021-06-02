@@ -32,6 +32,18 @@ namespace EBookLibrary.Client.Core.Implementations
             return data;
         }
 
+
+        public async Task<bool> DeleteBook(string bookid)
+        {
+            var data= await _httpClient.Delete($"api/v1/Book/delete/{bookid}");
+            return data;
+            
+        }
+
+
+
+
+
         public async Task<BookResponse> UpdateBook(UpdateBookViewModel model, string Id)
         {
             BookResponse response = new BookResponse();
