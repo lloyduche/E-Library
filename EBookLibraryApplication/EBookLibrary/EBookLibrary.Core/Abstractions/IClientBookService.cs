@@ -16,5 +16,7 @@ namespace EBookLibrary.Client.Core.Implementations
         Task<UpdateBookViewModel> GetBook(string Id);
 
         Task<HomePageViewModel> GetHomePageData(PagingParametersViewModel model);
+
+        Task<bool> UploadPhoto(UploadPhotoVM model);
     }
 }

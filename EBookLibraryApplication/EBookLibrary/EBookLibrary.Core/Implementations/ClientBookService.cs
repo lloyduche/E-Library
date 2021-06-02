@@ -1,4 +1,5 @@
-﻿using EBookLibrary.Server.Core.Abstractions;
+﻿using EBookLibrary.DTOs.BookDTOs;
+using EBookLibrary.Server.Core.Abstractions;
 using EBookLibrary.ViewModels;
 using EBookLibrary.ViewModels.BookVMs;
 using EBookLibrary.ViewModels.Common;
@@ -53,6 +54,24 @@ namespace EBookLibrary.Client.Core.Implementations
         public async Task<HomePageViewModel> GetHomePageData(PagingParametersViewModel model)
         {
             return await _httpClient.Create<HomePageViewModel, PagingParametersViewModel>("api/v1/book/homepagedata", model);
+        }
+
+
+        public async Task<bool> UploadPhoto(UploadPhotoVM model)
+        {
+            var data = await _httpClient.UploadPhoto<ExpectedResponse<string>>($"api/v1/book/uploadphoto/{model.BookId}", model.BookPhoto);
+
+            if(data.Success)
+            {
+
+                return true;
+            }
+
+            
+            return false;
+
+
+
         }
     }
 }
