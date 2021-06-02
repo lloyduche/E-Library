@@ -33,6 +33,10 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         public async Task<IActionResult> BookDetail(string id)
         {
             var response = await _book.GetBook(id);
+            if (!response.Success)
+            {
+                return RedirectToAction("ErrorHandler", "Error", new { statusCode = response.StatusCode});
+            }
             /*if (response.Success is true)
             {
                 return View(response.data);

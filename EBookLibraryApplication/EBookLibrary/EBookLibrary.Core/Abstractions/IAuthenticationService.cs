@@ -14,7 +14,7 @@ namespace EBookLibrary.Client.Core.Abstractions
 
         Task<RegistrationResponse> ResetPassword(PasswordResetViewModel model);
 
-        Task<ExpectedResponse<string>> Login(LoginViewModel model);
+        Task<ExpectedResponse<LoginResponseVM>> Login(LoginViewModel model);
 
         Task<bool> DeleteUser(string Id);
     }

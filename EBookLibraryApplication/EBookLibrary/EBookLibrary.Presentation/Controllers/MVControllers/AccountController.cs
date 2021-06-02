@@ -107,8 +107,8 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             var response = await _auth.Login(model);
             if (response.Success)
             {
-                HttpContext.Session.SetString("access_token", response.Data);
-                return RedirectToAction("Index","Dashboard", new {Id = "6f07f58e-d3af-465f-8a75-62786e8179a3" });
+                HttpContext.Session.SetString("access_token", response.Data.Token);
+                return RedirectToAction("Index","Dashboard", new {Id = response.Data.UserId});
             }
             ModelState.AddModelError("", response.Message);
             return View(model);
