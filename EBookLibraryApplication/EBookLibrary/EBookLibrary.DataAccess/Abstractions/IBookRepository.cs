@@ -15,5 +15,9 @@ namespace EBookLibrary.DataAccess.Abstractions
         IQueryable<Book> GetPaginatedBooks();
 
         IQueryable<Book> GetFilteredBooks(string query);
+
+        int GetTotalNumberOfBooks();
+
+        int GetTotalNumberOfReviews();
     }
 }

@@ -18,5 +18,7 @@ namespace EBookLibrary.Server.Core.Abstractions
 
         Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO);
         PagedResult<AdminUserDTO> GetAllUser(SearchPagingParametersDTO model);
+
+        Response<int> GetTotalNumberOfUsers();
     }
 }

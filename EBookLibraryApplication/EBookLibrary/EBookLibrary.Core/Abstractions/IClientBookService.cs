@@ -1,7 +1,6 @@
 ﻿using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.DTOs;
-using EBookLibrary.DTOs;
 using EBookLibrary.ViewModels;
 using EBookLibrary.ViewModels.BookVMs;
 using EBookLibrary.ViewModels.Common;
@@ -28,5 +27,9 @@ namespace EBookLibrary.Client.Core.Implementations
         Task<bool> AddRating(AddRatingDto model);
 
         Task<PagedResult<BookCardViewModel>> Search(SearchParametersViewModel1 model);
+
+        Task<ExpectedResponse<int>> GetReviewsCount();
+
+        Task<ExpectedResponse<int>> GetBooksCount();
     }
 }

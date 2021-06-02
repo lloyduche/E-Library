@@ -227,7 +227,7 @@ namespace EBookLibrary.Server.Core.Implementations
         {
             var RecentResult = _bookRepo.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostRecent, paging.PageSize);
             var RecentMappedResult = _mapper.Map<PagedResult<BookCardDTO>>(RecentResult);
-            var popularResult = _bookRepository.GetAll().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostPopular, paging.PageSize);
+            var popularResult = _bookRepository.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostPopular, paging.PageSize);
             var PopularMappedResult = _mapper.Map<PagedResult<BookCardDTO>>(popularResult);
             HomePageDTO dto = new HomePageDTO();
             dto.MostPopular = PopularMappedResult;
@@ -240,6 +240,33 @@ namespace EBookLibrary.Server.Core.Implementations
         {
             var result = _bookRepo.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(model.PageNumber, model.PageSize);
             return _mapper.Map<PagedResult<BookCardDTO>>(result);
+        }
+
+        public Response<int> GetTotalBooksCount()
+        {
+            Response<int> response = new Response<int>();
+
+            var numOfBooks = _bookRepo.GetTotalNumberOfBooks();
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Data = numOfBooks;
+            response.Success = true;
+
+            return response;
+        }
+
+
+        public Response<int> GetTotalReviewsCount()
+        {
+            Response<int> response = new Response<int>();
+
+            var numOfReviews = _bookRepo.GetTotalNumberOfReviews();
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Data = numOfReviews;
+            response.Success = true;
+
+            return response;
         }
     }
 }

@@ -32,5 +32,9 @@ namespace EBookLibrary.Server.Core.Abstractions
         HomePageDTO GetHomePageData(HomePageFetchData paging);
 
         PagedResult<BookCardDTO> GetAllBooksPaginated(SearchPagingParametersDTO model);
+
+        Response<int> GetTotalBooksCount();
+
+        Response<int> GetTotalReviewsCount();
     }
 }

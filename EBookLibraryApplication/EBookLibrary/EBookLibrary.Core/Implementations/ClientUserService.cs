@@ -31,5 +31,10 @@ namespace EBookLibrary.Client.Core.Implementations
            return await _httpClient.Get<ExpectedResponse<UserDashboardViewModel>>($"api/v1/user/get-user/{Id}");
 
         }
+
+        public async Task<ExpectedResponse<int>> GetUsersCount()
+        {
+            return await _httpClient.Get<ExpectedResponse<int>>($"api/v1/user/get-users-count");
+        }
     }
 }

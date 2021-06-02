@@ -6,6 +6,7 @@ using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
+    [Authorize]
     public class BookController : BaseAPIController
     {
         private readonly IBookServices _bookService;
@@ -26,6 +28,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPost]
         [Route("add-book")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddBook([FromBody] AddBookDto addBookDto)
         {
             var response = await _bookService.AddBook(addBookDto);
@@ -34,6 +37,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPatch]
         [Route("update-book/{Id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBook(UpdateBookDto updatebookdto, string Id)
         {
             await _bookService.UpdateBook(updatebookdto, Id);
@@ -42,6 +46,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpDelete]
         [Route("delete")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteBook([FromBody] string bookid)
         {
             await _bookService.DeleteBook(bookid);
@@ -49,6 +54,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<PagedResult<Book>> GetAllBooks(int pageNumber, int numberToReturn)
         {
             return await _bookRepo.GetByPage(pageNumber, numberToReturn);
@@ -91,6 +97,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpGet]
         [Route("get-book-by-id/{Id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetBook(string Id)
         {
             var response = await _bookService.FindBook(Id);
@@ -99,6 +106,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPost]
         [Route("homepagedata")]
+        [AllowAnonymous]
         public HomePageDTO GetAllBooksPaginated(HomePageFetchData data)
         {
             return _bookService.GetHomePageData(data);
@@ -109,6 +117,25 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         public ActionResult<PagedResult<BookCardDTO>> GetBooks(SearchPagingParametersDTO model)
         {
             var result = _bookService.GetAllBooksPaginated(model);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("get-books-count")]
+        public ActionResult GetTotalNumberOfBooks()
+        {
+            var result = _bookService.GetTotalBooksCount();
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("get-reviews-count")]
+        public ActionResult GetTotalNumberOfReviews()
+
+        {
+            var result = _bookService.GetTotalReviewsCount();
+
             return Ok(result);
         }
     }

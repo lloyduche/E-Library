@@ -3,6 +3,7 @@ using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Server.Core.Abstractions;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using System;
@@ -10,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
+    [Authorize]
     public class UserController : BaseAPIController
     {
         private readonly IUserService _userservice;
 
         private readonly IMapper _mapper;
+
         public UserController(IUserService userservice, IMapper mapper)
         {
             _userservice = userservice;
@@ -31,6 +34,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpDelete]
         [Route("delete-user/{Id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(string Id)
         {
             await _userservice.DeleteUser(Id);
@@ -61,6 +65,15 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         public IActionResult GetAllUser(SearchPagingParametersDTO model)
         {
             var result = _userservice.GetAllUser(model);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("get-users-count")]
+        public ActionResult GetTotalNumberOfUsers()
+        {
+            var result = _userservice.GetTotalNumberOfUsers();
 
             return Ok(result);
         }
