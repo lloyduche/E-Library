@@ -1,5 +1,7 @@
 ﻿using EBookLibrary.Client.Core.Implementations;
+using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.ViewModels.BookVMs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -53,6 +55,27 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                     return View("successReg");
                 }
             }
+            return BadRequest();
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePhoto(UpdateBookViewModel model)
+        {
+            var uploadphotodtovm = new UploadPhotoVM
+            {
+                BookId = model.Id,
+                BookPhoto = model.UploadPhotoVM.BookPhoto
+
+            };
+
+           var response = await _book.UploadPhoto(uploadphotodtovm);
+            if (response)
+            {
+                return RedirectToAction("UpdateBook", new { id = model.Id });
+            }
+
             return BadRequest();
 
         }
