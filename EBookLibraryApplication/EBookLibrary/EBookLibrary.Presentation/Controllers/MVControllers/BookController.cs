@@ -41,7 +41,8 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                 return View(response.data);
             }
             return BadRequest();*/
-            return View(response);
+           
+            return View(response.Data);
         }
 
         [HttpPost]
@@ -119,7 +120,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             {
                 Comment = model.AddReviewVM.Comment,
                 BookId = model.Id,
-                UserId = "626751aa-e8ce-44e6-b4de-0d4f95010c37"
+                UserId = "49e71d58-019e-458e-9250-4ad3990f9f82"
             };
 
             var res = await _book.AddReview(reviewdto);
