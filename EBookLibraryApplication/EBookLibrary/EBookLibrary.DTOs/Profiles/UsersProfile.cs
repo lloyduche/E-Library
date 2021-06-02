@@ -41,6 +41,10 @@ namespace EBookLibrary.Commons.Profiles
             CreateMap<PagedResult<Book>, PagedResult<BookCardDTO>>()
                 .ForMember(book => book.Result, dto => dto.MapFrom(book => book.Result));
 
+            CreateMap<User, AdminUserDTO>().ReverseMap();
+            CreateMap<PagedResult<User>, PagedResult<AdminUserDTO>>()
+                .ForMember(user => user.Result, dto => dto.MapFrom(user => user.Result));
+
             CreateMap<Book, AddBookResponseDto>();
             CreateMap<User, RegisterDTO>().ReverseMap();
             CreateMap<UpdateUserDto, User>().ReverseMap();
@@ -50,6 +54,9 @@ namespace EBookLibrary.Commons.Profiles
                 .ForMember(book => book.Reviews, findBook => findBook.MapFrom(book => book.Reviews))
                 .ForMember(book => book.Ratings, findBook => findBook.MapFrom(book => book.Ratings))
                 .ForMember(book => book.Category, findBook => findBook.MapFrom(book => book.Category.Name));
+
+            CreateMap<Book, FindBookBySearchDTO>().ReverseMap();
+
         }
     }
 }

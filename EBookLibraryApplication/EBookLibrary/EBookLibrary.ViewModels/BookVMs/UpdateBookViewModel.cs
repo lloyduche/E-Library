@@ -1,4 +1,5 @@
 ﻿using EBookLibrary.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,6 +39,8 @@ namespace EBookLibrary.ViewModels.BookVMs
         public string Category { get; set; }
 
         public DateTime DatePublished { get; set; }
+
+        public UploadPhotoVM UploadPhotoVM { get; set; }
 
     }
 }

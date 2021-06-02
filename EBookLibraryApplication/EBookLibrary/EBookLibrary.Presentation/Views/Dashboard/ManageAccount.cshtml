@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "_DashBoardLayout";
+
+}
+@model EBookLibrary.DTOs.PagedResult<AdminUserViewModel> 
+
+<div class="d-flex flex-row justify-content-around">
+    <div class="col-lg-6 col-sm-6 p-sm-0 myCard-search">
+        <div class="input-group text-center mb-3 box-shadow ">
+            <input type="text" class="form-control"  placeholder="Search For User..." aria-label="Recipient's username" aria-describedby="basic-addon3">
+            <input type="submit" class="input-group-text bg-primary pl-lg-4 pr-lg-4 " style="color:aliceblue;" id="basic-addon3" value="Search" />
+        </div>
+    </div>
+</div>
+
+
+<div class="d-flex flex-row justify-content-around">
+
+    <div class="card col-lg-9 box-shadow border-0 p-4">
+
+        <div class="card-header border-0">
+            <h5>
+                List Of Users
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+            <table class="table table-borderless table-hover p-2">
+                <thead>
+                    <tr>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.Result)
+                    {
+                        <tr>
+                            <td>@item.FirstName @item.LastName</td>
+                            <td>@item.Email</td>
+                            <td class="justify-content-end">
+                                <div class="btn-group" role="group" aria-label="">
+                                    <a class="btn btn-danger " asp-action="Delete" asp-controller="Account" asp-route-id="@item.Id"><i class="fa fa-trash mr-2"></i></a>
+                                    <input type="hidden" asp-for="@item.Id" />
+                                </div>
+                            </td>
+                        </tr>
+                      }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+
+                            <div class="btn-group-lg">
+                                <a class="btn-sm btn-primary" asp-route-pageSize="@Model.PageSize" asp-route-pagenumber="@Model.PreviousPage" aria-current="page"><i class="fa fa-angle-double-left"></i> Prev</a>
+                                <a class="btn-sm btn-primary" asp-route-pageSize="@Model.PageSize" asp-route-pagenumber="@Model.NextPage"><i class="fa fa-angle-double-right"></i>Next</a>
+                            </div>
+                        </td>
+                        <td>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+

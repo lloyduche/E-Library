@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EBookLibrary.Commons.ExceptionHandler;
 using EBookLibrary.Commons.Exceptions;
+using EBookLibrary.Commons.Helpers;
 using EBookLibrary.DataAccess.Abstractions;
 using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.Commons;
@@ -138,6 +139,24 @@ namespace EBookLibrary.Server.Core.Implementations
 
             return response;
         }
+
+        public PagedResult<AdminUserDTO> GetAllUser(SearchPagingParametersDTO model)
+        {
+            var user = _userManager.Users.Paginate(model.PageNumber,model.PageSize);
+
+            if (user == null)
+            {
+                throw new NotFoundException("User does not exist");
+            }
+
+            var mappedUser = _mapper.Map<PagedResult<AdminUserDTO>>(user);
+
+           
+
+            return mappedUser;
+        }
+
+     
 
         public Response<int> GetTotalNumberOfUsers()
         {

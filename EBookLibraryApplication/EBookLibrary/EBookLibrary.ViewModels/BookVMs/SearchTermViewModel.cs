@@ -6,6 +6,7 @@ namespace EBookLibrary.ViewModels.BookVMs
 {
     public class SearchTermViewModel
     {
+        public string Category { get; set; }
         public string ISBN { get; set; }
 
         public string Title { get; set; }

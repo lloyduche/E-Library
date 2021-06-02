@@ -20,6 +20,12 @@ namespace EBookLibrary.Client.Core.Implementations
             _httpClient = serviceProvider.GetRequiredService<IAppHttpClient>();
         }
 
+        public async Task<PagedResult<AdminUserViewModel>> GetAllUser(SearchParametersViewModel model)
+        {
+            return await _httpClient.Create<PagedResult<AdminUserViewModel>, SearchParametersViewModel>($"api/v1/user/get-all-user", model);
+            
+        }
+
         public async Task<ExpectedResponse<UserDashboardViewModel>> GetUserById(string Id)
         {
            return await _httpClient.Get<ExpectedResponse<UserDashboardViewModel>>($"api/v1/user/get-user/{Id}");

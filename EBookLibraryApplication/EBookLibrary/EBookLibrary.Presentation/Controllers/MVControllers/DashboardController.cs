@@ -15,16 +15,17 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
     public class DashboardController : Controller
     {
         private readonly IClientUserService _userService;
-        private readonly IClientBookService _bookService;
+        private readonly IClientBookService _clientBookService;
 
-        public DashboardController(IClientUserService userService, IClientBookService bookService)
+        public DashboardController(IClientUserService userService,IClientBookService clientBookService)
         {
             _userService = userService;
-            _bookService = bookService;
+            _clientBookService = clientBookService;
+            
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id)
         {
-            var user = await _userService.GetUserById("");
+            var user = await _userService.GetUserById(id);
 
             if(user.Data.AvatarUrl == null)
             {
@@ -49,6 +50,31 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             };
 
             return View(adminDashboardViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ManageAccount(int PageNumber = 1, int PageSize = 5)
+        {
+            var model = new SearchParametersViewModel
+            {
+                PageNumber = PageNumber,
+                PageSize = PageSize
+            };
+            var myUsers = await _userService.GetAllUser(model);
+
+            return View(myUsers);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ManageBooks(int PageNumber =1, int PageSize = 5)
+        {
+            var model = new SearchParametersViewModel
+            {
+                PageNumber =PageNumber,
+                PageSize = PageSize
+            };
+            var myBook = await  _clientBookService.Books(model);
+            return View(myBook);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace EBookLibrary.Client.Core.Abstractions
 {
     public interface IAuthenticationService
     {
-        Task<bool> Update(UpdateViewModel model);
+        Task<bool> UpdateUser(UpdateViewModel model);
         Task<RegistrationResponse> Register(RegisterationViewModel model);
 
         Task<RegistrationResponse> ForgotPassword(ForgotPasswordViewModel model);
@@ -15,5 +15,7 @@ namespace EBookLibrary.Client.Core.Abstractions
         Task<RegistrationResponse> ResetPassword(PasswordResetViewModel model);
 
         Task<ExpectedResponse<string>> Login(LoginViewModel model);
+
+        Task<bool> DeleteUser(string Id);
     }
 }

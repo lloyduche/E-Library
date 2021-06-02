@@ -12,12 +12,12 @@ namespace EBookLibrary.Server.Core.Abstractions
 
         Task<bool> DeleteUser(string Id);
 
-
         Task<Response<UserDTO>> GetUserById(string Id);
 
         Task<Response<UserDTO>> GetUserByEmail(string Id);
 
         Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO);
+        PagedResult<AdminUserDTO> GetAllUser(SearchPagingParametersDTO model);
 
         Response<int> GetTotalNumberOfUsers();
     }
