@@ -247,5 +247,11 @@ namespace EBookLibrary.Server.Core.Implementations
             dto.PagingParams = paging;
             return dto;
         }
+
+        public PagedResult<BookCardDTO> GetAllBooksPaginated(SearchPagingParametersDTO model)
+        {
+            var result = _bookRepo.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(model.PageNumber, model.PageSize);
+            return _mapper.Map<PagedResult<BookCardDTO>>(result);
+        }
     }
 }
