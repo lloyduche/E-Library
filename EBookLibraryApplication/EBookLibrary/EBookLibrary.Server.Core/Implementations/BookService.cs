@@ -13,11 +13,11 @@ using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -47,7 +47,7 @@ namespace EBookLibrary.Server.Core.Implementations
             _userManager = userManager;
         }
 
-         public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
+        public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
         {
             Response<AddBookResponseDto> response = new Response<AddBookResponseDto>();
 
@@ -61,7 +61,7 @@ namespace EBookLibrary.Server.Core.Implementations
             var book = _mapper.Map<AddBookDto, Book>(addbookdto);
 
             //Add book to database
-             await _bookRepository.Insert(book);
+            await _bookRepository.Insert(book);
 
             //construct response
             var addbookresponsedto = _mapper.Map<AddBookResponseDto>(book);
@@ -109,24 +109,22 @@ namespace EBookLibrary.Server.Core.Implementations
             return await _bookRepository.Delete(bookToDelete);
         }
 
-        public async Task<Response<string>> UploadPhoto(UploadPhotoDto uploadphotodto)
+        public async Task<Response<string>> UploadPhoto(IFormFile image, string Id)
         {
-           
             Response<string> response = new Response<string>();
             UploadAvatarResponse uploadAvatarResponse = new UploadAvatarResponse();
-            var file = uploadphotodto.BookPhoto;
-            if (file == null)
+            if (image == null)
             {
                 throw new BadRequestException("Invalid Photo");
             }
 
-            var book = await _bookRepository.Get(uploadphotodto.BookId);
+            var book = await _bookRepository.Get(Id);
             if (book == null)
             {
                 throw new BadRequestException("Something went wrong");
             }
 
-            uploadAvatarResponse = _fileUpload.UploadAvatar(file);
+            uploadAvatarResponse = _fileUpload.UploadAvatar(image);
 
             book.AvatarUrl = uploadAvatarResponse.AvatarUrl;
             book.PublicId = uploadAvatarResponse.PublicId;
@@ -152,7 +150,7 @@ namespace EBookLibrary.Server.Core.Implementations
             }
 
             Response<AddRatingResponseDto> response = new Response<AddRatingResponseDto>();
-            var rating = _mapper.Map<AddRatingDto,Rating>(addratingdto);
+            var rating = _mapper.Map<AddRatingDto, Rating>(addratingdto);
 
             var result = await _ratingRepository.Insert(rating);
             if (!result)
@@ -218,21 +216,11 @@ namespace EBookLibrary.Server.Core.Implementations
             return response;
         }
 
-        public async Task<Response<IReadOnlyList<FindBookBySearchDTO>>> GetAllBooksWhere(SearchTermDto term)
+        public PagedResult<BookCardDTO> Search(SearchParametersDTO1 model)
         {
-            Response<IReadOnlyList<FindBookBySearchDTO>> response = new Response<IReadOnlyList<FindBookBySearchDTO>>();
-            var book = await _bookRepository.GetAllBooksWhere(term);
-            if (book == null)
-                throw new NotFoundException("Not available");
-
-            var books = _mapper.Map<IReadOnlyList<FindBookBySearchDTO>>(book);
-
-            response.StatusCode = (int)HttpStatusCode.OK;
-            response.Message = "Search Successful";
-            response.Success = true;
-            response.Data = books;
-
-            return response;
+            var books = _bookRepo.GetFilteredBooks(model.Query).Paginate(model.PageNumber, model.PageSize);
+            var mappedBooks = _mapper.Map<PagedResult<BookCardDTO>>(books);
+            return mappedBooks;
         }
 
         public HomePageDTO GetHomePageData(HomePageFetchData paging)
