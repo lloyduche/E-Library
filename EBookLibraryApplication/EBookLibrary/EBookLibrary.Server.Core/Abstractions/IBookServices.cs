@@ -3,6 +3,7 @@ using EBookLibrary.DTOs.BookDtos;
 using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace EBookLibrary.Server.Core.Abstractions
 
         Task<bool> DeleteBook(string bookid);
 
-        Task<Response<string>> UploadPhoto(UploadPhotoDto uploadphotodto);
+        Task<Response<string>> UploadPhoto(IFormFile image, string Id);
 
         Task<Response<AddRatingResponseDto>> AddRating(AddRatingDto addratingdto);
 
@@ -26,5 +27,7 @@ namespace EBookLibrary.Server.Core.Abstractions
         Task<Response<FindBookDto>> FindBook(string Id);
 
         HomePageDTO GetHomePageData(HomePageFetchData paging);
+        PagedResult<BookCardDTO> GetAllBooksPaginated(SearchPagingParametersDTO model);
+
     }
 }

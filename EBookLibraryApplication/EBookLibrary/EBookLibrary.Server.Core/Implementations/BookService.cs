@@ -12,7 +12,7 @@ using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
-
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -109,24 +109,23 @@ namespace EBookLibrary.Server.Core.Implementations
             return await _bookRepository.Delete(bookToDelete);
         }
 
-        public async Task<Response<string>> UploadPhoto(UploadPhotoDto uploadphotodto)
+        public async Task<Response<string>> UploadPhoto(IFormFile image, string Id)
         {
            
             Response<string> response = new Response<string>();
             UploadAvatarResponse uploadAvatarResponse = new UploadAvatarResponse();
-            var file = uploadphotodto.BookPhoto;
-            if (file == null)
+            if (image == null)
             {
                 throw new BadRequestException("Invalid Photo");
             }
 
-            var book = await _bookRepository.Get(uploadphotodto.BookId);
+            var book = await _bookRepository.Get(Id);
             if (book == null)
             {
                 throw new BadRequestException("Something went wrong");
             }
 
-            uploadAvatarResponse = _fileUpload.UploadAvatar(file);
+            uploadAvatarResponse = _fileUpload.UploadAvatar(image);
 
             book.AvatarUrl = uploadAvatarResponse.AvatarUrl;
             book.PublicId = uploadAvatarResponse.PublicId;
@@ -246,6 +245,12 @@ namespace EBookLibrary.Server.Core.Implementations
             dto.Recent = RecentMappedResult;
             dto.PagingParams = paging;
             return dto;
+        }
+
+        public PagedResult<BookCardDTO> GetAllBooksPaginated(SearchPagingParametersDTO model)
+        {
+            var result = _bookRepo.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(model.PageNumber, model.PageSize);
+            return _mapper.Map<PagedResult<BookCardDTO>>(result);
         }
     }
 }
