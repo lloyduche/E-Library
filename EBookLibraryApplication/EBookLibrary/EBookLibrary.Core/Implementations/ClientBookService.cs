@@ -1,4 +1,5 @@
-﻿using EBookLibrary.DTOs.BookDTOs;
+﻿using EBookLibrary.DTOs;
+using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
@@ -51,7 +52,7 @@ namespace EBookLibrary.Client.Core.Implementations
         public async Task<GetBookDetailsResponseVM> GetBook(string Id)
         {
             var data = await _httpClient.Get<ExpectedResponse<GetBookDetailsResponseVM>>($"api/v1/book/get-book-by-id/{Id}");
-            
+
             return data.Data;
         }
 
@@ -62,8 +63,6 @@ namespace EBookLibrary.Client.Core.Implementations
 
         public async Task<bool> AddReview(AddReviewDto model)
         {
-
-            
             var res = await _httpClient.Create<ExpectedResponse<AddReviewResponseVM>, AddReviewDto>("api/v1/book/add-review", model);
 
             if (res.Success)
@@ -76,8 +75,6 @@ namespace EBookLibrary.Client.Core.Implementations
 
         public async Task<bool> AddRating(AddRatingDto model)
         {
-
-
             var res = await _httpClient.Create<ExpectedResponse<AddRatingResponseVM>, AddRatingDto>("api/v1/book/add-rating", model);
 
             if (res.Success)
@@ -88,14 +85,11 @@ namespace EBookLibrary.Client.Core.Implementations
             return false;
         }
 
-
-
         public async Task<PagedResult<BookCardViewModel>> Books(SearchParametersViewModel model)
         {
             var resp = await _httpClient.Create<PagedResult<BookCardViewModel>, SearchParametersViewModel>("api/v1/book/get-books-paginated", model);
             return resp;
         }
-
 
         public async Task<bool> UploadPhoto(UploadPhotoVM model)
         {
@@ -103,15 +97,15 @@ namespace EBookLibrary.Client.Core.Implementations
 
             if(data.Success)
             {
-
                 return true;
             }
 
-            
             return false;
+        }
 
-
-
+        public async Task<PagedResult<BookCardViewModel>> Search(SearchParametersViewModel1 model)
+        {
+            return await _httpClient.Create<PagedResult<BookCardViewModel>, SearchParametersViewModel1>("api/v1/book/search", model);
         }
     }
 }

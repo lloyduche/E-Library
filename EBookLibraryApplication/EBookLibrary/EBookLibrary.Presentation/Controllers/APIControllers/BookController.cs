@@ -5,9 +5,10 @@ using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
+
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
@@ -54,13 +55,6 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpPost]
-        [Route("search")]
-        public async Task<IActionResult> Search(SearchTermDto term)
-        {
-            var response = await _bookService.GetAllBooksWhere(term);
-            return Ok(response);
-        }
-        [HttpPost]
         [Route("add-rating")]
         public async Task<IActionResult> RateBook([FromBody] AddRatingDto addratingdto)
         {
@@ -78,10 +72,21 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPost]
         [Route("uploadphoto/{Id}")]
-        public async Task<IActionResult> UploadPhoto(string Id, [FromForm]IFormFile image)
+        public async Task<IActionResult> UploadPhoto(string Id, [FromForm] IFormFile image)
         {
             var response = await _bookService.UploadPhoto(image, Id);
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("search")]
+        public IActionResult SearchBooks(SearchParametersDTO1 model)
+        {
+            if (model.PageNumber == 0) model.PageNumber++;
+            if (model.PageSize == 0) model.PageSize = 15;
+            if (string.IsNullOrEmpty(model.Query)) return Redirect("/");
+            var response = _bookService.Search(model);
+            return Ok(response);
         }
 
         [HttpGet]
@@ -103,7 +108,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         [Route("get-books-paginated")]
         public ActionResult<PagedResult<BookCardDTO>> GetBooks(SearchPagingParametersDTO model)
         {
-            var result =  _bookService.GetAllBooksPaginated(model);
+            var result = _bookService.GetAllBooksPaginated(model);
             return Ok(result);
         }
     }

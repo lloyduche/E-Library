@@ -1,11 +1,9 @@
 ﻿using EBookLibrary.DataAccess.Abstractions;
-using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.Models;
 
 using Microsoft.EntityFrameworkCore;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,13 +29,14 @@ namespace EBookLibrary.DataAccess.Implementations
                 .FirstOrDefaultAsync(book => book.Id == Id);
         }
 
-        public async Task<IReadOnlyList<Book>> GetAllBooksWhere(SearchTermDto search)
+        public IQueryable<Book> GetFilteredBooks(string query)
         {
-            return await _context.Books.Include(book => book.Category).Where(b =>
-            b.Author.Contains(search.Author)
-            || b.Category.Name.Contains(search.Category)
-            || b.Title.Contains(search.Title)
-            || b.Isbn.Contains(search.ISBN)).ToListAsync();
+            var res = _context.Books.Where(x => EF.Functions.Like(x.Title, $"%{query}%")
+                               || EF.Functions.Like(x.Isbn, $"%{query}%")
+                               || EF.Functions.Like(x.Author, $"%{query}%")
+                               || EF.Functions.Like(x.Description, $"%{query}%"))
+                                .AsQueryable();
+            return res;
         }
 
         public async Task<Book> GetBookByCategory(string categoryid)
