@@ -1,19 +1,19 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿using EBookLibrary.DTOs.Commons;
 using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Server.Core.Abstractions;
-using EBookLibrary.DTOs.Commons;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+using System;
+using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
     public class AuthController : BaseAPIController
     {
         private readonly IAuthService _authService;
+
         public AuthController(IAuthService authService)
         {
             _authService = authService;
@@ -43,24 +43,20 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         {
             await _authService.ConfirmEmail(confirmemail.Email, confirmemail.Token);
             return NoContent();
-
         }
-
 
         [HttpGet]
         [Route("reset-password-link/{email}")]
         public async Task<IActionResult> SendResetPasswordLink(string email)
         {
-            var response = await _authService.SendResetPasswordLink(email, Url, Request.Scheme);
-                return NoContent();
+            await _authService.SendResetPasswordLink(email, Url, Request.Scheme);
+            return NoContent();
         }
-
 
         [HttpPost]
         [Route("reset-password")]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPassword)
         {
-
             return Ok(await _authService.ResetPassword(resetPassword));
         }
     }

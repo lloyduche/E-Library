@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EBookLibrary.DataAccess.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -181,9 +181,9 @@ namespace EBookLibrary.DataAccess.Migrations
                     Title = table.Column<string>(nullable: false),
                     Publisher = table.Column<string>(nullable: false),
                     Isbn = table.Column<string>(nullable: false),
-                    AvatarUrl = table.Column<string>(nullable: false),
+                    AvatarUrl = table.Column<string>(nullable: true),
                     Description = table.Column<string>(maxLength: 150, nullable: false),
-                    Pages = table.Column<int>(nullable: false),
+                    Pages = table.Column<string>(nullable: false),
                     Author = table.Column<string>(nullable: false),
                     CopiesAvailable = table.Column<string>(nullable: false),
                     DatePublished = table.Column<DateTime>(nullable: false),
@@ -219,13 +219,13 @@ namespace EBookLibrary.DataAccess.Migrations
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ratings_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -246,13 +246,13 @@ namespace EBookLibrary.DataAccess.Migrations
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reviews_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

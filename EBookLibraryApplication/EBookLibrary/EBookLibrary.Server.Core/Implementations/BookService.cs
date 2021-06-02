@@ -227,7 +227,7 @@ namespace EBookLibrary.Server.Core.Implementations
         {
             var RecentResult = _bookRepo.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostRecent, paging.PageSize);
             var RecentMappedResult = _mapper.Map<PagedResult<BookCardDTO>>(RecentResult);
-            var popularResult = _bookRepository.GetAll().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostPopular, paging.PageSize);
+            var popularResult = _bookRepository.GetPaginatedBooks().OrderBy(x => x.CreatedAt).Paginate(paging.PageNumberForMostPopular, paging.PageSize);
             var PopularMappedResult = _mapper.Map<PagedResult<BookCardDTO>>(popularResult);
             HomePageDTO dto = new HomePageDTO();
             dto.MostPopular = PopularMappedResult;
