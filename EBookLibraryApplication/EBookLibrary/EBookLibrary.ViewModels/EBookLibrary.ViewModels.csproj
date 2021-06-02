@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="CategoryVMs\" />
-    <Folder Include="RatingsVM\" />
-    <Folder Include="ReviewVMs\" />
   </ItemGroup>
 
   <ItemGroup>

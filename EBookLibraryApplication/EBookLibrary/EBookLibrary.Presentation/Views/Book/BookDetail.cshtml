@@ -1,0 +1,369 @@
+﻿@model EBookLibrary.ViewModels.BookVMs.GetBookDetailsResponseVM;
+
+
+
+@{
+    Layout = null;
+   
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EBookLibrary.Presentation</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+
+    @*<link rel="stylesheet" href="~/css/BookDetailStyle.css" />*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        #readmore {
+            text-decoration: none;
+            color: dodgerblue;
+            outline-width: 0;
+            border: none;
+            cursor: pointer;
+            background-color: transparent;
+            margin-top: 2px;
+        }
+
+            #readmore:hover {
+                color: grey;
+            }
+        /*div.stars {
+            width: 270px;
+            display: inline-block
+        }
+
+        .mt-200 {
+            margin-top: 200px
+        }
+
+        input.star {
+            display: none
+        }
+
+        label.star {
+            float: right;
+            padding: 10px;
+            font-size: 26px;
+            color: #4A148C;
+            transition: all .2s
+        }
+
+        input.star:checked ~ label.star:before {
+            content: '\f005';
+            color: #FD4;
+            transition: all .25s
+        }
+
+        input.star-5:checked ~ label.star:before {
+            color: #FE7;
+            text-shadow: 0 0 20px #952
+        }
+
+        input.star-1:checked ~ label.star:before {
+            color: #F62
+        }
+
+        label.star:hover {
+            transform: rotate(-15deg) scale(1.3)
+        }
+
+        label.star:before {
+            content: '\f006';
+            font-family: FontAwesome
+        }*/
+    </style>
+
+</head>
+
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+            <div class="container-fluid p-4">
+                <a class="navbar-brand ml-lg-4" asp-area="" asp-controller="Home" asp-action="Index">EB<i class="fa fa-glasses fa-2x text-primary"></i>kLibrary</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+
+
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav myNav">
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-warning pr-4 pl-4 login" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="search-result-header mt-4">
+                    <p>Showing <strong>1</strong> result for Alice in wonderland</p>
+                </div>
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <img src=@Model.AvatarUrl alt="" style="width:95%;" />
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <p><button class="btn btn-success">Read Now</button>  <button class="btn btn-primary">Download</button></p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="search-result-header mt-3">
+                    <p id="book-title">Title</p>
+                    <p>Available Copies <strong>@Model.CopiesAvailable<</strong> Copies in Library <strong></strong> Copies taken out <strong>10</strong></p>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="detail-item">
+                                            <p class="detail-item-key" style="color:grey;">Category </p>
+                                            <p class="detail-item-value"><b>@Model.Category</b></p>
+                                        </div>
+                                        <div class="detail-item">
+                                            <p class="detail-item-key" style="color:grey;">Author  </p>
+                                            <p class="detail-item-value"><b>@Model.Author</b></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="detail-item">
+                                            <p class="detail-item-key" style="color:grey;">Language  </p>
+                                            <p class="detail-item-value"><b>English</b></p>
+                                        </div>
+                                        <div class="detail-item">
+                                            <p class="detail-item-key" style="color:grey;">Publisher </p>
+                                            <p class="detail-item-value"><b>@Model.Publisher</b></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="detail-item">
+                                            <p class="detail-item-key" style="color:grey;">Publish Date </p>
+                                            <p class="detail-item-value"><b>@Model.DatePublished</b></p>
+                                        </div>
+                                        <div class="detail-item">
+                                            <p class="detail-item-key" style="color:grey;">Added to Library : </p>
+                                            <p class="detail-item-value"><b>10 june, 2020</b></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="detail-item">
+                                            <p class="detail-item-key" style="color:grey;">Isbn : </p>
+                                            <p class="detail-item-value"><b>@Model.Isbn</b></p>
+                                        </div>
+                                        <div class="detail-item">
+                                            <p class="detail-item-key" style="color:grey;">Pages : </p>
+                                            <p class="detail-item-value"><b>@Model.Pages</b></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-12 mb-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="detailItem-description">
+                                            <p class="detail-item-key" style="color:grey;">Description </p>
+                                            <div class="description-box">
+                                                <p>
+                                                    @Model.Description
+                                            
+                                                    <span id="dots">...</span>
+                                                    <span id="more"></span>
+                                                    <button onclick="myFunction()" id="readmore">Read more</button>
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12 col-md-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="stars">
+                                            <label>Ratings:</label>
+                                            @*  <form action=""> <input class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label> <input class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label> <input class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label> <input class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label> <input class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label> </form>*@
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                Add Rating
+                                            </button>
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Rate This Book</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form method="post" asp-action="AddRating" asp-controller="Book" asp-route-Id="@Model.Id" id="formtosubmit">
+                                                            <div class="modal-body">
+
+                                                                <input asp-for="@Model.AddRatingVM.Ratings" type="number" id="rating-text-area" class="form-control" placeholder="Rating must be a number between 1 and 5" />
+
+                                                            </div>
+                                                            <span id="rating-error"></span>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" id="rating-submit" class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p><b>Add Review</b></p>
+                                    <form method="post" asp-controller="Book" asp-action="AddReview" asp-route-Id="@Model.Id">
+
+                                        <div>
+                                            <textarea asp-for="@Model.AddReviewVM.Comment" class="form-control mb-2" placeholder="Add review..."></textarea>
+                                        </div>
+
+                                        <div>
+                                            <button type="submit" id="submit-review-button" class="btn btn-block btn-primary">Add Review</button>
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card mt-2">
+                                <div class="card-body">
+                                    <div class="reviews-box">
+                                        <p><b>Reviews</b></p>
+                                        @foreach (var r in Model.Reviews)
+                                        {
+                                            <div class="reviews-box-body">
+                                                <p id="review-title"><b>Good to read</b></p>
+                                                <p>@r.Comment</p>
+                                                <p class="text-secondary" style="font-size:12px;">@r.DateCreated</p>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        function myFunctions() {
+            var text;
+            var x = document.getElementById("rating-text-area").value;
+            var form = document.getElementById("formtosubmit");
+
+           
+            if (isNaN(x) || x < 1 || x > 5) {
+                alert("Invalid Input");
+            } else {
+                text = "Input OK";
+                form.submit();
+            }
+           
+        }
+
+    </script>
+    <script src="~/js/bookdetail.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/bootstrap.esm.min.js"></script>
+
+
+</body>
+</html>

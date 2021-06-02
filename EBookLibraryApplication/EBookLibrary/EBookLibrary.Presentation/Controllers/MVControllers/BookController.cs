@@ -1,5 +1,8 @@
 ﻿using EBookLibrary.Client.Core.Implementations;
+using EBookLibrary.DTOs.RatingDTOs;
+using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.ViewModels.BookVMs;
+using EBookLibrary.ViewModels.ReviewVMs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,6 +24,19 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> BookDetail(string id)
+        {
+            var response = await _book.GetBook(id);
+            /*if (response.Success is true)
+            {
+                return View(response.data);
+            }
+            return BadRequest();*/
+            return View(response);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Add(AddBook model)
         {
@@ -55,5 +71,67 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             return BadRequest();
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddReview(GetBookDetailsResponseVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Wrong Review Format");
+                return RedirectToAction("BookDetail", new {id = model.Id });
+
+            }
+
+            var reviewdto = new AddReviewDto
+            {
+                Comment = model.AddReviewVM.Comment,
+                BookId = model.Id,
+                UserId = "626751aa-e8ce-44e6-b4de-0d4f95010c37"
+            };
+
+            var res = await _book.AddReview(reviewdto);
+            if (!res)
+            {
+                ModelState.AddModelError("", "Wrong Review Format");
+                return RedirectToAction("BookDetail", new { id = model.Id });
+            }
+
+            
+
+            return RedirectToAction("BookDetail", new { id=model.Id}) ;
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddRating(GetBookDetailsResponseVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Wrong Rating Format");
+                return RedirectToAction("BookDetail", new { id = model.Id });
+
+            }
+
+            var ratingdto = new AddRatingDto
+            {
+                Ratings = model.AddRatingVM.Ratings,
+                BookId = model.Id,
+                UserId = "626751aa-e8ce-44e6-b4de-0d4f95010c37"
+            };
+
+            var res = await _book.AddRating(ratingdto);
+            if (!res)
+            {
+                ModelState.AddModelError("", "Wrong Review Format");
+                return RedirectToAction("BookDetail", new { id = model.Id });
+            }
+
+
+            
+            return RedirectToAction("BookDetail", new { id = model.Id });
+        }
+
+        /*public async Task<IActionResult> UploadPhoto([FromForm] )
+        {
+            
+        }*/ 
     }
 }
