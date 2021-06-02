@@ -12,7 +12,7 @@ namespace EBookLibrary.Server.Core.Abstractions
 {
     public interface IAuthService
     {
-        Task<Response<string>> Login(string email, string password);
+        Task<Response<LoginResponseDto>> Login(string email, string password);
         Task<Response<string>> Register(RegisterDTO model, string scheme, IUrlHelper url);
         Task<bool> ConfirmEmail(string userid, string token);
 
