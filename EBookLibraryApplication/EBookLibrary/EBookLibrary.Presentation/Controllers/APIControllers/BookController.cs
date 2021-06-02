@@ -105,6 +105,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         [HttpGet]
         [Route("get-reviews-count")]
         public ActionResult GetTotalNumberOfReviews()
+        
         {
             var result = _bookService.GetTotalReviewsCount();
 
