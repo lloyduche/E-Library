@@ -151,8 +151,6 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             return RedirectToAction("BookDetail", new { id = model.Id });
         }
 
-        /*public async Task<IActionResult> UploadPhoto([FromForm] )
-        {
-        }*/
+   
     }
 }

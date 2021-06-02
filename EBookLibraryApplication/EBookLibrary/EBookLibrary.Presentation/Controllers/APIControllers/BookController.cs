@@ -55,14 +55,6 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpPost]
-        [Route("search")]
-        public async Task<IActionResult> Search(SearchTermDto term)
-        {
-            var response = await _bookService.GetAllBooksWhere(term);
-            return Ok(response);
-        }
-
-        [HttpPost]
         [Route("add-rating")]
         public async Task<IActionResult> RateBook([FromBody] AddRatingDto addratingdto)
         {

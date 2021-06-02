@@ -12,12 +12,12 @@ using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -47,7 +47,7 @@ namespace EBookLibrary.Server.Core.Implementations
             _userManager = userManager;
         }
 
-         public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
+        public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
         {
             Response<AddBookResponseDto> response = new Response<AddBookResponseDto>();
 
@@ -61,7 +61,7 @@ namespace EBookLibrary.Server.Core.Implementations
             var book = _mapper.Map<AddBookDto, Book>(addbookdto);
 
             //Add book to database
-             await _bookRepository.Insert(book);
+            await _bookRepository.Insert(book);
 
             //construct response
             var addbookresponsedto = _mapper.Map<AddBookResponseDto>(book);
@@ -150,7 +150,7 @@ namespace EBookLibrary.Server.Core.Implementations
             }
 
             Response<AddRatingResponseDto> response = new Response<AddRatingResponseDto>();
-            var rating = _mapper.Map<AddRatingDto,Rating>(addratingdto);
+            var rating = _mapper.Map<AddRatingDto, Rating>(addratingdto);
 
             var result = await _ratingRepository.Insert(rating);
             if (!result)
@@ -216,7 +216,7 @@ namespace EBookLibrary.Server.Core.Implementations
             return response;
         }
 
-        public async Task<Response<IReadOnlyList<FindBookBySearchDTO>>> GetAllBooksWhere(SearchTermDto term)
+        public PagedResult<BookCardDTO> Search(SearchParametersDTO1 model)
         {
             var books = _bookRepo.GetFilteredBooks(model.Query).Paginate(model.PageNumber, model.PageSize);
             var mappedBooks = _mapper.Map<PagedResult<BookCardDTO>>(books);
