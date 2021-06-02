@@ -1,4 +1,6 @@
-﻿using EBookLibrary.DTOs.RatingDTOs;
+﻿using EBookLibrary.DTOs.BookDTOs;
+using EBookLibrary.DTOs;
+using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Server.Core.Abstractions;
 using EBookLibrary.ViewModels;
@@ -87,5 +89,29 @@ namespace EBookLibrary.Client.Core.Implementations
         }
 
 
+
+        public async Task<PagedResult<BookCardViewModel>> Books(SearchParametersViewModel model)
+        {
+            var resp = await _httpClient.Create<PagedResult<BookCardViewModel>, SearchParametersViewModel>("api/v1/book/get-books-paginated", model);
+            return resp;
+        }
+
+
+        public async Task<bool> UploadPhoto(UploadPhotoVM model)
+        {
+            var data = await _httpClient.UploadPhoto<ExpectedResponse<string>>($"api/v1/book/uploadphoto/{model.BookId}", model.BookPhoto);
+
+            if(data.Success)
+            {
+
+                return true;
+            }
+
+            
+            return false;
+
+
+
+        }
     }
 }

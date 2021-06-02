@@ -1,7 +1,9 @@
 ﻿using EBookLibrary.Client.Core.Implementations;
 using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
+using EBookLibrary.DTOs.BookDTOs;
 using EBookLibrary.ViewModels.BookVMs;
+using Microsoft.AspNetCore.Http;
 using EBookLibrary.ViewModels.ReviewVMs;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +24,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return View(new AddBook());
         }
 
         [HttpGet]
@@ -43,7 +45,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             var response = await _book.Add(model);
             if (response.Success is true)
             {
-                return RedirectToAction("dashboard");
+                return RedirectToAction("Admin", "Dashboard");
             }
             return BadRequest();
         }
@@ -68,6 +70,27 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                     return View("successReg");
                 }
             }
+            return BadRequest();
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePhoto(UpdateBookViewModel model)
+        {
+            var uploadphotodtovm = new UploadPhotoVM
+            {
+                BookId = model.Id,
+                BookPhoto = model.UploadPhotoVM.BookPhoto
+
+            };
+
+           var response = await _book.UploadPhoto(uploadphotodtovm);
+            if (response)
+            {
+                return RedirectToAction("UpdateBook", new { id = model.Id });
+            }
+
             return BadRequest();
 
         }

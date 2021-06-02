@@ -19,13 +19,13 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
         
         [HttpGet]
-        public ActionResult Registration()
+        public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Register(RegisterationViewModel model)
+        public async Task<IActionResult> Register(RegisterationViewModel model)
         {
            var response = await _auth.Register(model);
             if (response.Successful is true)
@@ -34,10 +34,13 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             }
            return BadRequest();
         }
-        public ActionResult successReg()
+
+
+        public IActionResult SuccessReg()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -67,7 +70,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpPost]
         public async Task<ActionResult> Update(UpdateViewModel model)
         {
-            var response = await _auth.Update(model);
+            var response = await _auth.UpdateUser(model);
             if (response is true)
             {
                 ViewBag.Title = "Registration";
@@ -111,18 +114,13 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             return View(model);
         }
 
-        public ActionResult Delete()
+
+        [HttpGet]
+        public IActionResult Delete()
         {
             return View();
         }
 
-
-        [HttpPost]
-        public ActionResult DeleteUser()
-        {
-            
-            return View();
-        }
 
     }
 }

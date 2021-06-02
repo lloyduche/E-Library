@@ -1,4 +1,5 @@
-﻿using EBookLibrary.Models;
+﻿using EBookLibrary.DTOs;
+using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
 
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,8 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,8 +56,6 @@ namespace EBookLibrary.Server.Core.Implementations
 
         public async Task<bool> Update<TRequest>(string Uri, TRequest patchDoc)
         {
-            bool result = false;
-
             var serializedDoc = JsonConvert.SerializeObject(patchDoc);
 
             var requestContent = new StringContent(serializedDoc, Encoding.UTF8, "application/json-patch+json");
@@ -62,42 +63,36 @@ namespace EBookLibrary.Server.Core.Implementations
             using var client = CustomHttpClient();
             {
                 var response = await client.PatchAsync(Uri, requestContent);
-
-                if (response.StatusCode == HttpStatusCode.NoContent)
-                {
-                    result = true;
-                }
+                return response.IsSuccessStatusCode;
             }
-
-            return result;
         }
 
-        public async Task<TResponse> UploadPhoto<TResponse, TRequest>(string Uri, IFormFile file)
+        public async Task<TResponse> UploadPhoto<TResponse>(string Uri, IFormFile file)
         {
-            TResponse result = default;
-
             using var client = CustomHttpClient();
             {
-                byte[] data;
-                using (var br = new BinaryReader(file.OpenReadStream()))
-                    data = br.ReadBytes((int)file.OpenReadStream().Length);
-                ByteArrayContent bytes = new ByteArrayContent(data);
 
-                MultipartFormDataContent multiContent = new MultipartFormDataContent();
-
-                multiContent.Add(bytes, "file", file.FileName);
-
-                var response = await client.PostAsync(Uri, multiContent);
-
-                if (response.StatusCode == HttpStatusCode.Created)
-                {
-                    result = await response.Content.ReadAsAsync<TResponse>();
-                }
+                MultipartFormDataContent form = new MultipartFormDataContent();
+                HttpContent content = new StringContent(file.FileName);
+                form.Add(CreateFileContent(file.OpenReadStream(), file.FileName, "multipart/form-data"));
+                var stream = file.OpenReadStream();
+                var response = await client.PostAsync(Uri, form);
+                return await response.Content.ReadAsAsync<TResponse>();
             }
-
-            return result;
         }
 
+        private StreamContent CreateFileContent(Stream stream, string fileName, string contentType)
+        {
+            var fileContent = new StreamContent(stream);
+            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                Name = "uploadfile",
+                FileName = fileName
+            };
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+            return fileContent;
+        }
+ 
         public HttpClient CustomHttpClient()
         {
             var client = new HttpClient();
@@ -105,6 +100,15 @@ namespace EBookLibrary.Server.Core.Implementations
             client.BaseAddress = new Uri(baseAddress.BaseAddress);
 
             return client;
+        }
+
+        public async Task<bool> Delete(string Uri)
+        {
+            using var client = CustomHttpClient();
+            {
+                var response = await client.DeleteAsync(Uri);
+                return response.IsSuccessStatusCode;
+            }
         }
     }
 }

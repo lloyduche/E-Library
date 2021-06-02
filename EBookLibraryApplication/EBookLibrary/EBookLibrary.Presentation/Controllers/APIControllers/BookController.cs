@@ -5,9 +5,9 @@ using EBookLibrary.DTOs.RatingDTOs;
 using EBookLibrary.DTOs.ReviewDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
-
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
@@ -47,6 +47,19 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             return NoContent();
         }
 
+        [HttpGet]
+        public async Task<PagedResult<Book>> GetAllBooks(int pageNumber, int numberToReturn)
+        {
+            return await _bookRepo.GetByPage(pageNumber, numberToReturn);
+        }
+
+        [HttpPost]
+        [Route("search")]
+        public async Task<IActionResult> Search(SearchTermDto term)
+        {
+            var response = await _bookService.GetAllBooksWhere(term);
+            return Ok(response);
+        }
         [HttpPost]
         [Route("add-rating")]
         public async Task<IActionResult> RateBook([FromBody] AddRatingDto addratingdto)
@@ -64,18 +77,11 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpPost]
-        [Route("uploadphoto")]
-        public async Task<IActionResult> UploadPhoto([FromForm] UploadPhotoDto uploadphotodto)
+        [Route("uploadphoto/{Id}")]
+        public async Task<IActionResult> UploadPhoto(string Id, [FromForm]IFormFile image)
         {
-            var response = await _bookService.UploadPhoto(uploadphotodto);
-            return Ok(response);
-        }
-
-        [Route("(authors{authorId:int}/books")]
-        public async Task<IActionResult> GetBookByAuthor(string authorId)
-        {
-            var response = await _bookService.GetBookByAuthor(authorId);
-            return Ok(response);
+            var response = await _bookService.UploadPhoto(image, Id);
+            return Ok();
         }
 
         [HttpGet]
@@ -91,6 +97,14 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         public HomePageDTO GetAllBooksPaginated(HomePageFetchData data)
         {
             return _bookService.GetHomePageData(data);
+        }
+
+        [HttpPost]
+        [Route("get-books-paginated")]
+        public ActionResult<PagedResult<BookCardDTO>> GetBooks(SearchPagingParametersDTO model)
+        {
+            var result =  _bookService.GetAllBooksPaginated(model);
+            return Ok(result);
         }
     }
 }
