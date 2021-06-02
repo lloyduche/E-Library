@@ -25,5 +25,11 @@ namespace EBookLibrary.Client.Core.Implementations
 
         Task<bool> AddReview(AddReviewDto model);
         Task<bool> AddRating(AddRatingDto model);
+
+        Task<PagedResult<BookCardViewModel>> Search(SearchParametersViewModel1 model);
+
+        Task<ExpectedResponse<int>> GetReviewsCount();
+
+        Task<ExpectedResponse<int>> GetBooksCount();
     }
 }

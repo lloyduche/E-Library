@@ -30,7 +30,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
            var response = await _auth.Register(model);
             if (response.Successful is true)
             {
-                return RedirectToAction("successReg");
+                return RedirectToAction(nameof(SuccessReg));
             }
            return BadRequest();
         }
@@ -108,7 +108,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             if (response.Success)
             {
                 HttpContext.Session.SetString("access_token", response.Data);
-                return View("successReg");
+                return RedirectToAction("Index","Dashboard", new {Id = "6f07f58e-d3af-465f-8a75-62786e8179a3" });
             }
             ModelState.AddModelError("", response.Message);
             return View(model);

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Server.Core.Abstractions;
 
@@ -20,12 +21,12 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
             _mapper = mapper;
         }
 
-        [HttpGet("all-users")]
-        public IActionResult GetAllUser()
-        {
-            var user = _userservice.GetAllUsers();
-            return Ok(user);
-        }
+        //[HttpGet("all-users")]
+        //public IActionResult GetAllUser()
+        //{
+        //    var user = _userservice.GetAllUsers();
+        //    return Ok(user);
+        //}
 
         [HttpPut]
         [Route("update-user")]
@@ -59,6 +60,22 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
             return Ok(result);
         }
+        [HttpPost]
+        [Route("get-all-user")]
+        public IActionResult GetAllUser(SearchPagingParametersDTO model)
+        {
+            var result = _userservice.GetAllUser(model);
 
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("get-users-count")]
+        public ActionResult GetTotalNumberOfUsers()
+        {
+            var result = _userservice.GetTotalNumberOfUsers();
+
+            return Ok(result);
+        }
     }
 }

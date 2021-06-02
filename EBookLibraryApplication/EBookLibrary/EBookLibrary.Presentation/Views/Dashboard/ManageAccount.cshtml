@@ -2,7 +2,7 @@
     Layout = "_DashBoardLayout";
 
 }
-
+@model EBookLibrary.DTOs.PagedResult<AdminUserViewModel> 
 
 <div class="d-flex flex-row justify-content-around">
     <div class="col-lg-6 col-sm-6 p-sm-0 myCard-search">
@@ -35,23 +35,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td class="justify-content-end">
-                            <div class="btn-group" role="group" aria-label="">
-                                <a class="btn btn-danger " asp-action="Delete" asp-controller="Account"><i class="fa fa-trash mr-2"></i></a>
-                            </div>
-                        </td>
-                    </tr>
+
+                    @foreach (var item in Model.Result)
+                    {
+                        <tr>
+                            <td>@item.FirstName @item.LastName</td>
+                            <td>@item.Email</td>
+                            <td class="justify-content-end">
+                                <div class="btn-group" role="group" aria-label="">
+                                    <a class="btn btn-danger " asp-action="Delete" asp-controller="Account" asp-route-id="@item.Id"><i class="fa fa-trash mr-2"></i></a>
+                                    <input type="hidden" asp-for="@item.Id" />
+                                </div>
+                            </td>
+                        </tr>
+                      }
                 </tbody>
                 <tfoot>
                     <tr>
                         <td>
 
                             <div class="btn-group-lg">
-                                <a href="#" class="btn-sm btn-primary" aria-current="page"><i class="fa fa-angle-double-left"></i> Prev</a>
-                                <a href="#" class="btn-sm btn-primary"><i class="fa fa-angle-double-right"></i>Next</a>
+                                <a class="btn-sm btn-primary" asp-route-pageSize="@Model.PageSize" asp-route-pagenumber="@Model.PreviousPage" aria-current="page"><i class="fa fa-angle-double-left"></i> Prev</a>
+                                <a class="btn-sm btn-primary" asp-route-pageSize="@Model.PageSize" asp-route-pagenumber="@Model.NextPage"><i class="fa fa-angle-double-right"></i>Next</a>
                             </div>
                         </td>
                         <td>
