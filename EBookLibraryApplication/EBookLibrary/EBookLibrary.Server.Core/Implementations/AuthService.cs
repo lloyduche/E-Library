@@ -37,18 +37,18 @@ namespace EBookLibrary.Server.Core.Implementations
         }
 
 
-        public async Task<Response<string>> Login(string email, string password)
+        public async Task<Response<LoginResponseDto>> Login(string email, string password)
         {
-            Response<string> responseObject = new Response<string>();
+            Response<LoginResponseDto> responseObject = new Response<LoginResponseDto>();
 
             var user = await _userManager.FindByEmailAsync(email);
 
-            if(user == null)
+            if (user == null)
             {
                 throw new NotFoundException("User with email provided does not exist");
             }
 
-            if (! await _userManager.IsEmailConfirmedAsync(user))
+            if (!await _userManager.IsEmailConfirmedAsync(user))
             {
                 throw new BadRequestException("Please confirm your mail to get access to the website");
             }
@@ -61,8 +61,15 @@ namespace EBookLibrary.Server.Core.Implementations
 
             var token = await _jwtService.GenerateToken(user);
 
+            LoginResponseDto loginresponse = new LoginResponseDto 
+            {
+                Token = token,
+                UserId = user.Id
+            };
+
+
             responseObject.StatusCode = (int) HttpStatusCode.OK;
-            responseObject.Data = token;
+            responseObject.Data = loginresponse;
             responseObject.Message = "Login successful";
             responseObject.Success = true;
 

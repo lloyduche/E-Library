@@ -19,7 +19,7 @@ namespace EBookLibrary.Client.Core.Implementations
 
         Task<BookResponse> UpdateBook(UpdateBookViewModel model, string Id);
 
-        Task<GetBookDetailsResponseVM> GetBook(string Id);
+        Task<ExpectedResponse<GetBookDetailsResponseVM>> GetBook(string Id);
 
         Task<HomePageViewModel> GetHomePageData(PagingParametersViewModel model);
 

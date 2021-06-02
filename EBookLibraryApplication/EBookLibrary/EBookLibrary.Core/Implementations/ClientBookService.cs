@@ -60,11 +60,11 @@ namespace EBookLibrary.Client.Core.Implementations
             return response;
         }
 
-        public async Task<GetBookDetailsResponseVM> GetBook(string Id)
+        public async Task<ExpectedResponse<GetBookDetailsResponseVM>> GetBook(string Id)
         {
             var data = await _httpClient.Get<ExpectedResponse<GetBookDetailsResponseVM>>($"api/v1/book/get-book-by-id/{Id}");
 
-            return data.Data;
+            return data;
         }
 
         public async Task<HomePageViewModel> GetHomePageData(PagingParametersViewModel model)
