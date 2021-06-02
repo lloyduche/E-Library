@@ -23,9 +23,9 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             _clientBookService = clientBookService;
             
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id)
         {
-            var user = await _userService.GetUserById("");
+            var user = await _userService.GetUserById(id);
 
             if(user.Data.AvatarUrl == null)
             {
