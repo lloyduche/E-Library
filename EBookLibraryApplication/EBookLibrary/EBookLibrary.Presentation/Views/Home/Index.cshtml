@@ -1,15 +1,12 @@
 ﻿@{ ViewData["Title"] = "Home Page"; }
 @model EBookLibrary.ViewModels.HomePageViewModel;
-@{
-    var recentPrevious = Model.Recent.PreviousPage;
-    var recentNextpage = Model.Recent.NextPage;
-    var popularPreviousPage = Model.MostPopular.PreviousPage;
-    var popularNextPage = Model.MostPopular.NextPage;
-}
+@{ var recentPrevious = Model.Recent.PreviousPage;
+                var recentNextpage = Model.Recent.NextPage;
+                var popularPreviousPage = Model.MostPopular.PreviousPage;
+                var popularNextPage = Model.MostPopular.NextPage; }
 
 <div class="col-lg-12 col-sm-12 myJumbotron">
     <div class="overlay"></div>
-
     <form action="book/search">
         <div class="col-lg-12 col-sm-12">
 
@@ -18,53 +15,55 @@
                 <div class="col-lg-6 col-sm-12 p-sm-0 myCard-search ">
                     <div class="input-group text-center mb-3 box-shadow ">
                         <input type="text" name="query" class="form-control" style="font-size:22px; padding:1.2em;" placeholder="Search For Books..." aria-label="Recipient's username" aria-describedby="basic-addon3">
-                        <input type="submit" class="input-group-text bg-primary pl-4 pr-4" style="color:aliceblue;" id="basic-addon3" value="Search"/>
+                        <input type="submit" class="input-group-text bg-primary pl-4 pr-4" style="color:aliceblue;" id="basic-addon3" value="Search" />
                     </div>
                 </div>
             </div>
         </div>
     </form>
 
-    <div class="d-flex justify-content-center bg-transparent pb-3">
+   
+    <form action="book/search">
 
-        <div class="card col-lg-9 col-sm-3 bg-transparent border-0">
+        <div class="d-flex justify-content-center bg-transparent pb-3">
 
-            <div class="row pb-3 mt-3 rowInterest">
-                <p>
-                    What Interests you?
-                </p>
-            </div>
+            <div class="card col-lg-9 col-sm-3 bg-transparent border-0">
 
-            <div class="row jumboRow">
-                <div class="col-lg-6 col-sm-6 text-center pb-3">
-                    <h5 style="font-size:24px; font-weight:bold;">
-                        Fiction Books
-                    </h5>
-                    <div class="p-2">
-
-                        <a class="btn btn-lg  btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Drama</a>
-                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Horror</a>
-                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Mystery</a>
-                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Sci-Fi</a>
-                    </div>
+                <div class="row pb-3 mt-3 rowInterest">
+                    <p>
+                        What Interests you?
+                    </p>
                 </div>
-                <div class="col-lg-6 col-sm-6 text-center pb-3">
 
-                    <h5 style="font-size:24px; font-weight:bold;">
-                        Non-Fiction Books
-                    </h5>
-                    <div class="p-2">
-                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Biography</a>
-                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Sports</a>
+                <div class="row jumboRow">
+                    <div class="col-lg-6 col-sm-6 text-center pb-3">
+                        <h5 style="font-size:24px; font-weight:bold;">
+                            Fiction Books
+                        </h5>
+                        <div class="p-2">
+                            <button type="submit" class="btn btn-lg  btn-outline-light m-2 myBtn" name="query" value="Drama"> Drama</button>
+                            <button type="submit" class="btn btn-lg  btn-outline-light m-2 myBtn" name="query" value="Horror"> Horror</button>
+                            <button type="submit" class="btn btn-lg  btn-outline-light m-2 myBtn" name="query" value="Mystery"> Mystery</button>
+                            <button type="submit" class="btn btn-lg  btn-outline-light m-2 myBtn" name="query" value="Sci-Fi"> Sci-Fi</button>
+                           
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 text-center pb-3">
 
-                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Arts</a>
-
-                        <a class="btn  btn-lg btn-outline-light m-2 myBtn" asp-controller="Dashboard" asp-action="Guest" asp-route-id="">Travels</a>
+                        <h5 style="font-size:24px; font-weight:bold;">
+                            Non-Fiction Books
+                        </h5>
+                        <div class="p-2">
+                            <button type="submit" class="btn btn-lg  btn-outline-light m-2 myBtn" name="query" value="Biography"> Biography</button>
+                            <button type="submit" class="btn btn-lg  btn-outline-light m-2 myBtn" name="query" value="Sports"> Sports</button>
+                            <button type="submit" class="btn btn-lg  btn-outline-light m-2 myBtn" name="query" value="Arts"> Arts</button>
+                            <button type="submit" class="btn btn-lg  btn-outline-light m-2 myBtn" name="query" value="Travels"> Travels</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+   </form>
 </div>
 
 <section id="section-one">
@@ -76,81 +75,72 @@
                 New Releases  <span class="ml-3 ">  Books  </span> <span class="badge bg-warning">20</span>
             </h4>
         </div>
-        @{
-            foreach (var book in Model.Recent.Result)
-            {
-                <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
-                    <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="@book.AvatarUrl" alt="image" width="200" height="250" /></a>
-                    <div class="card-body p-0 mt-3 myBook-card">
-                        <p class="text-secondary text-capitalize">@book.Title</p>
-                        <p class="text-secondary text-capitalize">@book.Category</p>
-                        <p class="text-secondary text-capitalize" style=" font-size:20px;">@book.Author</p>
-                        @if (@book.Rating == 5)
+        @{ foreach (var book in Model.Recent.Result)
                         {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                            </p>
-                        }
-                        else if (@book.Rating == 4)
-                        {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
-                        else if (@book.Rating == 3)
-                        {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
-                        else if (@book.Rating == 2)
-                        {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
-                        else if (@book.Rating == 1)
-                        {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
-                        else
-                        {
-                            <p>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
+            <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
+                <a asp-action="BookDetail" asp-controller="Book" asp-route-id="@book.Id"><img class="card-img-top rounded" asp-append-version="true" src="@book.AvatarUrl" alt="image" width="200" height="250" /></a>
+                <div class="card-body p-0 mt-3 myBook-card">
+                    <p class="text-secondary text-capitalize">@book.Title</p>
+                    <p class="text-secondary text-capitalize">@book.Category</p>
+                    <p class="text-secondary text-capitalize" style=" font-size:20px;">@book.Author</p>
+                    @if (@book.Rating == 5)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+    </p> }
+                    else if (@book.Rating == 4)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p> }
+                    else if (@book.Rating == 3)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p> }
+                    else if (@book.Rating == 2)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p> }
+                    else if (@book.Rating == 1)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p> }
+                    else
+                    {
+    <p>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p>}
 
-                        <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
-                    </div>
+                    <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
                 </div>
-            }
-        }
+            </div> } }
     </div>
 </section>
 
@@ -180,81 +170,72 @@
                 Most Popular  <span class="ml-3">  Books  </span> <span class="badge bg-warning">27</span>
             </h4>
         </div>
-        @{
-            foreach (var book in Model.MostPopular.Result)
-            {
-                <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
-                    <a href="#"><img class="card-img-top rounded" asp-append-version="true" src="~@book.AvatarUrl" alt="image" width="200" height="250" /></a>
-                    <div class="card-body p-0 mt-3 myBook-card">
-                        <p class="text-secondary text-capitalize">@book.Title</p>
-                        <p class="text-secondary text-capitalize">@book.Category</p>
-                        <p class="text-secondary text-capitalize" style=" font-size:20px;">@book.Author</p>
-                        @if (@book.Rating == 5)
+        @{ foreach (var book in Model.MostPopular.Result)
                         {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                            </p>
-                        }
-                        else if (@book.Rating == 4)
-                        {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
-                        else if (@book.Rating == 3)
-                        {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
-                        else if (@book.Rating == 2)
-                        {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
-                        else if (@book.Rating == 1)
-                        {
-                            <p>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
-                        else
-                        {
-                            <p>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                            </p>
-                        }
+            <div class="card border-0 col-lg-2 col-sm-6 mb-3 mt-4 mr-2 ml-2">
+                <a asp-action="BookDetail" asp-controller="Book" asp-route-id="@book.Id"><img class="card-img-top rounded" asp-append-version="true" src="~@book.AvatarUrl" alt="image" width="200" height="250" /></a>
+                <div class="card-body p-0 mt-3 myBook-card">
+                    <p class="text-secondary text-capitalize">@book.Title</p>
+                    <p class="text-secondary text-capitalize">@book.Category</p>
+                    <p class="text-secondary text-capitalize" style=" font-size:20px;">@book.Author</p>
+                    @if (@book.Rating == 5)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+    </p> }
+                    else if (@book.Rating == 4)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p> }
+                    else if (@book.Rating == 3)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p> }
+                    else if (@book.Rating == 2)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p> }
+                    else if (@book.Rating == 1)
+                    {
+    <p>
+        <i class="fa fa-star text-warning"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p> }
+                    else
+                    {
+    <p>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+        <i class="fa fa-star text-secondary"></i>
+    </p>}
 
-                        <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
-                    </div>
+                    <p class="text-secondary text-capitalize" style=" font-size:20px;"> Available</p>
                 </div>
-            }
-        }
+            </div> } }
     </div>
 </section>
 <section>

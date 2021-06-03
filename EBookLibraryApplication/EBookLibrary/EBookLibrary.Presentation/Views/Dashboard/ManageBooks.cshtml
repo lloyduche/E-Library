@@ -32,7 +32,7 @@
                             <td class="justify-content-end">
                                 <div class="btn-group" role="group" aria-label="">
                                    
-                                        <a class="mr-3" asp-controller="Book" asp-action="UpdateBook" asp-route-id="@item.Id"><i class="fa fa-edit mr-2"></i></a>
+                                        <a class="mr-3" asp-controller="Book" asp-action="UpdateMyBook" asp-route-id="@item.Id"><i class="fa fa-edit mr-2"></i></a>
                                     
                                         <form method="post" asp-action="DeleteBooks" asp-controller="Book">
                                             <input type="hidden" name="bookid" value="@item.Id" />

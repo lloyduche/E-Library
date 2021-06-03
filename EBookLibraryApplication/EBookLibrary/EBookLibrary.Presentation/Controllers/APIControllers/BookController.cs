@@ -28,7 +28,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPost]
         [Route("add-book")]
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddBook([FromBody] AddBookDto addBookDto)
         {
             var response = await _bookService.AddBook(addBookDto);
@@ -37,7 +37,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPatch]
         [Route("update-book/{Id}")]
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBook(UpdateBookDto updatebookdto, string Id)
         {
             await _bookService.UpdateBook(updatebookdto, Id);
@@ -45,7 +45,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpDelete]
-        [Route("delete/{bookid}")]
+       [Route("delete/{bookid}")]
         public async Task<IActionResult> DeleteBook(string bookid)
         {
             await _bookService.DeleteBook(bookid);
@@ -60,7 +60,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpPost]
-        [Route("add-rating")]
+       [Route("add-rating")]
         public async Task<IActionResult> RateBook([FromBody] AddRatingDto addratingdto)
         {
             var response = await _bookService.AddRating(addratingdto);

@@ -59,10 +59,23 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
 
         [HttpGet]
         //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateBook(string id)
+        public async Task<IActionResult> UpdateMyBook(string id)
         {
             var data = await _book.GetBook(id);
-            return View(data);
+            var model = new UpdateBookViewModel
+            {
+                Title = data.Data.Title,
+                Author = data.Data.Author,
+                Isbn = data.Data.Isbn,
+                Pages =data.Data.Pages,
+                Publisher = data.Data.Publisher,
+                Category = data.Data.Category,
+                Description = data.Data.Description,
+                DatePublished = data.Data.DatePublished,
+                Id = data.Data.Id,
+                CopiesAvailable = data.Data.CopiesAvailable
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -71,14 +84,6 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             var data = await _book.DeleteBook(bookid);
             return Redirect("/Dashboard/ManageBooks");
         }
-
-
-
-
-
-
-
-
 
 
 
@@ -92,7 +97,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                 if (response.Successful is true)
                 {
                     ViewBag.Message = "Update Successful";
-                    return View("successReg");
+                    return RedirectToAction("ManageBooks","Dashboard");
                 }
             }
             return BadRequest();

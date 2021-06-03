@@ -27,7 +27,7 @@ namespace EBookLibrary.Client.Core.Implementations
         public async Task<ExpectedResponse<string>> Add(AddBook model)
         {
             var data = await _httpClient.Create<ExpectedResponse<string>,
-               AddBook>("api/v1/Auth/addbook", model);
+               AddBook>("api/v1/Book/add-book", model);
 
             return data;
         }

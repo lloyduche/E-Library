@@ -47,9 +47,9 @@ namespace EBookLibrary.Server.Core.Implementations
             _userManager = userManager;
         }
 
-        public async Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto)
+        public async Task<Response<string>> AddBook(AddBookDto addbookdto)
         {
-            Response<AddBookResponseDto> response = new Response<AddBookResponseDto>();
+            Response<string> response = new Response<string>();
 
             //check if dto is valid
             if (addbookdto == null)
@@ -57,17 +57,19 @@ namespace EBookLibrary.Server.Core.Implementations
                 throw new BadRequestException("Invalid Input");
             }
 
+            var findcatid = await _categoryRepository.Find(e => e.Name == addbookdto.CategoryName);
+
             //create book
             var book = _mapper.Map<AddBookDto, Book>(addbookdto);
+            book.CategoryId = findcatid.Id;
 
             //Add book to database
             await _bookRepository.Insert(book);
 
             //construct response
-            var addbookresponsedto = _mapper.Map<AddBookResponseDto>(book);
 
             response.StatusCode = (int)HttpStatusCode.OK;
-            response.Data = addbookresponsedto;
+            response.Data = book.Id;
             response.Message = "Book Added Successfully";
             response.Success = true;
 

@@ -12,5 +12,7 @@ namespace EBookLibrary.ViewModels
         public PagedResult<BookCardViewModel> MostPopular { get; set; }
 
         public PagingParametersViewModel PagingParams { get; set; }
+
+        public SearchParametersViewModel1 Search { get; set; }
     }
 }

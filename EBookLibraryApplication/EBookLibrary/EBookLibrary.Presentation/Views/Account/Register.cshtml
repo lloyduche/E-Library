@@ -23,7 +23,9 @@
                     </div>
                     <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-lock text-primary"></i></span>
-                        <input type="password" placeholder="Password" required asp-for="Password" />
+                        <input type="password" placeholder="Password" required asp-for="Password"
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter,and at least 8 or more characters" />
+
                     </div>
                     <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-lock text-warning"></i></span>

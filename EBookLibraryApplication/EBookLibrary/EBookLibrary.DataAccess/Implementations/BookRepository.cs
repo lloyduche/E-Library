@@ -31,10 +31,11 @@ namespace EBookLibrary.DataAccess.Implementations
 
         public IQueryable<Book> GetFilteredBooks(string query)
         {
-            var res = _context.Books.Where(x => EF.Functions.Like(x.Title, $"%{query}%")
+            var res = _context.Books.Include(b=>b.Category).Where(x => EF.Functions.Like(x.Title, $"%{query}%")
                                || EF.Functions.Like(x.Isbn, $"%{query}%")
                                || EF.Functions.Like(x.Author, $"%{query}%")
-                               || EF.Functions.Like(x.Description, $"%{query}%"))
+                               || EF.Functions.Like(x.Description, $"%{query}%")
+                               || EF.Functions.Like(x.Category.Name, $"%{query}%"))
                                 .AsQueryable();
             return res;
         }

@@ -29,7 +29,7 @@ namespace EBookLibrary.ViewModels.BookVMs
 
         [Required]
         public string Author { get; set; }
-        public string Category { get; set; }
+        public string CategoryName { get; set; }
         [Required]
         public string CopiesAvailable { get; set; }
         public DateTime DatePublished { get; set; }

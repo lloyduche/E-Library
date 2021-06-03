@@ -12,10 +12,9 @@ namespace EBookLibrary.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string PublicId { get; set; }
 
-        [Required]
+
         [ForeignKey("CategoryId")]
         public string CategoryId { get; set; }
 
@@ -28,8 +27,8 @@ namespace EBookLibrary.Models
         [Required]
         public string Isbn { get; set; }
 
-        //[Required]
-        public string? AvatarUrl { get; set; }
+      
+        public string AvatarUrl { get; set; }
 
         [Required]
         [StringLength(maximumLength: 150, ErrorMessage = "The property {0} should have not have more than {1} characters")]

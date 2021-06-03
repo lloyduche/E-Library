@@ -33,6 +33,6 @@ namespace EBookLibrary.DTOs.BookDTOs
         public DateTime DatePublished { get; set; }
 
         [Required]
-        public string CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }

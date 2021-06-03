@@ -13,7 +13,7 @@ namespace EBookLibrary.Server.Core.Abstractions
     public interface IBookServices
     {
         //Task<Response<IReadOnlyList<FindBookBySearchDTO>>> GetAllBooksWhere(SearchTermDto term);
-        Task<Response<AddBookResponseDto>> AddBook(AddBookDto addbookdto);
+        Task<Response<string>> AddBook(AddBookDto addbookdto);
 
         Task<bool> UpdateBook(UpdateBookDto updatebookdto, string Id);
 
