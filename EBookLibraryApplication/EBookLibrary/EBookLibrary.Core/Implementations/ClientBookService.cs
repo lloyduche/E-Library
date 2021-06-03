@@ -104,14 +104,14 @@ namespace EBookLibrary.Client.Core.Implementations
 
         public async Task<bool> UploadPhoto(UploadPhotoVM model)
         {
-            var data = await _httpClient.UploadPhoto<ExpectedResponse<string>>($"api/v1/book/uploadphoto/{model.BookId}", model.BookPhoto);
-
-            if(data.Success)
+            var data = await _httpClient.UploadPhoto<ExpectedResponse<string>>(model.BookPhoto, model.BookId);
+            if (data)
             {
                 return true;
             }
 
             return false;
+            
         }
 
         public async Task<PagedResult<BookCardViewModel>> Search(SearchParametersViewModel1 model)

@@ -9,6 +9,7 @@ using EBookLibrary.Client.Core;
 using EBookLibrary.Client.Core.Abstractions;
 using EBookLibrary.ViewModels;
 using EBookLibrary.Client.Core.Implementations;
+using Microsoft.AspNetCore.Http;
 
 namespace EBookLibrary.Presentation.Controllers.MVControllers
 {
@@ -78,6 +79,18 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             };
             var myBook = await  _clientBookService.Books(model);
             return View(myBook);
+        }
+
+        [HttpPost]
+        public ActionResult UploadAvatar([FromForm] IFormFile avatar)
+        {
+            var model = new UploadUserAvatarViewModel
+            {
+                Avatar = avatar,
+                UserId = "b79203fc-526c-4fac-bf76-338e576040b5"
+            };
+            _userService.UploadPhoto(model);
+            return RedirectToAction("Index");
         }
     }
 }

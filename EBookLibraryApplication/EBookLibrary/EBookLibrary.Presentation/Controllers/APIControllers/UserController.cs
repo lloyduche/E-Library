@@ -4,6 +4,7 @@ using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Server.Core.Abstractions;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using System;
@@ -11,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
-    //[Authorize(AuthenticationSchemes = "Bearer")]
     public class UserController : BaseAPIController
     {
         private readonly IUserService _userservice;
@@ -42,10 +42,13 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         }
 
         [HttpPost]
-        [Route("upload-photo")]
-        public async Task<IActionResult> UploadPhoto([FromForm] PhotoUploadDTO model)
+        [Route("upload-photo/{Id}")]
+        public async Task<IActionResult> UploadPhoto([FromForm] IFormFile file, string Id)
         {
-            var response = await _userservice.UploadPhoto(model);
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var response = await _userservice.UploadPhoto(file, Id);
             return Ok(response);
         }
 

@@ -43,8 +43,7 @@ namespace EBookLibrary.DataAccess.Implementations
 
         public async Task<bool> Update(T entity)
         {
-            _dbSet.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
+            _dbSet.Update(entity);
           return  await _context.SaveChangesAsync() > 0;
         }
 
