@@ -25,14 +25,16 @@ namespace EBookLibrary.Server.Core.Implementations
         private readonly IJWTService _jwtService;
         private readonly IMapper _mapper;
         private readonly IMailService _mailService;
+        private readonly SignInManager<User> _signInManager;
 
 
-        public AuthService(IServiceProvider serviceProvider)  
+        public AuthService(IServiceProvider serviceProvider, SignInManager<User> signInManager)  
         {
             _jwtService = serviceProvider.GetRequiredService<IJWTService>();
             _userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             _mapper = serviceProvider.GetRequiredService<IMapper>();
             _mailService = serviceProvider.GetRequiredService<IMailService>();
+            _signInManager = signInManager;
 
         }
 
@@ -48,15 +50,13 @@ namespace EBookLibrary.Server.Core.Implementations
                 throw new NotFoundException("User with email provided does not exist");
             }
 
-            if (!await _userManager.IsEmailConfirmedAsync(user))
-            {
-                throw new BadRequestException("Please confirm your mail to get access to the website");
-            }
-            var passwordCheck = await _userManager.CheckPasswordAsync(user, password);
+           
+            //var passwordCheck = await _userManager.CheckPasswordAsync(user, password);
+            var passwordCheck = await _signInManager.PasswordSignInAsync(user, password, false, false);
 
-            if (!passwordCheck)
+            if (!passwordCheck.Succeeded)
             {
-                throw new BadRequestException("Invalid password");
+                throw new BadRequestException("Username or password is not correct");
             }
 
             var token = await _jwtService.GenerateToken(user);
@@ -64,6 +64,7 @@ namespace EBookLibrary.Server.Core.Implementations
             LoginResponseDto loginresponse = new LoginResponseDto 
             {
                 Token = token,
+                Role = string.Join(" ,", await _userManager.GetRolesAsync(user)),
                 UserId = user.Id
             };
 

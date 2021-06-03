@@ -69,7 +69,7 @@ namespace EBookLibrary.Server.Core.Implementations
             }
         }
 
-        public async Task<bool> UploadPhoto<TResponse>(IFormFile file, string Id)
+        public async Task<bool> UploadPhoto<TResponse>(IFormFile file, string Uri)
         {
             using var client = new HttpClient();
             {
@@ -85,7 +85,7 @@ namespace EBookLibrary.Server.Core.Implementations
                     {
                         Method = HttpMethod.Post,
                         Content = form,
-                        RequestUri = new Uri($"https://localhost:44391/api/v1/book/uploadphoto/{Id}"),
+                        RequestUri = new Uri(Uri),
                     };
 
                     var response = client.SendAsync(request).GetAwaiter().GetResult();

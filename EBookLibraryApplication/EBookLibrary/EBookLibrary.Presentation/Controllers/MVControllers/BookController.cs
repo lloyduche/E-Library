@@ -23,7 +23,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
         
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult AddBookView()
         {
             return View(new AddBook());
         }
@@ -46,8 +46,8 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Add(AddBook model)
+        //[Authorize(Roles = "Admin")]
+        public async Task<ActionResult> AddBookView(AddBook model)
         {
             var response = await _book.Add(model);
             if (response.Success is true)

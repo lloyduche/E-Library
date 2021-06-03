@@ -27,7 +27,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpGet]
         public async Task<IActionResult> Index(string id)
         {
-            var user = await _userService.GetUserById("fdb91b7a-1d81-4f58-a46d-185f50d870a3");
+            var user = await _userService.GetUserById(id);
 
             if(user.Data.AvatarUrl == null)
             {
@@ -38,7 +38,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Admin()
+        public async Task<IActionResult> Admin(string id)
         {
             var totalNumOfUsers = await _userService.GetUsersCount();
 

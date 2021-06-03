@@ -104,7 +104,7 @@ namespace EBookLibrary.Client.Core.Implementations
 
         public async Task<bool> UploadPhoto(UploadPhotoVM model)
         {
-            var data = await _httpClient.UploadPhoto<ExpectedResponse<string>>(model.BookPhoto, model.BookId);
+            var data = await _httpClient.UploadPhoto<ExpectedResponse<string>>(model.BookPhoto, $"http://localhost:44391/api/v1/book/uploadphoto/{model.BookId}");
             if (data)
             {
                 return true;

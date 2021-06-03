@@ -1,6 +1,5 @@
 ﻿using EBookLibrary.Client.Core.Abstractions;
 using EBookLibrary.ViewModels.UserVMs;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,13 +29,19 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
            var response = await _auth.Register(model);
             if (response.Successful is true)
             {
-                return RedirectToAction(nameof(SuccessReg));
+                
+                return RedirectToAction(nameof(SuccessRegistration));
             }
            return BadRequest();
         }
 
 
         public IActionResult SuccessReg()
+        {
+            return View();
+        }
+
+        public IActionResult SuccessRegistration()
         {
             return View();
         }
@@ -107,7 +112,13 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             var response = await _auth.Login(model);
             if (response.Success)
             {
-                HttpContext.Session.SetString("access_token", response.Data.Token);
+               // HttpContext.Session.SetString("access_token", response.Data.Token);
+               // HttpContext.Session.SetString("Role", response.Data.Role);
+                if (response.Data.Role.Contains("Admin"))
+                {
+                    return RedirectToAction("Admin", "Dashboard", new { Id = response.Data.UserId });
+
+                }
                 return RedirectToAction("Index","Dashboard", new {Id = response.Data.UserId});
             }
             ModelState.AddModelError("", response.Message);

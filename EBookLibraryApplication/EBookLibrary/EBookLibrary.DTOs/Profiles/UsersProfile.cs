@@ -38,7 +38,7 @@ namespace EBookLibrary.Commons.Profiles
             CreateMap<AddReviewResponseDto, Review>();
 
             CreateMap<Book, BookCardDTO>()
-                .ForMember(dto => dto.Rating, book => book.MapFrom(book => book.Ratings.Average(c => c.Ratings)))
+                .ForMember(dto => dto.Rating, book => book.MapFrom(book => book.Ratings.DefaultIfEmpty().Average(c => c.Ratings)))
                 .ForMember(dto => dto.Category, book => book.MapFrom(book => book.Category.Name))
             .ReverseMap();
 
