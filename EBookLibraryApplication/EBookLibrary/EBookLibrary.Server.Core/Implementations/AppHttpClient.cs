@@ -67,18 +67,33 @@ namespace EBookLibrary.Server.Core.Implementations
             }
         }
 
-        public async Task<TResponse> UploadPhoto<TResponse>(string Uri, IFormFile file)
+        public async Task<bool> UploadPhoto<TResponse>(IFormFile file, string Id)
         {
-            using var client = CustomHttpClient();
+            using var client = new HttpClient();
             {
-                MultipartFormDataContent form = new MultipartFormDataContent();
-                HttpContent content = new StringContent(file.FileName);
-                form.Add(CreateFileContent(file.OpenReadStream(), file.FileName, "multipart/form-data"));
-                var stream = file.OpenReadStream();
-                var response = await client.PostAsync(Uri, form);
-                return await response.Content.ReadAsAsync<TResponse>();
+                using (var memoryStream = new MemoryStream())
+                {
+                    //Get the file stream from the multiform
+                    file.CopyToAsync(memoryStream).GetAwaiter().GetResult();
+                    var form = new MultipartFormDataContent();
+                    var fileContent = new ByteArrayContent(memoryStream.ToArray());
+                    fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+                    form.Add(fileContent, nameof(file), file.FileName);
+                    HttpRequestMessage request = new HttpRequestMessage
+                    {
+                        Method = HttpMethod.Post,
+                        Content = form,
+                        RequestUri = new Uri($"https://localhost:44391/api/v1/book/uploadphoto/{Id}"),
+                    };
+
+                    var response = client.SendAsync(request).GetAwaiter().GetResult();
+                    if (response.IsSuccessStatusCode)
+                        return true;
+                }
             }
+            return false;
         }
+
 
         private StreamContent CreateFileContent(Stream stream, string fileName, string contentType)
         {

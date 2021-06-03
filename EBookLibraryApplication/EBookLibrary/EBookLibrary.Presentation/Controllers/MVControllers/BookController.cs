@@ -5,6 +5,7 @@ using EBookLibrary.ViewModels;
 using EBookLibrary.ViewModels.BookVMs;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using System;
@@ -22,7 +23,6 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin")]
         public IActionResult Add()
         {
             return View(new AddBook());
@@ -32,11 +32,6 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         public async Task<IActionResult> BookDetail(string id)
         {
             var response = await _book.GetBook(id);
-            /*if (response.Success is true)
-            {
-                return View(response.data);
-            }
-            return BadRequest();*/
             return View(response);
         }
 
@@ -53,15 +48,17 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBook(string id)
         {
             var data = await _book.GetBook(id);
+            if(data.AvatarUrl == null)
+            {
+                data.AvatarUrl = "~/images/dummyman.jpg";
+            }
             return View(data);
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBooks(UpdateBookViewModel model, string Id)
         {
             if (ModelState.IsValid)
@@ -85,18 +82,19 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdatePhoto(UpdateBookViewModel model)
+        public async Task<IActionResult> UpdatePhoto( IFormFile avatar, string Id)
         {
             var uploadphotodtovm = new UploadPhotoVM
             {
-                BookId = model.Id,
-                BookPhoto = model.UploadPhotoVM.BookPhoto
+                BookId = Id,
+                BookPhoto = avatar
             };
 
             var response = await _book.UploadPhoto(uploadphotodtovm);
             if (response)
             {
-                return RedirectToAction("UpdateBook", new { id = model.Id });
+                ViewBag.Message = "Update Successful";
+                return View("successReg");
             }
 
             return BadRequest();

@@ -8,7 +8,7 @@ using EBookLibrary.DTOs.Commons;
 using EBookLibrary.DTOs.UserDTOs;
 using EBookLibrary.Models;
 using EBookLibrary.Server.Core.Abstractions;
-
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -109,17 +109,16 @@ namespace EBookLibrary.Server.Core.Implementations
 
             return response;
         }
-        public async Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO)
+        public async Task<Response<string>> UploadPhoto(IFormFile file, string Id)
         {
             Response<string> response = new Response<string>();
             UploadAvatarResponse uploadAvatarResponse = new UploadAvatarResponse();
-            var file = photoUploadDTO.Photo;
             if (file == null)
             {
                 throw new BadRequestException("Invalid Photo");
             }
 
-            var user = await _userRepo.Get(photoUploadDTO.Id);
+            var user = await _userRepo.Get(Id);
             if (user == null)
             {
                 throw new BadRequestException("Something went wrong");

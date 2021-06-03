@@ -1,6 +1,6 @@
 ﻿using EBookLibrary.DTOs;
 using EBookLibrary.DTOs.UserDTOs;
-
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
 
@@ -16,7 +16,7 @@ namespace EBookLibrary.Server.Core.Abstractions
 
         Task<Response<UserDTO>> GetUserByEmail(string Id);
 
-        Task<Response<string>> UploadPhoto(PhotoUploadDTO photoUploadDTO);
+        Task<Response<string>> UploadPhoto(IFormFile file, string Id);
         PagedResult<AdminUserDTO> GetAllUser(SearchPagingParametersDTO model);
 
         Response<int> GetTotalNumberOfUsers();

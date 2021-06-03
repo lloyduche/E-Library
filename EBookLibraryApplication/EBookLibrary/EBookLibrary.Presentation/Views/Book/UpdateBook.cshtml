@@ -91,13 +91,13 @@
             <div class="card">
                 <div class="card-body">
                    <div class="image mb-1">
-                        <img asp-append-version="true" src="~/images/dummyman.jpg" alt="image" style="width:95%;" /><br />
+                        <img asp-append-version="true" src="@Model.AvatarUrl" alt="image" style="width:95%;" /><br />
                     </div>
 
-                        <form method="post" enctype="multipart/form-data" asp-controller="Book" asp-action="UpdatePhoto" asp-route-Id="@Model.Id">
-                            <input asp-for="@Model.UploadPhotoVM.BookPhoto" class="form-control-file"/><br />
-                            <button type="submit" class="btn btn-block btn-info">Update Book Cover</button>
-                        </form>
+                   <form method="post" enctype="multipart/form-data" asp-controller="Book" asp-action="UpdatePhoto" asp-route-Id="@Model.Id">
+                       <input type="file" name="avatar" id="avatar" class="form-control-file"/>
+                       <button type="submit" class="btn btn-block btn-info">Update Book Cover</button>
+                   </form>
                     </div>
                 </div>
             </div>
