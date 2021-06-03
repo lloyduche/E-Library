@@ -2,6 +2,7 @@
 using EBookLibrary.DTOs.UserDTOs;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EBookLibrary.Server.Core.Abstractions
@@ -20,5 +21,7 @@ namespace EBookLibrary.Server.Core.Abstractions
         PagedResult<AdminUserDTO> GetAllUser(SearchPagingParametersDTO model);
 
         Response<int> GetTotalNumberOfUsers();
+
+        Task<IEnumerable<string>> GetUserByRole(string email);
     }
 }

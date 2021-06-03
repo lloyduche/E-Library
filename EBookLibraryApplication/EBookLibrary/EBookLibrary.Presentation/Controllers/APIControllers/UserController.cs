@@ -77,5 +77,14 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("get-user-role")]
+        public IActionResult GetUserByRole(string Id)
+        {
+            var userRole = _userservice.GetUserByRole(Id);
+
+            return Ok(userRole);
+        }
     }
 }

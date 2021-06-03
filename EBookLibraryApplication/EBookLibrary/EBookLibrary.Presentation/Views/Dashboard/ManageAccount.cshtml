@@ -43,8 +43,11 @@
                             <td>@item.Email</td>
                             <td class="justify-content-end">
                                 <div class="btn-group" role="group" aria-label="">
-                                    <a class="btn btn-danger " asp-action="Delete" asp-controller="Account" asp-route-id="@item.Id"><i class="fa fa-trash mr-2"></i></a>
-                                    <input type="hidden" asp-for="@item.Id" />
+
+                                    <form method="post" asp-action="DeleteUser" asp-controller="Users">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <input type="submit" value="Delete">
+                                    </form>
                                 </div>
                             </td>
                         </tr>

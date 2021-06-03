@@ -32,6 +32,18 @@ namespace EBookLibrary.Client.Core.Implementations
             return data;
         }
 
+
+        public async Task<bool> DeleteBook(string bookid)
+        {
+            var data= await _httpClient.Delete($"api/v1/Book/delete/{bookid}");
+            return data;
+            
+        }
+
+
+
+
+
         public async Task<BookResponse> UpdateBook(UpdateBookViewModel model, string Id)
         {
             BookResponse response = new BookResponse();
@@ -48,11 +60,11 @@ namespace EBookLibrary.Client.Core.Implementations
             return response;
         }
 
-        public async Task<UpdateBookViewModel> GetBook(string Id)
+        public async Task<ExpectedResponse<GetBookDetailsResponseVM>> GetBook(string Id)
         {
-            var data = await _httpClient.Get<ExpectedResponse<UpdateBookViewModel>>($"api/v1/book/get-book-by-id/{Id}");
+            var data = await _httpClient.Get<ExpectedResponse<GetBookDetailsResponseVM>>($"api/v1/book/get-book-by-id/{Id}");
 
-            return data.Data;
+            return data;
         }
 
         public async Task<HomePageViewModel> GetHomePageData(PagingParametersViewModel model)

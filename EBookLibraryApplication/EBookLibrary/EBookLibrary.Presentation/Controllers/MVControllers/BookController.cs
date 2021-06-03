@@ -21,7 +21,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         {
             _book = book;
         }
-
+        
         [HttpGet]
         public IActionResult Add()
         {
@@ -32,7 +32,17 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         public async Task<IActionResult> BookDetail(string id)
         {
             var response = await _book.GetBook(id);
-            return View(response);
+            if (!response.Success)
+            {
+                return RedirectToAction("ErrorHandler", "Error", new { statusCode = response.StatusCode});
+            }
+            /*if (response.Success is true)
+            {
+                return View(response.data);
+            }
+            return BadRequest();*/
+           
+            return View(response.Data);
         }
 
         [HttpPost]
@@ -51,12 +61,27 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         public async Task<IActionResult> UpdateBook(string id)
         {
             var data = await _book.GetBook(id);
-            if(data.AvatarUrl == null)
-            {
-                data.AvatarUrl = "~/images/dummyman.jpg";
-            }
-            return View(data);
+         
+            return View(data.Data);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBooks([FromForm] string bookid)
+        {
+            var data = await _book.DeleteBook(bookid);
+            return Redirect("/Dashboard/ManageBooks");
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         [HttpPost]
         public async Task<IActionResult> UpdateBooks(UpdateBookViewModel model, string Id)
@@ -113,7 +138,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             {
                 Comment = model.AddReviewVM.Comment,
                 BookId = model.Id,
-                UserId = "626751aa-e8ce-44e6-b4de-0d4f95010c37"
+                UserId = "49e71d58-019e-458e-9250-4ad3990f9f82"
             };
 
             var res = await _book.AddReview(reviewdto);
