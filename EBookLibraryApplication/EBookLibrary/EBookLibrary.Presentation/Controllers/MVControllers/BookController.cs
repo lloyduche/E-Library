@@ -5,6 +5,7 @@ using EBookLibrary.ViewModels;
 using EBookLibrary.ViewModels.BookVMs;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using System;
@@ -22,7 +23,6 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
         
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin")]
         public IActionResult Add()
         {
             return View(new AddBook());
@@ -58,11 +58,11 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBook(string id)
         {
             var data = await _book.GetBook(id);
-            return View(data);
+         
+            return View(data.Data);
         }
 
         [HttpPost]
@@ -107,18 +107,19 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdatePhoto(UpdateBookViewModel model)
+        public async Task<IActionResult> UpdatePhoto( IFormFile avatar, string Id)
         {
             var uploadphotodtovm = new UploadPhotoVM
             {
-                BookId = model.Id,
-                BookPhoto = model.UploadPhotoVM.BookPhoto
+                BookId = Id,
+                BookPhoto = avatar
             };
 
             var response = await _book.UploadPhoto(uploadphotodtovm);
             if (response)
             {
-                return RedirectToAction("UpdateBook", new { id = model.Id });
+                ViewBag.Message = "Update Successful";
+                return View("successReg");
             }
 
             return BadRequest();

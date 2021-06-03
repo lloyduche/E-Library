@@ -7,6 +7,9 @@ using EBookLibrary.ViewModels.UserVMs;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,5 +50,17 @@ namespace EBookLibrary.Client.Core.Implementations
 
 
 
+
+        public async Task<bool> UploadPhoto(UploadUserAvatarViewModel model)
+        {
+            var data = await _httpClient.UploadPhoto<ExpectedResponse<string>>(model.Avatar, model.UserId);
+            if (data)
+            {
+                return true;
+            }
+
+            return false;
+        }
+       
     }
 }

@@ -17,5 +17,6 @@ namespace EBookLibrary.Client.Core.Abstractions
         Task<ExpectedResponse<int>> GetUsersCount();
 
         Task<bool> DeleteUser(string id);
+        Task<bool> UploadPhoto(UploadUserAvatarViewModel model);
     }
 }

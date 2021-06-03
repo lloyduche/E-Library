@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 
 namespace EBookLibrary.Presentation.Controllers.APIControllers
 {
-    [Authorize]
     public class BookController : BaseAPIController
     {
         private readonly IBookServices _bookService;
@@ -37,7 +36,6 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPatch]
         [Route("update-book/{Id}")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBook(UpdateBookDto updatebookdto, string Id)
         {
             await _bookService.UpdateBook(updatebookdto, Id);
@@ -77,10 +75,10 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
 
         [HttpPost]
         [Route("uploadphoto/{Id}")]
-        public async Task<IActionResult> UploadPhoto(string Id, [FromForm] IFormFile image)
+        public async Task<IActionResult> UploadPhoto([FromForm] IFormFile file, string Id )
         {
-            var response = await _bookService.UploadPhoto(image, Id);
-            return Ok();
+            var response = await _bookService.UploadPhoto(file, Id);
+            return Ok(response);
         }
 
         [HttpPost]
