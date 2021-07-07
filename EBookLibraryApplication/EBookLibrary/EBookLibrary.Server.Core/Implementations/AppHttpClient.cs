@@ -93,20 +93,8 @@ namespace EBookLibrary.Server.Core.Implementations
                         return true;
                 }
             }
+            await Task.CompletedTask;
             return false;
-        }
-
-
-        private StreamContent CreateFileContent(Stream stream, string fileName, string contentType)
-        {
-            var fileContent = new StreamContent(stream);
-            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-            {
-                Name = "uploadfile",
-                FileName = fileName
-            };
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-            return fileContent;
         }
 
         public HttpClient CustomHttpClient()

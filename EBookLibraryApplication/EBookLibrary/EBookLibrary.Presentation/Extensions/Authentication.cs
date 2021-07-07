@@ -27,6 +27,7 @@ namespace EBookLibrary.Presentation.Extensions
                     ValidAudience = configuration.GetSection("JWTConfigurations:Audience").Value
                 };
             });
+            
         }
     }
 }

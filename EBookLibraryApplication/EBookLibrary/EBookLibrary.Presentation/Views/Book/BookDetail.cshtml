@@ -64,8 +64,21 @@
 
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <div class="search-result-header mt-3">
-                    <p id="book-title">Title</p>
+                    <p id="book-title">Title: <strong>@Model.Title</strong></p>
                     <p>Available Copies  :  <strong>@Model.CopiesAvailable</strong></p>
+                    
+                    @if (ViewBag.AddingSuccess != null)
+                    {
+                        @if (ViewBag.AddingSuccess == true)
+                        {
+                            <p class="text-success">@ViewBag.Message</p>
+                        }
+                        else
+                        {
+                            <p class="text-danger">@ViewBag.Message</p>
+                        }
+
+                    }
                 </div>
                 <div class="card">
                     <div class="card-body">

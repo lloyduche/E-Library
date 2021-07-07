@@ -24,9 +24,12 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             _clientBookService = clientBookService;
             
         }
+
         [HttpGet]
-        public async Task<IActionResult> Index(string id)
+        public async Task<IActionResult> Index()
         {
+            var id = HttpContext.Session.GetString("Id");
+            if (id == null) return Redirect("/account/login");
             var user = await _userService.GetUserById(id);
 
             if(user.Data.AvatarUrl == null)
@@ -84,10 +87,12 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         [HttpPost]
         public ActionResult UploadAvatar([FromForm] IFormFile avatar)
         {
+            var Id = HttpContext.Session.GetString("Id");
+            if (Id == null) return Redirect("/account/login");
             var model = new UploadUserAvatarViewModel
             {
                 Avatar = avatar,
-                UserId = "b79203fc-526c-4fac-bf76-338e576040b5"
+                UserId = Id
             };
             _userService.UploadPhoto(model);
             return RedirectToAction("Index");

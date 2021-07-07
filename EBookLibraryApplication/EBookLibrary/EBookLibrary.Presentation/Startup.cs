@@ -45,7 +45,7 @@ namespace EBookLibrary.Presentation
             services.AddHttpContextAccessor();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time
+                options.IdleTimeout = TimeSpan.FromMinutes(120);//You can set Time
             }); services.AddConfigurations(Configuration);
         }
 
@@ -69,9 +69,7 @@ namespace EBookLibrary.Presentation
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
 
-            Seeder.Seed(context, roleManager, userManager).Wait();
 
             app.UseSession();
             app.Use(async (ctx, next) =>
@@ -83,9 +81,12 @@ namespace EBookLibrary.Presentation
                 }
                 await next();
             });
+
+            app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 
+            Seeder.Seed(context, roleManager, userManager).Wait();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

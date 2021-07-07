@@ -81,7 +81,7 @@ namespace EBookLibrary.Client.Core.Implementations
                 return true;
             }
 
-            return false;
+            return false; 
         }
 
         public async Task<bool> AddRating(AddRatingDto model)

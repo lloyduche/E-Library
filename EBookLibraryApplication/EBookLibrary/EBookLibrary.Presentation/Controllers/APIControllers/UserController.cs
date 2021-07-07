@@ -39,7 +39,7 @@ namespace EBookLibrary.Presentation.Controllers.APIControllers
         {
             await _userservice.DeleteUser(Id);
             return NoContent();
-        }
+    }
 
         [HttpPost]
         [Route("upload-photo/{Id}")]

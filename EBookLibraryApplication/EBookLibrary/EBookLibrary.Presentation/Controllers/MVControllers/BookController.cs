@@ -29,7 +29,7 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> BookDetail(string id)
+        public async Task<IActionResult> BookDetail(string id,  string message, bool? success)
         {
             var response = await _book.GetBook(id);
             if (!response.Success)
@@ -41,6 +41,8 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                 return View(response.data);
             }
             return BadRequest();*/
+            ViewBag.AddingSuccess = success;
+            ViewBag.Message = message;
            
             return View(response.Data);
         }
@@ -139,21 +141,28 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                 return RedirectToAction("BookDetail", new { id = model.Id });
             }
 
+            var userId = HttpContext.Session.GetString("Id");
+
             var reviewdto = new AddReviewDto
             {
                 Comment = model.AddReviewVM.Comment,
                 BookId = model.Id,
-                UserId = "49e71d58-019e-458e-9250-4ad3990f9f82"
+                UserId = userId
             };
 
+            
             var res = await _book.AddReview(reviewdto);
+            var message = "Review Added successfully";
+            var success = true;
             if (!res)
             {
-                ModelState.AddModelError("", "Wrong Review Format");
-                return RedirectToAction("BookDetail", new { id = model.Id });
+
+                success = false;
+                message = "There was an error adding the review";
+
             }
 
-            return RedirectToAction("BookDetail", new { id = model.Id });
+            return RedirectToAction("BookDetail", new { id = model.Id, Success = success, Message = message });
         }
 
         [HttpPost]
@@ -165,21 +174,27 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
                 return RedirectToAction("BookDetail", new { id = model.Id });
             }
 
+            var userId = HttpContext.Session.GetString("Id");
             var ratingdto = new AddRatingDto
             {
                 Ratings = model.AddRatingVM.Ratings,
                 BookId = model.Id,
-                UserId = "626751aa-e8ce-44e6-b4de-0d4f95010c37"
+                UserId = userId
             };
 
             var res = await _book.AddRating(ratingdto);
+            var message = "Rating Added Successfully";
+            var success = true;
+
             if (!res)
             {
-                ModelState.AddModelError("", "Wrong Review Format");
-                return RedirectToAction("BookDetail", new { id = model.Id });
+                //ModelState.AddModelError("", "Wrong Review Format");
+                message = "There was an error adding the rating";
+                success = false;
+                //return RedirectToAction("BookDetail", new { id = model.Id });
             }
-
-            return RedirectToAction("BookDetail", new { id = model.Id });
+            
+            return RedirectToAction("BookDetail", new { id = model.Id, Success = success, Message=message });
         }
     }
 }

@@ -112,14 +112,15 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             var response = await _auth.Login(model);
             if (response.Success)
             {
-               // HttpContext.Session.SetString("access_token", response.Data.Token);
-               // HttpContext.Session.SetString("Role", response.Data.Role);
+                HttpContext.Session.SetString("access_token", response.Data.Token);
+                HttpContext.Session.SetString("Role", response.Data.Role);
+                HttpContext.Session.SetString("Id", response.Data.UserId);
                 if (response.Data.Role.Contains("Admin"))
                 {
                     return RedirectToAction("Admin", "Dashboard", new { Id = response.Data.UserId });
 
                 }
-                return RedirectToAction("Index","Dashboard", new {Id = response.Data.UserId});
+                return RedirectToAction("Index","Dashboard");
             }
             ModelState.AddModelError("", response.Message);
             return View(model);
@@ -132,6 +133,12 @@ namespace EBookLibrary.Presentation.Controllers.MVControllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/Account/Login");
+        }
 
     }
 }

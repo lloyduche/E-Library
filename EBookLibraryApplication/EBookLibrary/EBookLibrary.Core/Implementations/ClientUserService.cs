@@ -47,13 +47,9 @@ namespace EBookLibrary.Client.Core.Implementations
             return data;
 
         }
-
-
-
-
         public async Task<bool> UploadPhoto(UploadUserAvatarViewModel model)
         {
-            var data = await _httpClient.UploadPhoto<ExpectedResponse<string>>(model.Avatar, $"http://localhost:44391/api/v1/book/upload-photo/{model.UserId}");
+            var data = await _httpClient.UploadPhoto<ExpectedResponse<string>>(model.Avatar, $"http://localhost:44391/api/v1/user/upload-photo/{model.UserId}");
             if (data)
             {
                 return true;
